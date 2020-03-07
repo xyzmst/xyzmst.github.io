@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="#333333">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keyword"  content="">
+    <meta name="description" content="想写什么就写什么">
+    <title>NDK-C++基础 - undefined</title>
+    <base href="/">
+    <link rel="preconnect" href="//cdn.bootcss.com">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-light.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-dark.min.css" rel="stylesheet" media="screen and (prefers-color-scheme: dark)">
+    <!-- UIkit CSS -->
+    <link href="https://cdn.bootcss.com/uikit/3.2.0/css/uikit.min.css" rel="stylesheet">
+    <!-- UIkit JS -->
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit.min.js" async></script>
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit-icons.min.js" async></script>
+    
+<link rel="stylesheet" href="/styles/cold-stone.css">
+
+    <noscript>
+      <p class="text-center">你的浏览器还没开启 Javascript 功能！</p>
+    </noscript>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  <body>
+    
+
+    <header class="header" uk-sticky="top: 100; animation: uk-animation-slide-top; bottom: #sticky-on-scroll-up">
+  <nav class="wrapper header-content">
+    <div class="nav-overlay uk-navbar-left">
+      <h1 class="title nav-list-item uk-logo" data-link="/">
+        
+        <a href="/" data-link="/">xyzmst</a>
+        
+      </h1>
+
+      <ul class="nav-list">
+        
+        <li class="nav-list-item" data-link="/categories/">
+          <a class="nav-list-link" href="/categories">分类</a>
+        </li>
+        
+        
+        <li class="nav-list-item" data-link="/about/">
+          <a class="nav-list-link" href="/about/">关于</a>
+        </li>
+        
+        <li class="nav-list-item" data-link="/rss/">
+          <a class="nav-list-link" href="/atom.xml">RSS</a>
+        </li>
+        
+      </ul>
+    </div>
+
+    
+      <div class="uk-navbar-right translate-x">
+        <a class="uk-navbar-toggle" href="#modal-full" uk-search-icon uk-toggle></a>
+      </div>
+    
+  </nav>
+</header>
+
+<div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
+  <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+    <button class="uk-modal-close-full" type="button" uk-close></button>
+    <form class="uk-search uk-search-large search-form" action="//google.com/search" method="get" accept-charset="UTF-8"
+      target="_blank">
+      <input class="uk-search-input search-form-input" type="search" name="q" placeholder="搜索"
+        autofocus autocomplete="false">
+      <input type="hidden" name="sitesearch" value="http://xyzmst.top">
+    </form>
+  </div>
+</div>
+
+
+    <main class="main wrapper"><article class="article slide-in-right uk-article">
+  <section class="article-header">
+    <h1 class="article-title uk-article-title">
+      NDK-C++基础
+    </h1>
+    <p class="article-meta uk-article-meta">
+      <span class="meta-info">
+        <span>
+          最后更新&#58;<time class="post-time"
+            datetime="2018-08-16">2018-08-16</time>
+        </span>
+        <span>阅读时间&#58; 6 min</span>
+        <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
+            id="busuanzi_value_page_pv"></span></span>
+      </span>
+    </p>
+  </section>
+  <section class="article-content"><p>Q:C++基础.001<br>C++调用C实现的库注意事项<br>A:<br>extern “C” //指示编译器这部分代码使用C的方式进行编译而不是C++</p>
+<p>Q:C++基础.002<br>C++编译后函数名的区别<br>A:<br>对于 func 函数 被C的编译器编译后在函数库中的名字可能为func(无参数符号),而C++编译器则会产生类似funcii之类的名字。<br>//main.c / main.cpp<br>int func(int x,int y){}<br>int main(){return 0;}<br>gcc main.c -o mainc.o<br>gcc main.cpp -o maincpp.o<br>//输出所有 mainc.o 里所有符号<br>nm -A mainc.o<br>nm -A maincpp.o </p>
+<p>Q:C++基础.003<br>引用<br>A:<br>引用是C++定义的一种新类型“int&amp;”就是一个别名<br>//声明形参为引用<br>void change(int&amp; i) {<br>    i = 10;<br>}<br>int i = 1;<br>change(i);<br>printf(“%d\n”,i); //i == 10<br>===========================<br>引用和指针是两个东西<br>引用 ：变量名是附加在内存位置中的一个标签,可以设置第二个标签<br>简单来说 引用变量是一个别名，表示一个变量的另一个名字</p>
+<p>Q:C++基础.004<br>C字符串<br>A:<br>字符串实际上是使用 NULL字符 ‘\0’终止的一维字符数组。<br>//字符数组 = 字符串<br>char str1[6] = {‘H’, ‘e’, ‘l’, ‘l’, ‘o’, ‘\0’};<br>//自动加入\0<br>char str2[] = “Hello”;</p>
+<p>Q:C++基础.004<br>C字符串操作<br>A:<br>说明：strcmp:两个字符串自左向右逐个字符相比（按ASCII值大小相比较）<br>函数<br>描述<br>strcpy(s1, s2);<br>复制字符串 s2 到字符串 s1。<br>strcat(s1, s2);<br>连接字符串 s2 到字符串 s1 的末尾。<br>strlen(s1);<br>返回字符串 s1 的长度。<br>strcmp(s1, s2);<br>如果 s1 和 s2 相同，则返回 0；如果 s1 &lt; s2 则返回小于0；如果 s1&gt;s2 则返回大于0<br>strchr(s1, ch);<br>返回指向字符串 s1 中字符 ch 的第一次出现的位置的指针。<br>strstr(s1, s2);<br>返回指向字符串 s1 中字符串 s2 的第一次出现的位置的指针。<br>Q:C++基础.005<br>C++ 字符串操作<br>A:<br>C++ 标准库提供了 string 类类型，支持上述所有的操作，另外还增加了其他更多的功能。<br>#include <string><br>//string 定义在 std命令空间中<br>usning namespace std;<br>string str1 = “Hello”;<br>string str2 = “World”;<br>string str3(“天之道”);<br>string str4(str3);</p>
+<p>// str1拼接str2 组合新的string<br>string str5 = str1 + str2;<br>// 在str1后拼接str2 str1改变<br>str1.append(str2);<br>//获得c 风格字符串<br>const char *s1 = str1.c_str();<br>//字符串长度<br>str1.size();<br>//长度是否为0<br>str1.empty();<br>……等等</p>
+<p>Q:C++基础.006<br>析构函数<br>A:<br>类的析构函数是类的一种特殊的成员函数，它会在每次删除所创建的对象时执行(不需要手动调用)。</p>
+<p>Q:C++基础.007<br>友元<br>A:<br>类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员<br>友元可以是一个函数，该函数被称为友元函数；友元也可以是一个类，该类被称为友元类，在这种情况下，整个类及其所有成员都是友元。</p>
+<p>Q:C++基础.008<br>静态成员<br>A:<br>和Java一样，可以使用static来声明类成员为静态的<br>当我们使用静态成员属性或者函数时候 需要使用 域运算符 ::<br>//Instance.h<br>#ifndef INSTANCE_H<br>#define INSTANCE_H<br>class Instance {<br>public:<br>    static Instance* getInstance();<br>private:<br>    static Instance *instance;<br>};<br>#endif </p>
+<p>//Instance.cpp<br>#include “Instance.h”<br>Instance* Instance::instance = 0;<br>Instance* Instance::getInstance() {<br>    //C++11以后，编译器保证内部静态变量的线程安全性<br>    if (!instance) {<br>        instance = new Instance;<br>    }<br>    return instance;<br>}</p>
+<p>Q:C++基础.009<br>多态<br>A:<br> 多种形态<br>        当类之间存在层次结构，并且类之间是通过继承关联时，就会用到多态。<br>    静态多态（静态联编）<br>        是指在编译期间就可以确定函数的调用地址，通过函数重载和模版（泛型编程）实现<br>    动态多态（动态联编）<br>        是指函数调用的地址不能在编译器期间确定，必须需要在运行时才确定 ,<br>        通过继承+虚函数 实现</p>
+<p>Q:C++基础.010<br>虚函数<br>A:<br>注意<br>      构造函数任何时候都不可以声明为虚函数<br>      析构函数一般都是虚函数,释放先执行子类再执行父类<br>demo<br>class Parent {<br>public:<br>     void test() {<br>        cout &lt;&lt; “parent” &lt;&lt; endl;<br>    }<br>};</p>
+<p>class Child :public Parent {<br>public:<br>    void test() {<br>        cout &lt;&lt; “child” &lt;&lt; endl;<br>    }<br>};</p>
+<p>Parent *c = new Child();<br>// 编译期间 确定c 为 parent 调用parent的test方法<br>c-&gt;test();</p>
+<p>//修改Parent为virtual 虚函数 动态链接,告诉编译器不要静态链接到该函数<br>virtual void test() {<br>        cout &lt;&lt; “parent” &lt;&lt; endl;<br>}<br>//动态多态 调用Child的test方法<br>c-&gt;test();</p>
+<p>Q:C++基础.011<br>纯虚函数<br>A:<br>相当于java的抽象函数<br>class Parent {<br>public:<br>    //纯虚函数 继承自这个类需要实现 抽象类型<br>    virtual void test() = 0;<br>};</p>
+<p>class Child :public Parent {<br>public:<br>    void test(){}<br>};</p>
+<p>Q:C++基础.011<br>模板<br>A:<br>模板是泛型编程的基础<br>函数模板<br>函数模板能够用来创建一个通用的函数。以支持多种不同的形參。避免重载函数的函数体反复设计。<br>template <typename T><br>T max(T a,T b)<br>{<br>    // 函数的主体<br>    return  a &gt; b ? a : b;<br>}<br>//代替了<br>int max(int a,int b)<br>int max(float a,float b)<br>类模板(泛型类)<br>为类定义一种模式。使得类中的某些数据成员、默写成员函数的參数、某些成员函数的返回值，能够取随意类型<br>常见的 容器比如 向量 vector 或 vector 就是模板类<br>template&lt;class E,class T&gt;<br>class Queue {<br>public:<br>    T add(E e,T t){<br>        return e+t;<br>    }<br>};<br>Queue&lt;int,float&gt; q;<br>q.add(1,1.1f) = 2.1f</p>
+<p>Q:C++基础.012<br>容器<br>A:<br>类似于 java的集合。<br>容器，就是用来存放东西的盒子。<br>常用的数据结构包括：数组array, 链表list， 树tree， 栈stack， 队列queue， 散列表hash table, 集合set、映射表map 等等。容器便是容纳这些数据结构的。<br>这些数据结构分为序列式与关联式两种，容器也分为序列式容器和关联式容器。<br>STL 标准模板库，核心包括容器、算法、迭代器。</p>
+<p>Q:C++基础.013<br>文件读写<br>A:<br>C 文件读写<br>        fopen，fclose<br>        fprintf，fscanf（遇到空格就停止）<br>        判断是否读完 feof（*file）<br>        fgetc，fgets<br>        fputc，fputs<br>C++ 文件读写<br>        ofstream<br>        ifstream<br>        fstream</p>
+<p>Q:C++基础.014<br>线程<br>A:<br><img src="https://i.loli.net/2020/03/07/A7D9SfGEr4dU6Zu.png" alt=""></p>
+</section>
+</article>
+
+<section class="prev-next card slide-in-right">
+	
+		<a href="/2018/08/16/NDK-结构体共用体/" class="link prev" title="NDK-结构体共用体">
+			<span class="hover-underline-animation">&larr; NDK-结构体共用体</span>
+		</a>
+	
+	
+		<a href="/2018/08/15/NDK-C-基础/" class="link next" title="NDK-C 基础">
+			<span class="hover-underline-animation">NDK-C 基础 &rarr;</span>
+		</a>
+	
+</section>
+
+
+<section class="article-toc">
+  <div class="card uk-margin-remove-bottom">
+    
+  </div>
+</section>
+
+<section class="article slide-in-right">
+  <div class="loader" id="loader">
+    <svg viewBox="0 0 50 50">
+      <circle class="ring" cx="25" cy="25" r="20"></circle>
+      <circle class="ball" cx="25" cy="5" r="3.5"></circle>
+    </svg>
+  </div>
+
+  <div class="comment" id="utteranc"></div>
+  <noscript>Please activate JavaScript for normal use of comments</noscript>
+</section>
+
+<a class="card back-to-top" id="backTop">&UpArrow;</a>
+</main>
+
+    
+
+    <script>
+	window.COLD_STONE = {
+		root: "/",
+		author: "xyzmst" || '',
+		gaid: "xxxxxxxxxxxxxx" || '',
+		repo: "xyzmst/blog" || '',
+	}
+</script>
+
+
+
+
+	<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+
+
+<script src="/scripts/busuanzi.js" referrerpolicy="origin"></script>
+
+<script src="/scripts/cold-stone.js"></script>
+
+
+
+  <script src="//www.googletagmanager.com/gtag/js?id=xxxxxxxxxxxxxx"></script>
+
+  <script>
+	window.dataLayer = window.dataLayer || []
+	function gtag() {
+		dataLayer.push(arguments)
+	}
+	gtag('js', new Date())
+	gtag('config', window.COLD_STONE.gaid)
+  </script>
+
+
+  </body>
+</html>
