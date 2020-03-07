@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="#333333">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keyword"  content="">
+    <meta name="description" content="想写什么就写什么">
+    <title>有道广告集成 - undefined</title>
+    <base href="/">
+    <link rel="preconnect" href="//cdn.bootcss.com">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-light.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-dark.min.css" rel="stylesheet" media="screen and (prefers-color-scheme: dark)">
+    <!-- UIkit CSS -->
+    <link href="https://cdn.bootcss.com/uikit/3.2.0/css/uikit.min.css" rel="stylesheet">
+    <!-- UIkit JS -->
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit.min.js" async></script>
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit-icons.min.js" async></script>
+    
+<link rel="stylesheet" href="/styles/cold-stone.css">
+
+    <noscript>
+      <p class="text-center">你的浏览器还没开启 Javascript 功能！</p>
+    </noscript>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  <body>
+    
+
+    <header class="header" uk-sticky="top: 100; animation: uk-animation-slide-top; bottom: #sticky-on-scroll-up">
+  <nav class="wrapper header-content">
+    <div class="nav-overlay uk-navbar-left">
+      <h1 class="title nav-list-item uk-logo" data-link="/">
+        
+        <a href="/" data-link="/">xyzmst</a>
+        
+      </h1>
+
+      <ul class="nav-list">
+        
+        <li class="nav-list-item" data-link="/categories/">
+          <a class="nav-list-link" href="/categories">分类</a>
+        </li>
+        
+        
+        <li class="nav-list-item" data-link="/about/">
+          <a class="nav-list-link" href="/about/">关于</a>
+        </li>
+        
+        <li class="nav-list-item" data-link="/rss/">
+          <a class="nav-list-link" href="/atom.xml">RSS</a>
+        </li>
+        
+      </ul>
+    </div>
+
+    
+      <div class="uk-navbar-right translate-x">
+        <a class="uk-navbar-toggle" href="#modal-full" uk-search-icon uk-toggle></a>
+      </div>
+    
+  </nav>
+</header>
+
+<div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
+  <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+    <button class="uk-modal-close-full" type="button" uk-close></button>
+    <form class="uk-search uk-search-large search-form" action="//google.com/search" method="get" accept-charset="UTF-8"
+      target="_blank">
+      <input class="uk-search-input search-form-input" type="search" name="q" placeholder="搜索"
+        autofocus autocomplete="false">
+      <input type="hidden" name="sitesearch" value="http://xyzmst.top">
+    </form>
+  </div>
+</div>
+
+
+    <main class="main wrapper"><article class="article slide-in-right uk-article">
+  <section class="article-header">
+    <h1 class="article-title uk-article-title">
+      有道广告集成
+    </h1>
+    <p class="article-meta uk-article-meta">
+      <span class="meta-info">
+        <span>
+          最后更新&#58;<time class="post-time"
+            datetime="2016-07-02">2016-07-02</time>
+        </span>
+        <span>阅读时间&#58; 3 min</span>
+        <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
+            id="busuanzi_value_page_pv"></span></span>
+      </span>
+    </p>
+  </section>
+  <section class="article-content"><h3 id="1-jar"><a href="#1-jar" class="headerlink" title="1. jar"></a>1. jar</h3><h3 id="2-manifest-文件配置配置"><a href="#2-manifest-文件配置配置" class="headerlink" title="2. manifest 文件配置配置"></a>2. manifest 文件配置配置</h3><pre><code>&lt;!-- SDK中Activity配置 --&gt;
+        &lt;!-- YouDaoBrowser用于所有的native广告，为必选配置 --&gt;
+        &lt;activity
+            android:name=&quot;com.youdao.sdk.common.YouDaoBrowser&quot;
+            android:configChanges=&quot;keyboardHidden|orientation|screenSize&quot;
+            android:launchMode=&quot;singleTask&quot; /&gt;
+        &lt;!-- YouDaoNativeBrowser用于应用详情页，为必选配置 --&gt;
+        &lt;activity
+            android:name=&quot;com.youdao.sdk.common.YouDaoNativeBrowser&quot;
+            android:configChanges=&quot;keyboardHidden|orientation&quot;
+            android:launchMode=&quot;singleTask&quot; &gt;
+        &lt;/activity&gt;
+&lt;!--  YouDaoInterstitialActivity用于开屏和插屏广告，若不使用开屏和插屏广告，可不配置此Activity， --&gt;
+        &lt;activity
+            android:name=&quot;com.youdao.sdk.nativeads.YouDaoInterstitialActivity&quot;
+            android:configChanges=&quot;keyboardHidden|orientation|screenSize&quot;
+            android:launchMode=&quot;singleTask&quot;
+            android:theme=&quot;@android:style/Theme.Translucent&quot; /&gt;
+
+        &lt;!-- 视频广告Activity配置，必须配置 --&gt;
+        &lt;activity
+            android:name=&quot;com.youdao.sdk.video.YouDaoVideoActivity&quot;
+            android:configChanges=&quot;keyboardHidden|orientation&quot;
+            android:screenOrientation=&quot;landscape&quot; &gt;
+        &lt;/activity&gt;
+
+        &lt;!-- 应用下载服务，用于应用下载，为必选配置 --&gt;
+        &lt;service
+            android:name=&quot;com.youdao.sdk.common.YouDaoAppService&quot;
+            android:enabled=&quot;true&quot; &gt;
+        &lt;/service&gt;
+
+        &lt;!-- 应用安装广播接收器，用于应用下载，为必选配置 --&gt;
+        &lt;receiver
+            android:name=&quot;com.youdao.sdk.common.YouDaoTrackerReceiver&quot;
+            android:enabled=&quot;true&quot;
+            android:exported=&quot;true&quot; &gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.PACKAGE_ADDED&quot; /&gt;
+                &lt;action android:name=&quot;android.intent.action.PACKAGE_REMOVED&quot; /&gt;
+
+                &lt;data android:scheme=&quot;package&quot; /&gt;
+            &lt;/intent-filter&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.net.conn.CONNECTIVITY_CHANGE&quot; /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/receiver&gt;</code></pre><h3 id="Service-和-receiver-配置"><a href="#Service-和-receiver-配置" class="headerlink" title="Service 和 receiver 配置"></a>Service 和 receiver 配置</h3><pre><code>&lt;!-- 应用下载服务，用于应用下载，为必选配置 --&gt;
+        &lt;service
+            android:name=&quot;com.youdao.sdk.common.YouDaoAppService&quot;
+            android:enabled=&quot;true&quot; &gt;
+        &lt;/service&gt;
+
+        &lt;!-- 应用安装广播接收器，用于应用下载，为必选配置 --&gt;
+        &lt;receiver
+            android:name=&quot;com.youdao.sdk.common.YouDaoTrackerReceiver&quot;
+            android:enabled=&quot;true&quot;
+            android:exported=&quot;true&quot; &gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.PACKAGE_ADDED&quot; /&gt;
+                &lt;action android:name=&quot;android.intent.action.PACKAGE_REMOVED&quot; /&gt;
+
+                &lt;data android:scheme=&quot;package&quot; /&gt;
+            &lt;/intent-filter&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.net.conn.CONNECTIVITY_CHANGE&quot; /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/receiver&gt;</code></pre><h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><pre><code>&lt;!-- 必加权限 --&gt;
+    &lt;!-- 网络访问权限 --&gt;
+    &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
+    &lt;!-- 获取WiFi状态 --&gt;
+    &lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot; /&gt;
+    &lt;!-- 获取网络信息状态，如当前的网络连接是否有效 --&gt;
+    &lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;
+
+    &lt;!-- 读取手机状态 phone group --&gt;
+    &lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot; /&gt;
+
+    &lt;!-- 往SDCard读写数据权限   storage group --&gt;
+    &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot; /&gt;
+
+    &lt;!-- 定位相关权限，建议添加，便于广告的定向  location group --&gt;
+    &lt;uses-permission android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.SET_DEBUG_APP&quot; /&gt;</code></pre><h3 id="代码混淆"><a href="#代码混淆" class="headerlink" title="代码混淆"></a>代码混淆</h3><p>修改代码混淆文件proguard-project.txt,添加如下内容:<br>-libraryjars libs/youdaosdk-3.9.4.jar<br>-keep class com.youdao.sdk.** { *;}</p>
+</section>
+</article>
+
+<section class="prev-next card slide-in-right">
+	
+		<a href="/2016/06/18/巧用-GitHub-创建自己的私人-Maven-仓库/" class="link prev" title="巧用 GitHub 创建自己的私人 Maven 仓库">
+			<span class="hover-underline-animation">&larr; 巧用 GitHub 创建自己的私人 Maven 仓库</span>
+		</a>
+	
+	
+		<a href="/2016/06/14/centos7-firwall/" class="link next" title="Centos7 Firwall">
+			<span class="hover-underline-animation">Centos7 Firwall &rarr;</span>
+		</a>
+	
+</section>
+
+
+<section class="article-toc">
+  <div class="card uk-margin-remove-bottom">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-jar"><span class="toc-text">1. jar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-manifest-文件配置配置"><span class="toc-text">2. manifest 文件配置配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Service-和-receiver-配置"><span class="toc-text">Service 和 receiver 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#权限"><span class="toc-text">权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码混淆"><span class="toc-text">代码混淆</span></a></li></ol>
+  </div>
+</section>
+
+<section class="article slide-in-right">
+  <div class="loader" id="loader">
+    <svg viewBox="0 0 50 50">
+      <circle class="ring" cx="25" cy="25" r="20"></circle>
+      <circle class="ball" cx="25" cy="5" r="3.5"></circle>
+    </svg>
+  </div>
+
+  <div class="comment" id="utteranc"></div>
+  <noscript>Please activate JavaScript for normal use of comments</noscript>
+</section>
+
+<a class="card back-to-top" id="backTop">&UpArrow;</a>
+</main>
+
+    
+
+    <script>
+	window.COLD_STONE = {
+		root: "/",
+		author: "xyzmst" || '',
+		gaid: "xxxxxxxxxxxxxx" || '',
+		repo: "xyzmst/blog" || '',
+	}
+</script>
+
+
+
+
+	<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+
+
+<script src="/scripts/busuanzi.js" referrerpolicy="origin"></script>
+
+<script src="/scripts/cold-stone.js"></script>
+
+
+
+  <script src="//www.googletagmanager.com/gtag/js?id=xxxxxxxxxxxxxx"></script>
+
+  <script>
+	window.dataLayer = window.dataLayer || []
+	function gtag() {
+		dataLayer.push(arguments)
+	}
+	gtag('js', new Date())
+	gtag('config', window.COLD_STONE.gaid)
+  </script>
+
+
+  </body>
+</html>

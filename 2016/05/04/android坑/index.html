@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="#333333">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keyword"  content="">
+    <meta name="description" content="想写什么就写什么">
+    <title>Android坑 - undefined</title>
+    <base href="/">
+    <link rel="preconnect" href="//cdn.bootcss.com">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-light.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-dark.min.css" rel="stylesheet" media="screen and (prefers-color-scheme: dark)">
+    <!-- UIkit CSS -->
+    <link href="https://cdn.bootcss.com/uikit/3.2.0/css/uikit.min.css" rel="stylesheet">
+    <!-- UIkit JS -->
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit.min.js" async></script>
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit-icons.min.js" async></script>
+    
+<link rel="stylesheet" href="/styles/cold-stone.css">
+
+    <noscript>
+      <p class="text-center">你的浏览器还没开启 Javascript 功能！</p>
+    </noscript>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  <body>
+    
+
+    <header class="header" uk-sticky="top: 100; animation: uk-animation-slide-top; bottom: #sticky-on-scroll-up">
+  <nav class="wrapper header-content">
+    <div class="nav-overlay uk-navbar-left">
+      <h1 class="title nav-list-item uk-logo" data-link="/">
+        
+        <a href="/" data-link="/">xyzmst</a>
+        
+      </h1>
+
+      <ul class="nav-list">
+        
+        <li class="nav-list-item" data-link="/categories/">
+          <a class="nav-list-link" href="/categories">分类</a>
+        </li>
+        
+        
+        <li class="nav-list-item" data-link="/about/">
+          <a class="nav-list-link" href="/about/">关于</a>
+        </li>
+        
+        <li class="nav-list-item" data-link="/rss/">
+          <a class="nav-list-link" href="/atom.xml">RSS</a>
+        </li>
+        
+      </ul>
+    </div>
+
+    
+      <div class="uk-navbar-right translate-x">
+        <a class="uk-navbar-toggle" href="#modal-full" uk-search-icon uk-toggle></a>
+      </div>
+    
+  </nav>
+</header>
+
+<div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
+  <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+    <button class="uk-modal-close-full" type="button" uk-close></button>
+    <form class="uk-search uk-search-large search-form" action="//google.com/search" method="get" accept-charset="UTF-8"
+      target="_blank">
+      <input class="uk-search-input search-form-input" type="search" name="q" placeholder="搜索"
+        autofocus autocomplete="false">
+      <input type="hidden" name="sitesearch" value="http://xyzmst.top">
+    </form>
+  </div>
+</div>
+
+
+    <main class="main wrapper"><article class="article slide-in-right uk-article">
+  <section class="article-header">
+    <h1 class="article-title uk-article-title">
+      Android坑
+    </h1>
+    <p class="article-meta uk-article-meta">
+      <span class="meta-info">
+        <span>
+          最后更新&#58;<time class="post-time"
+            datetime="2016-08-31">2016-08-31</time>
+        </span>
+        <span>阅读时间&#58; 1 min</span>
+        <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
+            id="busuanzi_value_page_pv"></span></span>
+      </span>
+    </p>
+  </section>
+  <section class="article-content"><ul>
+<li><p>1 android4.4 windows 添加过view之后 无法再添加其他view<br>场景：windowmanager 添加一个 surfaceview后 无法显示dialog</p>
+</li>
+<li><p>2 viewpager 中的 fragment 再嵌套 fragment，嵌套的fragment 无法显示<br>场景：不同分类的左右滑的列表，每个fragment 用封装好的 ListFragment 为了方便应用列表，<br>不显示<br>解决方法：fragment 添加 子fragment 一定要使用 getChildFragmentManager() 而非<br>getActivity().getSupportFragmentManager()，并且调试中 不是换上childfragment马上就好用，<br>怀疑是as 没有刷新代码<br>同样尝试过配置到xml中的方式，但是并没有解决问题，添加不同的fragment只显示1个fragment<br>添加同一个fragment无法获取fragment，无论通过getSupportFragmentManager还是getChildFragmentManage<br>时间：2016/05/19</p>
+</li>
+<li><p>3 gradle 配置会导致，应该运行慢，试过 2g 4g 6g 8g 16g， debug渠道 会忽快忽慢，不稳定</p>
+<pre><code>dexOptions {
+      javaMaxHeapSize &quot;4g&quot;
+  }</code></pre><p>时间：2016/05/24</p>
+</li>
+<li><p>4 升级 support 22<br>报错：java.lang.IllegalArgumentException: AppCompat does not support the current theme features<br>解决：<br>1、 values-v21,等等 values styles.xml<br>改成 parent=”Theme.AppCompat.NoActionBar”<br>因为 没有改全 甚至开始怀疑是不是 as又没有编译，严重怀疑人生，汗<br>2、<br><code>super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);</code><br>放在代码最上面</p>
+</li>
+<li><p>5 java.lang.IllegalStateException: Fragment already active<br>修改 java.lang.IllegalStateException: Fragment already active<br>Fragment被隐藏后，不能在使用setArguments()传递<br>可以使用setter和getter Fragment的属性方法进行数据的存储和获取</p>
+</li>
+<li><p>6 Activity singletask，intent 无法传值</p>
+</li>
+</ul>
+</section>
+</article>
+
+<section class="prev-next card slide-in-right">
+	
+		<a href="/2016/05/05/深入理解java-8-Lambda语言篇笔记/" class="link prev" title="深入理解Java-8-Lambda语言篇笔记">
+			<span class="hover-underline-animation">&larr; 深入理解Java-8-Lambda语言篇笔记</span>
+		</a>
+	
+	
+		<a href="/2016/04/23/rxlistfragment封装/" class="link next" title="Rxlistfragment封装">
+			<span class="hover-underline-animation">Rxlistfragment封装 &rarr;</span>
+		</a>
+	
+</section>
+
+
+<section class="article-toc">
+  <div class="card uk-margin-remove-bottom">
+    
+  </div>
+</section>
+
+<section class="article slide-in-right">
+  <div class="loader" id="loader">
+    <svg viewBox="0 0 50 50">
+      <circle class="ring" cx="25" cy="25" r="20"></circle>
+      <circle class="ball" cx="25" cy="5" r="3.5"></circle>
+    </svg>
+  </div>
+
+  <div class="comment" id="utteranc"></div>
+  <noscript>Please activate JavaScript for normal use of comments</noscript>
+</section>
+
+<a class="card back-to-top" id="backTop">&UpArrow;</a>
+</main>
+
+    
+
+    <script>
+	window.COLD_STONE = {
+		root: "/",
+		author: "xyzmst" || '',
+		gaid: "xxxxxxxxxxxxxx" || '',
+		repo: "xyzmst/blog" || '',
+	}
+</script>
+
+
+
+
+	<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+
+
+<script src="/scripts/busuanzi.js" referrerpolicy="origin"></script>
+
+<script src="/scripts/cold-stone.js"></script>
+
+
+
+  <script src="//www.googletagmanager.com/gtag/js?id=xxxxxxxxxxxxxx"></script>
+
+  <script>
+	window.dataLayer = window.dataLayer || []
+	function gtag() {
+		dataLayer.push(arguments)
+	}
+	gtag('js', new Date())
+	gtag('config', window.COLD_STONE.gaid)
+  </script>
+
+
+  </body>
+</html>

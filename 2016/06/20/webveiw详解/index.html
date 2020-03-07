@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="#333333">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keyword"  content="">
+    <meta name="description" content="想写什么就写什么">
+    <title>Webveiw详解 - undefined</title>
+    <base href="/">
+    <link rel="preconnect" href="//cdn.bootcss.com">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-light.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-dark.min.css" rel="stylesheet" media="screen and (prefers-color-scheme: dark)">
+    <!-- UIkit CSS -->
+    <link href="https://cdn.bootcss.com/uikit/3.2.0/css/uikit.min.css" rel="stylesheet">
+    <!-- UIkit JS -->
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit.min.js" async></script>
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit-icons.min.js" async></script>
+    
+<link rel="stylesheet" href="/styles/cold-stone.css">
+
+    <noscript>
+      <p class="text-center">你的浏览器还没开启 Javascript 功能！</p>
+    </noscript>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  <body>
+    
+
+    <header class="header" uk-sticky="top: 100; animation: uk-animation-slide-top; bottom: #sticky-on-scroll-up">
+  <nav class="wrapper header-content">
+    <div class="nav-overlay uk-navbar-left">
+      <h1 class="title nav-list-item uk-logo" data-link="/">
+        
+        <a href="/" data-link="/">xyzmst</a>
+        
+      </h1>
+
+      <ul class="nav-list">
+        
+        <li class="nav-list-item" data-link="/categories/">
+          <a class="nav-list-link" href="/categories">分类</a>
+        </li>
+        
+        
+        <li class="nav-list-item" data-link="/about/">
+          <a class="nav-list-link" href="/about/">关于</a>
+        </li>
+        
+        <li class="nav-list-item" data-link="/rss/">
+          <a class="nav-list-link" href="/atom.xml">RSS</a>
+        </li>
+        
+      </ul>
+    </div>
+
+    
+      <div class="uk-navbar-right translate-x">
+        <a class="uk-navbar-toggle" href="#modal-full" uk-search-icon uk-toggle></a>
+      </div>
+    
+  </nav>
+</header>
+
+<div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
+  <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+    <button class="uk-modal-close-full" type="button" uk-close></button>
+    <form class="uk-search uk-search-large search-form" action="//google.com/search" method="get" accept-charset="UTF-8"
+      target="_blank">
+      <input class="uk-search-input search-form-input" type="search" name="q" placeholder="搜索"
+        autofocus autocomplete="false">
+      <input type="hidden" name="sitesearch" value="http://xyzmst.top">
+    </form>
+  </div>
+</div>
+
+
+    <main class="main wrapper"><article class="article slide-in-right uk-article">
+  <section class="article-header">
+    <h1 class="article-title uk-article-title">
+      Webveiw详解
+    </h1>
+    <p class="article-meta uk-article-meta">
+      <span class="meta-info">
+        <span>
+          最后更新&#58;<time class="post-time"
+            datetime="2016-07-06">2016-07-06</time>
+        </span>
+        <span>阅读时间&#58; 4 min</span>
+        <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
+            id="busuanzi_value_page_pv"></span></span>
+      </span>
+    </p>
+  </section>
+  <section class="article-content"><h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>这个算是 知识点的整理，或者叫笔记吧，参考链接在最下面，也有使用时的注意事项之类的</p>
+<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><ul>
+<li><p>js支持 </p>
+<pre><code>WebView.getSettings().setJavaScriptEnabled(true);</code></pre></li>
+<li><p>禁止打开外部浏览器</p>
+<pre><code>mWebView.setWebViewClient(new WebViewClient(){
+  public boolean shouldOverrideUrlLoading(WebView view, String url){ 
+      view.loadUrl(url);
+      return true;
+  }
+});</code></pre></li>
+<li><p>返回键页面历史回退</p>
+<pre><code>public boolean onKeyDown(int keyCode, KeyEvent event) {
+      if ((keyCode == KeyEvent.KEYCODE_BACK) &amp;&amp; mWebView.canGoBack()) {
+          mWebView.goBack();
+          return true;
+      }
+      return super.onKeyDown(keyCode, event);
+  }</code></pre><h3 id="与js互调"><a href="#与js互调" class="headerlink" title="与js互调"></a>与js互调</h3></li>
+<li><p>注:android 4.2 之后版本提供给js调用的函数必须带有注释语句@JavascriptInterface<br>否则回报 “Uncaught TypeError: window.demo.clickOnAndroid is not a function</p>
+<pre><code>mWebView.addJavascriptInterface(new Object() {
+  @JavascriptInterface
+    public void clickOnAndroid() {
+        mHandler.post(new Runnable() {
+            public void run() { 
+                mWebView.loadUrl(&quot;javascript:wave()&quot;);
+            }
+        });
+    }
+  }, &quot;demo&quot;); 
+  mWebView.loadUrl(&quot;file:///android_asset/demo.html&quot;); </code></pre><p>html 页面</p>
+<pre><code>&lt;html&gt;
+&lt;script language=&quot;javascript&quot;&gt;
+function wave() {
+  document.getElementById(&quot;droid&quot;).src=&quot;android_waving.png&quot;;
+}
+&lt;/script&gt;
+&lt;body&gt;
+&lt;a onClick=&quot;window.demo.clickOnAndroid()&quot;&gt;
+&lt;img id=&quot;droid&quot; src=&quot;android_normal.png&quot; mce_src=&quot;android_normal.png&quot;/&gt;&lt;br&gt; Click me! &lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="深入使用WebView"><a href="#深入使用WebView" class="headerlink" title="深入使用WebView"></a>深入使用WebView</h3></li>
+<li><p>WebView、WebViewClient、WebChromeClient 之间的区别:<br>在 WebView 的设计中,不是什么事都要 WebView类干的,有些杂事是分给其他人的,<br>这样 WebView 专心干好 自己的解析、渲染工作就行了.WebViewClient 就是帮助<br>WebView 处理各种通知、请求事件等 ,WebChromeClient 是辅助 WebView<br>处理 Javascript 的对话框,网站图标,网站 title.</p>
+<h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><pre><code>//优先使用缓存: 
+WebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); 
+//不使用缓存: 
+WebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);</code></pre></li>
+<li><p>在退出应用的时候加上如下代码，可以完整的清空缓存</p>
+<pre><code>  File file = CacheManager.getCacheFileBaseDir();
+  if (file != null &amp;&amp; file.exists() &amp;&amp; file.isDirectory()) {
+      for (File item : file.listFiles()) {
+          item.delete();
+      }
+      file.delete();
+  }
+  context.deleteDatabase(&quot;WebView.db&quot;); 
+  context.deleteDatabase(&quot;WebViewCache.db&quot;);</code></pre><p>删除保存于手机上的缓存</p>
+<pre><code>private int clearCacheFolder(File dir,long numDays) { 
+int deletedFiles = 0;
+if (dir!= null &amp;&amp; dir.isDirectory()){
+  try {
+    for (File child:dir.listFiles()){
+        if (child.isDirectory()) {
+          deletedFiles += clearCacheFolder(child, numDays);
+      }
+      if (child.lastModified() &lt; numDays) {
+        if (child.delete()) {
+         deletedFiles++; 
+        }
+      }
+    }
+  } catch(Exception e) {
+    e.printStackTrace(); 
+  }
+}
+return deletedFiles; 
+}</code></pre></li>
+<li><p>404 处理</p>
+<pre><code>public class WebView_404 extends Activity {    
+  private Handler handler = new Handler() {
+  public void handleMessage(Message msg) {
+    if(msg.what==404) {//主页不存在
+      //载入本地 assets 文件夹下面的错误提示页面 404.html 
+      web.loadUrl(&quot;file:///android_asset/404.html&quot;);
+    }else{
+      web.loadUrl(HOMEPAGE);
+    }
+  }
+  };
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    web.setWebViewClient(new WebViewClient() {
+    public boolean shouldOverrideUrl(WebView view,String url) { 
+      if(url.startsWith(&quot;http://&quot;) &amp;&amp; getRespStatus(url)==404) {
+        view.stopLoading();
+        //载入本地 assets 文件夹下面的错误提示页面 404.html 
+        view.loadUrl(&quot;file:///android_asset/404.html&quot;);
+      }else{
+        view.loadUrl(url);
+      }
+        return true;
+      }
+    });
+    new Thread(new Runnable() {
+  public void run() {
+        Message msg = new Message();
+        //此处判断主页是否存在,因为主页是通过 loadUrl 加载的,
+        //此时不会执行 shouldOverrideUrlLoading 进行页面是否存在的判断 //进入主页后,点主页里面的链接,链接到其他页面就一定会执行
+        shouldOverrideUrlLoading 方法了 
+        if(getRespStatus(HOMEPAGE)==404) {
+        msg.what = 404;
+        }
+        handler.sendMessage(msg);
+    }).start();
+}
+}</code></pre><h3 id="判断-WebView-是否已经滚动到页面底端"><a href="#判断-WebView-是否已经滚动到页面底端" class="headerlink" title="判断 WebView 是否已经滚动到页面底端"></a>判断 WebView 是否已经滚动到页面底端</h3></li>
+<li><p>启动或关闭webview的缩放功能。</p>
+<pre><code>mWebView.getSettings().setSupportZoom(true);
+mWebView.getSettings().setBuiltInZoomControls(true);</code></pre></li>
+<li><p>如果已经处于底端</p>
+<pre><code>if(WebView.getContentHeight*WebView.getScale() -(webvi ew.getHeight()+WebView.getScrollY())){ 
+//XXX
+}</code></pre></li>
+</ul>
+<h3 id="WebView获取服务器中的-session-问题"><a href="#WebView获取服务器中的-session-问题" class="headerlink" title="WebView获取服务器中的 session 问题"></a>WebView获取服务器中的 session 问题</h3><ul>
+<li>Android 中的 WebView 如何获取服务器页面的 jsessionid 的值</li>
+<li>Android 的 WebView 又是如何把得到的 jsessionid 的值在 set 到服务器中,一致达到他们在同一个 jsessionid 的回话中.<pre><code>CookieManager cm = CookieManager.getInstance(); 
+cm.removeAllCookie();
+cm.getCookie(url);
+cm.setCookie(url, cookie);</code></pre>工具方法<pre><code>  /***
+   * 如果用户已经登录，则同步本地的cookie到webview中
+   */
+  public void synCookies() {
+      if (!CacheUtils.isLogin(this)) return;
+      CookieSyncManager.createInstance(this);
+      CookieManager cookieManager = CookieManager.getInstance();
+      cookieManager.setAcceptCookie(true);
+      cookieManager.removeSessionCookie();//移除
+      String cookies = PreferenceHelper.readString(this, AppConfig.COOKIE_KEY, AppConfig.COOKIE_KEY);
+      KJLoger.debug(cookies);
+      cookieManager.setCookie(url, cookies);
+      CookieSyncManager.getInstance().sync();
+  }</code></pre></li>
+</ul>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li><a href="http://www.kymjs.com/code/2015/05/03/01" target="_blank" rel="noopener">深入讲解webview</a></li>
+<li><a href="http://kymjs.com/code/2015/05/04/01/" target="_blank" rel="noopener">深入讲解WebView——下</a></li>
+<li><a href="http://www.jianshu.com/p/3fcf8ba18d7f" target="_blank" rel="noopener">史上最全WebView使用，附送Html5Activity一份</a></li>
+</ul>
+</section>
+</article>
+
+<section class="prev-next card slide-in-right">
+	
+		<a href="/2016/06/21/hexo之next主题优化整理/" class="link prev" title="Hexo之next主题优化整理">
+			<span class="hover-underline-animation">&larr; Hexo之next主题优化整理</span>
+		</a>
+	
+	
+		<a href="/2016/06/18/git常用命令/" class="link next" title="Git常用命令">
+			<span class="hover-underline-animation">Git常用命令 &rarr;</span>
+		</a>
+	
+</section>
+
+
+<section class="article-toc">
+  <div class="card uk-margin-remove-bottom">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置"><span class="toc-text">设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#与js互调"><span class="toc-text">与js互调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#深入使用WebView"><span class="toc-text">深入使用WebView</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缓存"><span class="toc-text">缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#判断-WebView-是否已经滚动到页面底端"><span class="toc-text">判断 WebView 是否已经滚动到页面底端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WebView获取服务器中的-session-问题"><span class="toc-text">WebView获取服务器中的 session 问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考链接"><span class="toc-text">参考链接</span></a></li></ol>
+  </div>
+</section>
+
+<section class="article slide-in-right">
+  <div class="loader" id="loader">
+    <svg viewBox="0 0 50 50">
+      <circle class="ring" cx="25" cy="25" r="20"></circle>
+      <circle class="ball" cx="25" cy="5" r="3.5"></circle>
+    </svg>
+  </div>
+
+  <div class="comment" id="utteranc"></div>
+  <noscript>Please activate JavaScript for normal use of comments</noscript>
+</section>
+
+<a class="card back-to-top" id="backTop">&UpArrow;</a>
+</main>
+
+    
+
+    <script>
+	window.COLD_STONE = {
+		root: "/",
+		author: "xyzmst" || '',
+		gaid: "xxxxxxxxxxxxxx" || '',
+		repo: "xyzmst/blog" || '',
+	}
+</script>
+
+
+
+
+	<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+
+
+<script src="/scripts/busuanzi.js" referrerpolicy="origin"></script>
+
+<script src="/scripts/cold-stone.js"></script>
+
+
+
+  <script src="//www.googletagmanager.com/gtag/js?id=xxxxxxxxxxxxxx"></script>
+
+  <script>
+	window.dataLayer = window.dataLayer || []
+	function gtag() {
+		dataLayer.push(arguments)
+	}
+	gtag('js', new Date())
+	gtag('config', window.COLD_STONE.gaid)
+  </script>
+
+
+  </body>
+</html>

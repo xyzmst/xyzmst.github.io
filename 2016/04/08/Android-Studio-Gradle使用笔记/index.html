@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="#333333">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keyword"  content="">
+    <meta name="description" content="想写什么就写什么">
+    <title>Android Studio Gradle使用笔记 - undefined</title>
+    <base href="/">
+    <link rel="preconnect" href="//cdn.bootcss.com">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-light.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-dark.min.css" rel="stylesheet" media="screen and (prefers-color-scheme: dark)">
+    <!-- UIkit CSS -->
+    <link href="https://cdn.bootcss.com/uikit/3.2.0/css/uikit.min.css" rel="stylesheet">
+    <!-- UIkit JS -->
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit.min.js" async></script>
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit-icons.min.js" async></script>
+    
+<link rel="stylesheet" href="/styles/cold-stone.css">
+
+    <noscript>
+      <p class="text-center">你的浏览器还没开启 Javascript 功能！</p>
+    </noscript>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  <body>
+    
+
+    <header class="header" uk-sticky="top: 100; animation: uk-animation-slide-top; bottom: #sticky-on-scroll-up">
+  <nav class="wrapper header-content">
+    <div class="nav-overlay uk-navbar-left">
+      <h1 class="title nav-list-item uk-logo" data-link="/">
+        
+        <a href="/" data-link="/">xyzmst</a>
+        
+      </h1>
+
+      <ul class="nav-list">
+        
+        <li class="nav-list-item" data-link="/categories/">
+          <a class="nav-list-link" href="/categories">分类</a>
+        </li>
+        
+        
+        <li class="nav-list-item" data-link="/about/">
+          <a class="nav-list-link" href="/about/">关于</a>
+        </li>
+        
+        <li class="nav-list-item" data-link="/rss/">
+          <a class="nav-list-link" href="/atom.xml">RSS</a>
+        </li>
+        
+      </ul>
+    </div>
+
+    
+      <div class="uk-navbar-right translate-x">
+        <a class="uk-navbar-toggle" href="#modal-full" uk-search-icon uk-toggle></a>
+      </div>
+    
+  </nav>
+</header>
+
+<div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
+  <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+    <button class="uk-modal-close-full" type="button" uk-close></button>
+    <form class="uk-search uk-search-large search-form" action="//google.com/search" method="get" accept-charset="UTF-8"
+      target="_blank">
+      <input class="uk-search-input search-form-input" type="search" name="q" placeholder="搜索"
+        autofocus autocomplete="false">
+      <input type="hidden" name="sitesearch" value="http://xyzmst.top">
+    </form>
+  </div>
+</div>
+
+
+    <main class="main wrapper"><article class="article slide-in-right uk-article">
+  <section class="article-header">
+    <h1 class="article-title uk-article-title">
+      Android Studio Gradle使用笔记
+    </h1>
+    <p class="article-meta uk-article-meta">
+      <span class="meta-info">
+        <span>
+          最后更新&#58;<time class="post-time"
+            datetime="2016-08-09">2016-08-09</time>
+        </span>
+        <span>阅读时间&#58; 2 min</span>
+        <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
+            id="busuanzi_value_page_pv"></span></span>
+      </span>
+    </p>
+  </section>
+  <section class="article-content"><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>Gradle是一个基于Apache Ant和Apache Maven概念的项目自动化建构工具。</p>
+<h2 id="gradle-vs-maven"><a href="#gradle-vs-maven" class="headerlink" title="gradle vs maven"></a>gradle vs maven</h2><h2 id="groovy"><a href="#groovy" class="headerlink" title="groovy"></a>groovy</h2><p>groovy是一种基于java的动态语言。它也是跑在jvm上的。groovy为什么能跑在java的虚拟机上呢？这听上去让人有些难以理解。实际上，在groovy的编译阶段，groovy的编译器就会把groovy源码编译成class文件，class文件？没错！就是class文件。我们知道，java在编译后也是编译成class文件，然后交给虚拟机去执行的。换句话说，jvm的输入是class文件，只要你是标准的class文件，jvm是不会管你是由什么语言编译来的，它都会执行！</p>
+<ul>
+<li>支持动态类型<pre><code class="groovy">def temp = &quot;groovy&quot; //def是groovy中定义变量的关键字
+temp = 1 //groovy可以不用分号结尾～
+println temp</code></pre>
+</li>
+<li>函数<pre><code class="groovy">def getValue(){
+  retrun &quot;hello world&quot;
+}</code></pre>
+</li>
+<li>闭包<br>遍历一个 Collection<pre><code class="groovy">def list = [&quot;gradle&quot;, &quot;groovy&quot;, &quot;closure&quot;]
+//{}内的代码块就是一个闭包
+list.each{
+    println it//闭包中的it是一个关键字，指向被调用的外部集合的每个值。
+}</code></pre>
+输出结果<pre><code class="groovy">gradle
+groovy
+closure</code></pre>
+</li>
+<li>遍历map<pre><code class="groovy">//[key:value,key:value]代表定义一个map
+def hash = [name:&quot;Andy&quot;, &quot;VPN-#&quot;:45]
+hash.each{ key, value -&gt;//传递给闭包两个参数
+    println &quot;${key} : ${value}&quot;
+}</code></pre>
+.each 定义<pre><code class="groovy">public static &lt;T&gt; Iterable&lt;T&gt; each(Iterable&lt;T&gt; self, @ClosureParams(FirstParam.FirstGenericType.class) Closure closure) {
+each(self.iterator(), closure);
+return self;
+}</code></pre>
+当我们在调用.each方法时，第一个参数self传进去代表调用each方法的变量，第二个参数代表each{}包裹起来的代码块。而在groovy中，当函数最后的一个参数是闭包的话，可以省略圆括号。（有同学可能会问each方法的定义明明有两个参数，但在调用时只传入了一个closure参数，没有传入self参数啊。对于这个问题，在这里我们不深究了，可以简单的认为在编译时，groovy编译器会帮我们处理。）</li>
+</ul>
+<h2 id="gradle"><a href="#gradle" class="headerlink" title="gradle"></a>gradle</h2><h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><p><img src="http://7xrsw2.com1.z0.glb.clouddn.com/image028.png" alt="流程"></p>
+<p>1.初始化阶段(Initialization Phases):执行setting.gradle。settings.gradle会被转化为Settings的对象.settings.gradle决定哪个project应该加入构建。对于每一个工程创建一个Project对象。</p>
+<p>2.配置阶段(Configuration Phases):在这个阶段，所有参与构建的工程的build.gradle脚本将会被执行。task也是在这个阶段定义的,并被添加到一个有向图中。</p>
+<p>3.执行阶段(Execution Phases):Gradle会执行指定的task（例如，在命令行中执行gradle build，将会执行build这个task）</p>
+<h2 id="android-gradle-构建系统"><a href="#android-gradle-构建系统" class="headerlink" title="android gradle 构建系统"></a>android gradle 构建系统</h2><pre><code>buildscript {  
+    repositories {  
+        mavenCentral()  
+    }      
+    dependencies {  
+        classpath &#39;com.android.tools.build:gradle:0.11.1&#39;  
+    }  
+}  
+
+apply plugin: &#39;android&#39;  
+
+android {  
+    compileSdkVersion 19  
+    buildToolsVersion &quot;19.0.0&quot;  
+}  </code></pre><h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p>gradle入门 : <a href="http://yoursite.com/2016/03/12/gradlestart/index.html" target="_blank" rel="noopener">http://yoursite.com/2016/03/12/gradlestart/index.html</a><br><a href="http://blog.csdn.net/lzyzsd/article/details/42131637" target="_blank" rel="noopener">http://blog.csdn.net/lzyzsd/article/details/42131637</a><br>深入浅出gradle（一）：<a href="http://blog.csdn.net/lzyzsd/article/details/42131637" target="_blank" rel="noopener">http://blog.csdn.net/lzyzsd/article/details/42131637</a></p>
+</section>
+</article>
+
+<section class="prev-next card slide-in-right">
+	
+		<a href="/2016/04/09/android开源库/" class="link prev" title="Android开源库">
+			<span class="hover-underline-animation">&larr; Android开源库</span>
+		</a>
+	
+	
+		<a href="/2016/04/07/互动直播集成/" class="link next" title="互动直播集成">
+			<span class="hover-underline-animation">互动直播集成 &rarr;</span>
+		</a>
+	
+</section>
+
+
+<section class="article-toc">
+  <div class="card uk-margin-remove-bottom">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gradle-vs-maven"><span class="toc-text">gradle vs maven</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#groovy"><span class="toc-text">groovy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gradle"><span class="toc-text">gradle</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#工作流程"><span class="toc-text">工作流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#android-gradle-构建系统"><span class="toc-text">android gradle 构建系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关链接"><span class="toc-text">相关链接</span></a></li></ol>
+  </div>
+</section>
+
+<section class="article slide-in-right">
+  <div class="loader" id="loader">
+    <svg viewBox="0 0 50 50">
+      <circle class="ring" cx="25" cy="25" r="20"></circle>
+      <circle class="ball" cx="25" cy="5" r="3.5"></circle>
+    </svg>
+  </div>
+
+  <div class="comment" id="utteranc"></div>
+  <noscript>Please activate JavaScript for normal use of comments</noscript>
+</section>
+
+<a class="card back-to-top" id="backTop">&UpArrow;</a>
+</main>
+
+    
+
+    <script>
+	window.COLD_STONE = {
+		root: "/",
+		author: "xyzmst" || '',
+		gaid: "xxxxxxxxxxxxxx" || '',
+		repo: "xyzmst/blog" || '',
+	}
+</script>
+
+
+
+
+	<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+
+
+<script src="/scripts/busuanzi.js" referrerpolicy="origin"></script>
+
+<script src="/scripts/cold-stone.js"></script>
+
+
+
+  <script src="//www.googletagmanager.com/gtag/js?id=xxxxxxxxxxxxxx"></script>
+
+  <script>
+	window.dataLayer = window.dataLayer || []
+	function gtag() {
+		dataLayer.push(arguments)
+	}
+	gtag('js', new Date())
+	gtag('config', window.COLD_STONE.gaid)
+  </script>
+
+
+  </body>
+</html>

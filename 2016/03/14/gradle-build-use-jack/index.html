@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="#333333">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keyword"  content="">
+    <meta name="description" content="想写什么就写什么">
+    <title>Gradle Build Use Jack - undefined</title>
+    <base href="/">
+    <link rel="preconnect" href="//cdn.bootcss.com">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-light.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-dark.min.css" rel="stylesheet" media="screen and (prefers-color-scheme: dark)">
+    <!-- UIkit CSS -->
+    <link href="https://cdn.bootcss.com/uikit/3.2.0/css/uikit.min.css" rel="stylesheet">
+    <!-- UIkit JS -->
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit.min.js" async></script>
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit-icons.min.js" async></script>
+    
+<link rel="stylesheet" href="/styles/cold-stone.css">
+
+    <noscript>
+      <p class="text-center">你的浏览器还没开启 Javascript 功能！</p>
+    </noscript>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  <body>
+    
+
+    <header class="header" uk-sticky="top: 100; animation: uk-animation-slide-top; bottom: #sticky-on-scroll-up">
+  <nav class="wrapper header-content">
+    <div class="nav-overlay uk-navbar-left">
+      <h1 class="title nav-list-item uk-logo" data-link="/">
+        
+        <a href="/" data-link="/">xyzmst</a>
+        
+      </h1>
+
+      <ul class="nav-list">
+        
+        <li class="nav-list-item" data-link="/categories/">
+          <a class="nav-list-link" href="/categories">分类</a>
+        </li>
+        
+        
+        <li class="nav-list-item" data-link="/about/">
+          <a class="nav-list-link" href="/about/">关于</a>
+        </li>
+        
+        <li class="nav-list-item" data-link="/rss/">
+          <a class="nav-list-link" href="/atom.xml">RSS</a>
+        </li>
+        
+      </ul>
+    </div>
+
+    
+      <div class="uk-navbar-right translate-x">
+        <a class="uk-navbar-toggle" href="#modal-full" uk-search-icon uk-toggle></a>
+      </div>
+    
+  </nav>
+</header>
+
+<div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
+  <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+    <button class="uk-modal-close-full" type="button" uk-close></button>
+    <form class="uk-search uk-search-large search-form" action="//google.com/search" method="get" accept-charset="UTF-8"
+      target="_blank">
+      <input class="uk-search-input search-form-input" type="search" name="q" placeholder="搜索"
+        autofocus autocomplete="false">
+      <input type="hidden" name="sitesearch" value="http://xyzmst.top">
+    </form>
+  </div>
+</div>
+
+
+    <main class="main wrapper"><article class="article slide-in-right uk-article">
+  <section class="article-header">
+    <h1 class="article-title uk-article-title">
+      Gradle Build Use Jack
+    </h1>
+    <p class="article-meta uk-article-meta">
+      <span class="meta-info">
+        <span>
+          最后更新&#58;<time class="post-time"
+            datetime="2016-07-02">2016-07-02</time>
+        </span>
+        <span>阅读时间&#58; 1 min</span>
+        <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
+            id="busuanzi_value_page_pv"></span></span>
+      </span>
+    </p>
+  </section>
+  <section class="article-content"><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol>
+<li><p>project目录及对应module下的gradle-wrapper.properties</p>
+<pre><code class="xml">distributionUrl=https\://services.gradle.org/distributions/gradle-2.10-all.zip</code></pre>
+</li>
+<li><p>project目录下的 gradle.build    </p>
+<pre><code class="xml">classpath &#39;com.android.tools.build:gradle:2.1.0-alpha1&#39;</code></pre>
+</li>
+<li><p>module下的gradle.build</p>
+<pre><code class="xml"> android{
+   ...
+   buildToolsVersion &#39;24 rc1&#39;
+   ...
+   defaultConfig {
+     ...
+    useJack = true
+     ...
+    }
+   ...
+ }</code></pre>
+</li>
+<li><p>compile fileTree 要替换成 compile files</p>
+</li>
+<li><p>so 要用这种写法</p>
+<pre><code class="xml">task copyNativeLibs(type: Copy) {
+   from(new File(project(&#39;:modulename&#39;).buildDir, &#39;libs/armeabi&#39;)){ include &#39;.so&#39; }
+   into new File(buildDir, &#39;native-libs&#39;)
+ }</code></pre>
+</li>
+</ol>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>build 通过了但是 出了一个问题</p>
+<pre><code class="java">java.io.IOException: com.android.ide.common.process.ProcessException: org.gradle.process.internal.ExecException: Process &#39;command &#39;/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/bin/java&#39;&#39; finished with non-zero exit value 3
+</code></pre>
+<p><a href="https://code.google.com/p/android/issues/detail?id=202973" target="_blank" rel="noopener">google发现也有人遇到同样的问题，但是还没有解决</a></p>
+<h2 id="新发现"><a href="#新发现" class="headerlink" title="新发现"></a>新发现</h2><pre><code class="java">Caused by: com.android.sched.util.config.ConfigurationError: Configuration has not been initialized
+        at com.android.sched.util.config.UninitializedConfig.getObjectIfAny(UninitializedConfig.java:58)
+        at com.android.sched.util.config.ThreadConfig.updateStatistic(ThreadConfig.java:68)
+        at com.android.sched.util.config.ThreadConfig.get(ThreadConfig.java:54)
+        at com.android.jack.reporting.CommonReporter.&lt;init&gt;(CommonReporter.java:49)
+        at com.android.jack.reporting.DefaultReporter.&lt;init&gt;(DefaultReporter.java:32)
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+        at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+        at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+        at com.android.sched.util.config.ReflectDefaultCtorFactory.create(ReflectDefaultCtorFactory.java:68)
+        ... 9 more
+</code></pre>
+</section>
+</article>
+
+<section class="prev-next card slide-in-right">
+	
+		<a href="/2016/03/20/Kindle的使用技巧/" class="link prev" title="Kindle的使用技巧">
+			<span class="hover-underline-animation">&larr; Kindle的使用技巧</span>
+		</a>
+	
+	
+		<a href="/2016/03/11/开发工具汇总/" class="link next" title="开发工具汇总">
+			<span class="hover-underline-animation">开发工具汇总 &rarr;</span>
+		</a>
+	
+</section>
+
+
+<section class="article-toc">
+  <div class="card uk-margin-remove-bottom">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#新发现"><span class="toc-text">新发现</span></a></li></ol>
+  </div>
+</section>
+
+<section class="article slide-in-right">
+  <div class="loader" id="loader">
+    <svg viewBox="0 0 50 50">
+      <circle class="ring" cx="25" cy="25" r="20"></circle>
+      <circle class="ball" cx="25" cy="5" r="3.5"></circle>
+    </svg>
+  </div>
+
+  <div class="comment" id="utteranc"></div>
+  <noscript>Please activate JavaScript for normal use of comments</noscript>
+</section>
+
+<a class="card back-to-top" id="backTop">&UpArrow;</a>
+</main>
+
+    
+
+    <script>
+	window.COLD_STONE = {
+		root: "/",
+		author: "xyzmst" || '',
+		gaid: "xxxxxxxxxxxxxx" || '',
+		repo: "xyzmst/blog" || '',
+	}
+</script>
+
+
+
+
+	<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+
+
+<script src="/scripts/busuanzi.js" referrerpolicy="origin"></script>
+
+<script src="/scripts/cold-stone.js"></script>
+
+
+
+  <script src="//www.googletagmanager.com/gtag/js?id=xxxxxxxxxxxxxx"></script>
+
+  <script>
+	window.dataLayer = window.dataLayer || []
+	function gtag() {
+		dataLayer.push(arguments)
+	}
+	gtag('js', new Date())
+	gtag('config', window.COLD_STONE.gaid)
+  </script>
+
+
+  </body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="#333333">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keyword"  content="">
+    <meta name="description" content="想写什么就写什么">
+    <title>支付集成 - undefined</title>
+    <base href="/">
+    <link rel="preconnect" href="//cdn.bootcss.com">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-light.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-dark.min.css" rel="stylesheet" media="screen and (prefers-color-scheme: dark)">
+    <!-- UIkit CSS -->
+    <link href="https://cdn.bootcss.com/uikit/3.2.0/css/uikit.min.css" rel="stylesheet">
+    <!-- UIkit JS -->
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit.min.js" async></script>
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit-icons.min.js" async></script>
+    
+<link rel="stylesheet" href="/styles/cold-stone.css">
+
+    <noscript>
+      <p class="text-center">你的浏览器还没开启 Javascript 功能！</p>
+    </noscript>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  <body>
+    
+
+    <header class="header" uk-sticky="top: 100; animation: uk-animation-slide-top; bottom: #sticky-on-scroll-up">
+  <nav class="wrapper header-content">
+    <div class="nav-overlay uk-navbar-left">
+      <h1 class="title nav-list-item uk-logo" data-link="/">
+        
+        <a href="/" data-link="/">xyzmst</a>
+        
+      </h1>
+
+      <ul class="nav-list">
+        
+        <li class="nav-list-item" data-link="/categories/">
+          <a class="nav-list-link" href="/categories">分类</a>
+        </li>
+        
+        
+        <li class="nav-list-item" data-link="/about/">
+          <a class="nav-list-link" href="/about/">关于</a>
+        </li>
+        
+        <li class="nav-list-item" data-link="/rss/">
+          <a class="nav-list-link" href="/atom.xml">RSS</a>
+        </li>
+        
+      </ul>
+    </div>
+
+    
+      <div class="uk-navbar-right translate-x">
+        <a class="uk-navbar-toggle" href="#modal-full" uk-search-icon uk-toggle></a>
+      </div>
+    
+  </nav>
+</header>
+
+<div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
+  <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+    <button class="uk-modal-close-full" type="button" uk-close></button>
+    <form class="uk-search uk-search-large search-form" action="//google.com/search" method="get" accept-charset="UTF-8"
+      target="_blank">
+      <input class="uk-search-input search-form-input" type="search" name="q" placeholder="搜索"
+        autofocus autocomplete="false">
+      <input type="hidden" name="sitesearch" value="http://xyzmst.top">
+    </form>
+  </div>
+</div>
+
+
+    <main class="main wrapper"><article class="article slide-in-right uk-article">
+  <section class="article-header">
+    <h1 class="article-title uk-article-title">
+      支付集成
+    </h1>
+    <p class="article-meta uk-article-meta">
+      <span class="meta-info">
+        <span>
+          最后更新&#58;<time class="post-time"
+            datetime="2016-08-07">2016-08-07</time>
+        </span>
+        <span>阅读时间&#58; 6 min</span>
+        <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
+            id="busuanzi_value_page_pv"></span></span>
+      </span>
+    </p>
+  </section>
+  <section class="article-content"><p><a href="https://www.vultr.com/?ref=6926700-3B" target="_blank" rel="noopener"><img src="https://www.vultr.com/media/728x90_08.png" width="728" height="90"></a><br>本文原创，转载请以链接形式注明地址：<a href="http://xyzmst.top/2016/07/22/%E6%94%AF%E4%BB%98%E9%9B%86%E6%88%90/">http://xyzmst.top/2016/07/22/%E6%94%AF%E4%BB%98%E9%9B%86%E6%88%90/</a><br>集成个支付真是费心费力，就不能弄个测试的工具出来可以直指到底哪里出了错，没办法谁让必须的用呢，总结几大坑点，<br>希望不要再有人再踩坑吧</p>
+<h2 id="阿狸支付"><a href="#阿狸支付" class="headerlink" title="阿狸支付"></a>阿狸支付</h2><h3 id="坑点-加密"><a href="#坑点-加密" class="headerlink" title="坑点 加密"></a>坑点 加密</h3><p>先罗列出出处，然后一一说明<br>请求参数说明：<a href="https://doc.open.alipay.com/doc2/detail?treeId=59&amp;articleId=103663&amp;docType=1" target="_blank" rel="noopener">https://doc.open.alipay.com/doc2/detail?treeId=59&amp;articleId=103663&amp;docType=1</a><br>签名机制：<a href="https://doc.open.alipay.com/doc2/detail?treeId=59&amp;articleId=103927&amp;docType=1" target="_blank" rel="noopener">https://doc.open.alipay.com/doc2/detail?treeId=59&amp;articleId=103927&amp;docType=1</a><br>RSA私钥及公钥生成：<a href="https://doc.open.alipay.com/doc2/detail?treeId=58&amp;articleId=103242&amp;docType=1" target="_blank" rel="noopener">https://doc.open.alipay.com/doc2/detail?treeId=58&amp;articleId=103242&amp;docType=1</a><br>最终 等到的加密后的字符串应该是这个样子的：</p>
+<pre><code>partner=&quot;2088101568358171&quot;&amp;seller_id=&quot;xxx@alipay.com&quot;&amp;out_trade_no=&quot;0819145412-6177&quot;&amp;subject=&quot;测试&quot;&amp;body=&quot;测试测试&quot;&amp;total_fee=&quot;0.01&quot;&amp;notify_url=&quot;http://notify.msp.hk/notify.htm&quot;&amp;service=&quot;mobile.securitypay.pay&quot;&amp;payment_type=&quot;1&quot;&amp;_input_charset=&quot;utf-8&quot;&amp;it_b_pay=&quot;30m&quot;&amp;sign=&quot;lBBK%2F0w5LOajrMrji7DUgEqNjIhQbidR13GovA5r3TgIbNqv231yC1NksLdw%2Ba3JnfHXoXuet6XNNHtn7VE%2BeCoRO1O%2BR1KugLrQEZMtG5jmJIe2pbjm%2F3kb%2FuGkpG%2BwYQYI51%2BhA3YBbvZHVQBYveBqK%2Bh8mUyb7GM1HxWs9k4%3D&quot;&amp;sign_type=&quot;RSA&quot;</code></pre><p>serller_id:卖家支付宝账号（邮箱或手机号码格式）或其对应的支付宝唯一用户号（以2088开头的纯16位数字）。</p>
+<p>这里的坑点在于不同端使用的私钥不同，OpenSSL命令生成三个文件分别是：rsa_private_key.pem rsa_private_key_pkcs8.pem rsa_public_key.pem<br>为了省着去链接里看生成命令，这里贴出来：</p>
+<pre><code>OpenSSL&gt; genrsa -out rsa_private_key.pem   1024  #生成私钥
+OpenSSL&gt; pkcs8 -topk8 -inform PEM -in rsa_private_key.pem -outform PEM -nocrypt -out rsa_private_key_pkcs8.pem #Java开发者需要将私钥转换成PKCS8格式
+OpenSSL&gt; rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem #生成公钥
+OpenSSL&gt; exit #退出OpenSSL程序</code></pre><p>rsa_private_key_pkcs8 是给java用的，也就是android端需要这个加密，rsa_private_key 标准私钥是给PHP，.NET使用的</p>
+<p>私钥说完了，然后要说的是 加密另一个坑，加密顺序和key都是有要求的这里贴出来java代码</p>
+<pre><code>        // 签约合作者身份ID
+        String orderInfo = &quot;partner=&quot; + MARK + KeyLibs.ali_partner + MARK;
+
+        // 签约卖家支付宝账号
+        orderInfo += &quot;&amp;seller_id=&quot; + MARK + info.seller_id + MARK;
+
+        // 商户网站唯一订单号
+        if (!TextUtils.isEmpty(info.out_trade_no))
+            orderInfo += &quot;&amp;out_trade_no=&quot; + MARK + info.out_trade_no + MARK;
+
+        // 商品名称
+        if (!TextUtils.isEmpty(info.subject))
+            orderInfo += &quot;&amp;subject=&quot; + MARK + info.subject + MARK;
+
+        // 商品详情
+        if (!TextUtils.isEmpty(info.body))
+            orderInfo += &quot;&amp;body=&quot; + MARK + info.body + MARK;
+
+        // 商品金额
+        if (!TextUtils.isEmpty(info.total_fee))
+            orderInfo += &quot;&amp;total_fee=&quot; + MARK + info.total_fee + MARK;
+
+        // 服务器异步通知页面路径
+        if (!TextUtils.isEmpty(info.notify_url))
+            orderInfo += &quot;&amp;notify_url=&quot; + MARK + info.notify_url + MARK;
+
+        // 服务接口名称， 固定值
+        if (!TextUtils.isEmpty(info.service))
+            orderInfo += &quot;&amp;service=&quot; + MARK + info.service + MARK;
+
+        // 支付类型， 固定值
+        if (!TextUtils.isEmpty(info.payment_type))
+            orderInfo += &quot;&amp;payment_type=&quot; + MARK + info.payment_type + MARK;
+
+        // 参数编码， 固定值
+        if (!TextUtils.isEmpty(info._input_charset))
+            orderInfo += &quot;&amp;_input_charset=&quot; + MARK + info._input_charset + MARK;
+
+        // 设置未付款交易的超时时间
+        // 默认30分钟，一旦超时，该笔交易就会自动被关闭。
+        // 取值范围：1m～15d。
+        // m-分钟，h-小时，d-天，1c-当天（无论交易何时创建，都在0点关闭）。
+        // 该参数数值不接受小数点，如1.5h，可转换为90m。
+        if (!TextUtils.isEmpty(info.it_b_pay))
+            orderInfo += &quot;&amp;it_b_pay=&quot; + MARK + info.it_b_pay + MARK;
+
+        // extern_token为经过快登授权获取到的alipay_open_id,带上此参数用户将使用授权的账户进行支付
+        if (!TextUtils.isEmpty(info.extern_token))
+            orderInfo += &quot;&amp;extern_token=&quot; + MARK + info.extern_token + MARK;
+
+        // 支付宝处理完请求后，当前页面跳转到商户指定页面的路径，可空
+//        if (!TextUtils.isEmpty(info.return_url))
+//            orderInfo += &quot;&amp;return_url=&quot; + MARK + info.return_url + MARK;
+
+        if (!TextUtils.isEmpty(info.out_context))
+            orderInfo += &quot;&amp;out_context=&quot; + MARK + info.out_context + MARK;
+        if (!TextUtils.isEmpty(info.good_type))
+            orderInfo += &quot;&amp;good_type=&quot; + MARK + info.good_type + MARK;
+
+//        if (!TextUtils.isEmpty(info.rn_check))
+//            orderInfo += &quot;&amp;rn_check=&quot; + MARK + info.rn_check + MARK;
+
+        // 调用银行卡支付，需配置此参数，参与签名， 固定值 （需要签约《无线银行卡快捷支付》才能使用）
+        // orderInfo += &quot;&amp;paymethod=\&quot;expressGateway\&quot;&quot;;
+        String sign = SignUtils.sign(orderInfo);
+        orderInfo = orderInfo + &quot;&amp;sign=\&quot;&quot; + sign + &quot;\&quot;&amp;&quot; + SignUtils.getSignType();
+        return orderInfo;</code></pre><h2 id="微信支付"><a href="#微信支付" class="headerlink" title="微信支付"></a>微信支付</h2><p>微信比较麻烦的是，需要调用接口先生成预定单，客户端没办法随便写的数据就测试</p>
+<h3 id="坑点一-签名"><a href="#坑点一-签名" class="headerlink" title="坑点一 签名"></a>坑点一 签名</h3><p>app 用debug默认签名安装，和 用指定keystore签名安装后，再用微信生成签名工具得到的签名是不一样的，<br>而且生成的那一串东东没法复制，只能一个一个的敲进去</p>
+<h3 id="坑点二-加密"><a href="#坑点二-加密" class="headerlink" title="坑点二 加密"></a>坑点二 加密</h3><p>每个加密都是坑，躲不掉的，获取预支付订单会返回一堆数据，然而返回的sign并没有什么软用，必须重新生成才能给<br>客户端使用，<a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=4_3" target="_blank" rel="noopener">签名规则</a><br>还有<a href="https://pay.weixin.qq.com/wiki/tools/signverify/" target="_blank" rel="noopener">在线签名验证工具</a></p>
+<h3 id="坑点三-没有任何反应微信打不开"><a href="#坑点三-没有任何反应微信打不开" class="headerlink" title="坑点三 没有任何反应微信打不开"></a>坑点三 没有任何反应微信打不开</h3><p>这里涉及两个坑，一个是 返回的数据有一个键值是 package，java中package是关键字，封装代码很容易把这个关键的字段遗忘，<br>当看到微信毫无反应，没有任何报错信息时，就是一脸茫然，凑，毛都不提示，第二个坑就是 不正是签名的 apk微信绝不鸟你，<br>根源在于坑点一 ，因为那个签名字符串使用 签名apk生成的</p>
+<h3 id="坑点四-回调"><a href="#坑点四-回调" class="headerlink" title="坑点四 回调"></a>坑点四 回调</h3><p>需要将当前应用的包下，加入wxapi包路径并实现WXPayEntryActivity类<br>使用时需要 再清单文件配置，否则不会回调，切记</p>
+<pre><code>&lt;activity
+            android:name=&quot;.wxapi.WXPayEntryActivity&quot;
+            android:exported=&quot;true&quot;
+            android:launchMode=&quot;singleTop&quot;/&gt;</code></pre><h2 id="集成支付的库"><a href="#集成支付的库" class="headerlink" title="集成支付的库"></a>集成支付的库</h2><p>这里自己封装了，支付的库，还是蛮好用的，源码暂时没有放出来<br><a href="https://github.com/xyzmst/maven-repo" target="_blank" rel="noopener">https://github.com/xyzmst/maven-repo</a> 有详细说明</p>
+</section>
+</article>
+
+<section class="prev-next card slide-in-right">
+	
+		<a href="/2016/08/05/k线图/" class="link prev" title="K线图">
+			<span class="hover-underline-animation">&larr; K线图</span>
+		</a>
+	
+	
+		<a href="/2016/07/20/非常简单的用GitHub创建自己的私人Maven仓库/" class="link next" title="非常简单的用GitHub创建自己的私人Maven仓库">
+			<span class="hover-underline-animation">非常简单的用GitHub创建自己的私人Maven仓库 &rarr;</span>
+		</a>
+	
+</section>
+
+
+<section class="article-toc">
+  <div class="card uk-margin-remove-bottom">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#阿狸支付"><span class="toc-text">阿狸支付</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#坑点-加密"><span class="toc-text">坑点 加密</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微信支付"><span class="toc-text">微信支付</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#坑点一-签名"><span class="toc-text">坑点一 签名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坑点二-加密"><span class="toc-text">坑点二 加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坑点三-没有任何反应微信打不开"><span class="toc-text">坑点三 没有任何反应微信打不开</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坑点四-回调"><span class="toc-text">坑点四 回调</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集成支付的库"><span class="toc-text">集成支付的库</span></a></li></ol>
+  </div>
+</section>
+
+<section class="article slide-in-right">
+  <div class="loader" id="loader">
+    <svg viewBox="0 0 50 50">
+      <circle class="ring" cx="25" cy="25" r="20"></circle>
+      <circle class="ball" cx="25" cy="5" r="3.5"></circle>
+    </svg>
+  </div>
+
+  <div class="comment" id="utteranc"></div>
+  <noscript>Please activate JavaScript for normal use of comments</noscript>
+</section>
+
+<a class="card back-to-top" id="backTop">&UpArrow;</a>
+</main>
+
+    
+
+    <script>
+	window.COLD_STONE = {
+		root: "/",
+		author: "xyzmst" || '',
+		gaid: "xxxxxxxxxxxxxx" || '',
+		repo: "xyzmst/blog" || '',
+	}
+</script>
+
+
+
+
+	<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+
+
+<script src="/scripts/busuanzi.js" referrerpolicy="origin"></script>
+
+<script src="/scripts/cold-stone.js"></script>
+
+
+
+  <script src="//www.googletagmanager.com/gtag/js?id=xxxxxxxxxxxxxx"></script>
+
+  <script>
+	window.dataLayer = window.dataLayer || []
+	function gtag() {
+		dataLayer.push(arguments)
+	}
+	gtag('js', new Date())
+	gtag('config', window.COLD_STONE.gaid)
+  </script>
+
+
+  </body>
+</html>
