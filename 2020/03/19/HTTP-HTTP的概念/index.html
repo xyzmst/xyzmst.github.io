@@ -12,7 +12,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="keyword"  content="">
     <meta name="description" content="想写什么就写什么">
-    <title>阿里云ECS搭vps - undefined</title>
+    <title>HTTP - HTTP的概念 - undefined</title>
     <base href="/">
     <link rel="preconnect" href="//cdn.bootcss.com">
     <link rel="manifest" href="/manifest.json">
@@ -87,37 +87,109 @@
     <main class="main wrapper"><article class="article slide-in-right uk-article">
   <section class="article-header">
     <h1 class="article-title uk-article-title">
-      阿里云ECS搭vps
+      HTTP - HTTP的概念
     </h1>
     <p class="article-meta uk-article-meta">
       <span class="meta-info">
         <span>
           最后更新&#58;<time class="post-time"
-            datetime="2020-03-05">2020-03-05</time>
+            datetime="2020-03-19">2020-03-19</time>
         </span>
-        <span>阅读时间&#58; 1 min</span>
+        <span>阅读时间&#58; 2 min</span>
         <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
             id="busuanzi_value_page_pv"></span></span>
       </span>
     </p>
   </section>
-  <section class="article-content"><p>阿里云 的 服务器一年 74 ，三年 223。 119一年 香港(免备案)可领优惠券新人减20，到手再减20<br><a href="https://www.aliyun.com/minisite/goods?userCode=efu7zn7g" target="_blank" rel="noopener">地址</a><br>搞了个香港🇭🇰服务，还真便宜 99一年，一顿操作猛如虎，还搭了个 vps，奈何 不稳定。</p>
-<p>选择 Ubuntu 16.04 64位<br>ssr 安装脚本</p>
-<pre><code>wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; bash ssr.sh</code></pre><p>备用脚本</p>
-<pre><code>wget -N --no-check-certificate https://softs.fun/Bash/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; bash ssr.sh</code></pre><p>安装锐速</p>
-<pre><code>wget xiaofd.github.io/ruisu.sh &amp;&amp; bash ruisu.sh</code></pre><p>开启命令</p>
-<pre><code>root@ubuntu:~# /appex/bin/serverSpeeder.sh </code></pre></section>
+  <section class="article-content"><p><img src="https://i.loli.net/2020/03/19/EzoQSPNIDay6e7R.png" alt=""></p>
+<p>Q:125.001.HTTP.001<br>请求报文由哪些组成<br>A:<br>请求行： method+路径+http版本<br>Header<br>body</p>
+<p>Q:125.001.HTTP.002<br>常用的method<br>A：</p>
+<p>get  </p>
+<ul>
+<li>用于获取数据</li>
+<li>对服务器数据不进行修改</li>
+<li>不发送body<br><img src="https://i.loli.net/2020/03/19/l63zfqBZTcJRywv.png" alt=""></li>
+</ul>
+<p>post</p>
+<ul>
+<li>用于增加或修改资源</li>
+<li>发送给服务器的内容写在body里面<br><img src="https://i.loli.net/2020/03/19/JRhU85HMoTidzVy.png" alt=""></li>
+</ul>
+<p>put</p>
+<ul>
+<li>用于修改数据</li>
+<li>发送给服务器的内存写在body里面<br><img src="https://i.loli.net/2020/03/19/ZcG7AroY8SbEkXu.png" alt=""></li>
+</ul>
+<p>delete</p>
+<ul>
+<li>用于删除资源</li>
+<li>不发送body<br><img src="https://i.loli.net/2020/03/19/XQkFya2DGhozN3M.png" alt=""></li>
+</ul>
+<p>head</p>
+<ul>
+<li>和get使用方法完全相同</li>
+<li>和get唯一区别在于返回的响应中没有body<br>put get （幂等性）    操作一次和多次 一样</li>
+</ul>
+<p>Q:125.001.HTTP.003<br>响应报文组成<br>A:<br>状态行  版本+状态码+message<br>header<br>body</p>
+<p>Q:125.001.HTTP.004<br>常用状态码<br>A:<br>1xx: 临时消息  如：100 （继续发送）、101（正在切换协议）<br>2xx:成功  200（OK）、201（创建成功）<br>3xx：重定向   如 301（永久移动）、302（暂时移动）、304（内容未改变）<br>4xx: 客户端错误  如 400（客户端请求错误）、401（认证失败）、403（被禁止）、404（找 不到内容）<br>5xx:服务端错误  500（服务器内部错误）</p>
+<p>Q:125.001.HTTP.005<br>常用的头信息</p>
+<p>A:</p>
+<p>host</p>
+<ul>
+<li>目标主机</li>
+<li>注意：不是在网络上⽤于寻址的，而是在目标服务器上用于定位子服务器的  </li>
+</ul>
+<p>content_type</p>
+<ul>
+<li>指定 Body 的类型 主要有四类</li>
+</ul>
+<p>content_length</p>
+<ul>
+<li>指定 Body 的长度（字节）</li>
+</ul>
+<p>transfer:chunk 分段</p>
+<ul>
+<li>(分块传输编码 Chunked Transfer Encoding)</li>
+<li>用于当响应发起时，内容长度还没能确定的情况下。和 Content-Length 不同时使⽤用。用途是尽早给 出响应，减少用户等待。</li>
+</ul>
+<p>location</p>
+<ul>
+<li>指定重定向的目标 URL</li>
+</ul>
+<p>User-Agent</p>
+<p>range/accept-range</p>
+<ul>
+<li>按范围取数据<ul>
+<li>Accept-Range: bytes 响应报⽂文中出现，表示服务器器⽀支持按字节来取范围数据</li>
+<li>Range: bytes=<start>-<end> 请求报⽂文中出现，表示要取哪段数据</li>
+<li>Content-Range:<start>-<end>/total 响应报⽂文中出现，表示发送的是哪段数据</li>
+</ul>
+</li>
+<li>作⽤：断点续传、多线程下载。</li>
+</ul>
+<p>其他</p>
+<p>Accept: 客户端能接受的数据类型。如 text/html<br>Accept-Charset: 客户端接受的字符集。如 utf-8<br>Accept-Encoding: 客户端接受的压缩编码类型。如 gzip Content-Encoding：压缩类型。如 gzip</p>
+<p>Q:125.001.HTTP.006<br>content—type 有哪4类<br>A:<br>text/html</p>
+<ul>
+<li>请求 Web 页面是返回响应的类型，Body 中返回 html ⽂本</li>
+</ul>
+<p>x-www-form-urlencoded</p>
+<ul>
+<li>网页纯文本提交方式</li>
+</ul>
+<p>multitype/form-data<br>    - web页面含有二进制文件时的提交方式</p>
+<p>application/json , image/jpeg , application/zip …<br>    - 单项内容（⽂文本或⾮非⽂文本都可以），⽤用于 Web Api 的响应或者 POST / PUT 的请求</p>
+<p>Q:125.001.HTTP.007<br>cache作⽤<br>A:<br>在客户端或中间⽹络节点缓存数据，降低从服务器取数据的频率，以提高网络性能。 </p>
+</section>
 </article>
 
 <section class="prev-next card slide-in-right">
 	
-		<a href="/2020/03/19/HTTP-HTTP的概念/" class="link prev" title="HTTP - HTTP的概念">
-			<span class="hover-underline-animation">&larr; HTTP - HTTP的概念</span>
-		</a>
+		<a class="link-disabled prev link">&larr; 没有更多了</a>
 	
 	
-		<a href="/2020/02/18/hexo模板/" class="link next" title="Hexo模板">
-			<span class="hover-underline-animation">Hexo模板 &rarr;</span>
+		<a href="/2020/03/05/阿里云ECS搭vps/" class="link next" title="阿里云ECS搭vps">
+			<span class="hover-underline-animation">阿里云ECS搭vps &rarr;</span>
 		</a>
 	
 </section>
