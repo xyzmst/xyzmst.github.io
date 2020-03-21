@@ -96,7 +96,7 @@
           最后更新&#58;<time class="post-time"
             datetime="2018-01-29">2018-01-29</time>
         </span>
-        <span>阅读时间&#58; 4 min</span>
+        <span>阅读时间&#58; 5 min</span>
         <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
             id="busuanzi_value_page_pv"></span></span>
       </span>
@@ -107,15 +107,43 @@
 <p>Q:保活.002<br>LMK<br>A:<br><img src="https://i.loli.net/2020/03/21/w3y6GYnMCoRkIiF.png" alt=""></p>
 <p>Q:保活.003<br>如何保活<br>A:<br><img src="https://i.loli.net/2020/03/21/b42E5g7c3ifOezJ.png" alt=""></p>
 <p>Q:保活.004<br>Activity提权<br>A:<br><img src="https://i.loli.net/2020/03/21/reRtvEoCuYdMXjW.png" alt=""></p>
-<p>1、创建1个像素的Activity KeepActivity<br>Window window = getWindow();<br>window.setGravity(Gravity.START | Gravity.TOP);<br>WindowManager.LayoutParams attributes = window.getAttributes();<br>attributes.width = 1;<br>attributes.height = 1;<br>attributes.x = 0;<br>attributes.y = 0;<br>window.setAttributes(attributes);</p>
-<p>manifest注册<br><activity android:name=".activity.KeepActivity"
-            android:excludeFromRecents="true"
-            android:taskAffinity="com.dongnao.daemon.keep"
-            android:theme="@style/KeepTheme"
-            /></p>
-<p>styles添加主题样式，透明的样式<br>    <style name="KeepTheme"><br>        <item name="android:windowBackground">@null</item><br>        <item name="android:windowIsTranslucent">true</item><br>    </style></p>
-<p>2、闯将广播接收者<br>KeepReceiver<br>    if (TextUtils.equals(action, Intent.ACTION_SCREEN_OFF)) {<br>    //灭屏 开启1px activity<br>    KeepManager.getInstance().startKeep(context);<br>} else if (TextUtils.equals(action, Intent.ACTION_SCREEN_ON)) {<br>    //亮屏 关闭<br>    KeepManager.getInstance().finishKeep();<br>}<br>3、创建广播注册管理单例类<br>KeepManager<br>    注册/反注册广播<br>    启动/关闭keepActivity<br>    设置keepActivity弱引用</p>
-<p>Q:保活.005<br>Service提权<br>A:<br><img src="https://i.loli.net/2020/03/21/yaKNwurOvMep5Cb.png" alt=""></p>
+<pre><code>1、创建1个像素的Activity KeepActivity
+Window window = getWindow();
+window.setGravity(Gravity.START | Gravity.TOP);
+WindowManager.LayoutParams attributes = window.getAttributes();
+attributes.width = 1;
+attributes.height = 1;
+attributes.x = 0;
+attributes.y = 0;
+window.setAttributes(attributes);
+
+manifest注册
+&lt;activity android:name=&quot;.activity.KeepActivity&quot;
+            android:excludeFromRecents=&quot;true&quot;
+            android:taskAffinity=&quot;com.dongnao.daemon.keep&quot;
+            android:theme=&quot;@style/KeepTheme&quot;
+            /&gt;
+
+styles添加主题样式，透明的样式
+    &lt;style name=&quot;KeepTheme&quot;&gt;
+        &lt;item name=&quot;android:windowBackground&quot;&gt;@null&lt;/item&gt;
+        &lt;item name=&quot;android:windowIsTranslucent&quot;&gt;true&lt;/item&gt;
+    &lt;/style&gt;
+
+2、闯将广播接收者
+KeepReceiver
+    if (TextUtils.equals(action, Intent.ACTION_SCREEN_OFF)) {
+    //灭屏 开启1px activity
+    KeepManager.getInstance().startKeep(context);
+} else if (TextUtils.equals(action, Intent.ACTION_SCREEN_ON)) {
+    //亮屏 关闭
+    KeepManager.getInstance().finishKeep();
+}
+3、创建广播注册管理单例类
+KeepManager
+    注册/反注册广播
+    启动/关闭keepActivity
+    设置keepActivity弱引用</code></pre><p>Q:保活.005<br>Service提权<br>A:<br><img src="https://i.loli.net/2020/03/21/yaKNwurOvMep5Cb.png" alt=""></p>
 <p>Q:保活.006<br>广播拉活<br>A:<br><img src="https://i.loli.net/2020/03/21/rpjt3yEwUFeNSJR.png" alt=""></p>
 <p>Q:保活.007<br>Service机制(Sticky)拉活<br>A:<br><img src="https://i.loli.net/2020/03/21/lZ5R2cpVSiugs1X.png" alt=""></p>
 <p>Q:保活.008<br>JobSchedule拉活<br>A:<br><img src="https://i.loli.net/2020/03/21/MpgxuroAc5t89sY.png" alt=""></p>
