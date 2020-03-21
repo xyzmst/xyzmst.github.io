@@ -103,10 +103,10 @@
     </p>
   </section>
   <section class="article-content"><p><img src="https://i.loli.net/2020/03/21/vCEQZycUXwG1iaP.png" alt=""></p>
-<p>Q:保活.001<br>进程优先级<br>A:<br><img src="https://i.loli.net/2020/03/21/cxeA2tUVIaNFwCW.png" alt=""></p>
-<p>Q:保活.002<br>LMK<br>A:<br><img src="https://i.loli.net/2020/03/21/w3y6GYnMCoRkIiF.png" alt=""></p>
-<p>Q:保活.003<br>如何保活<br>A:<br><img src="https://i.loli.net/2020/03/21/b42E5g7c3ifOezJ.png" alt=""></p>
-<p>Q:保活.004<br>Activity提权<br>A:<br><img src="https://i.loli.net/2020/03/21/reRtvEoCuYdMXjW.png" alt=""></p>
+<h4 id="Q-保活-001"><a href="#Q-保活-001" class="headerlink" title="Q:保活.001"></a>Q:保活.001</h4><p>进程优先级<br>A:<br><img src="https://i.loli.net/2020/03/21/cxeA2tUVIaNFwCW.png" alt=""></p>
+<h4 id="Q-保活-002"><a href="#Q-保活-002" class="headerlink" title="Q:保活.002"></a>Q:保活.002</h4><p>LMK<br>A:<br><img src="https://i.loli.net/2020/03/21/w3y6GYnMCoRkIiF.png" alt=""></p>
+<h4 id="Q-保活-003"><a href="#Q-保活-003" class="headerlink" title="Q:保活.003"></a>Q:保活.003</h4><p>如何保活<br>A:<br><img src="https://i.loli.net/2020/03/21/b42E5g7c3ifOezJ.png" alt=""></p>
+<h4 id="Q-保活-004"><a href="#Q-保活-004" class="headerlink" title="Q:保活.004"></a>Q:保活.004</h4><p>Activity提权<br>A:<br><img src="https://i.loli.net/2020/03/21/reRtvEoCuYdMXjW.png" alt=""></p>
 <pre><code>1、创建1个像素的Activity KeepActivity
 Window window = getWindow();
 window.setGravity(Gravity.START | Gravity.TOP);
@@ -143,11 +143,11 @@ KeepReceiver
 KeepManager
     注册/反注册广播
     启动/关闭keepActivity
-    设置keepActivity弱引用</code></pre><p>Q:保活.005<br>Service提权<br>A:<br><img src="https://i.loli.net/2020/03/21/yaKNwurOvMep5Cb.png" alt=""></p>
-<p>Q:保活.006<br>广播拉活<br>A:<br><img src="https://i.loli.net/2020/03/21/rpjt3yEwUFeNSJR.png" alt=""></p>
-<p>Q:保活.007<br>Service机制(Sticky)拉活<br>A:<br><img src="https://i.loli.net/2020/03/21/lZ5R2cpVSiugs1X.png" alt=""></p>
-<p>Q:保活.008<br>JobSchedule拉活<br>A:<br><img src="https://i.loli.net/2020/03/21/MpgxuroAc5t89sY.png" alt=""></p>
-<p>Q:保活.009<br>JobSchedule拉活<br>A:<br><img src="https://i.loli.net/2020/03/21/moR1aHkIr4Wejgz.png" alt=""></p>
+    设置keepActivity弱引用</code></pre><h4 id="Q-保活-005"><a href="#Q-保活-005" class="headerlink" title="Q:保活.005"></a>Q:保活.005</h4><p>Service提权<br>A:<br><img src="https://i.loli.net/2020/03/21/yaKNwurOvMep5Cb.png" alt=""></p>
+<h4 id="Q-保活-006"><a href="#Q-保活-006" class="headerlink" title="Q:保活.006"></a>Q:保活.006</h4><p>广播拉活<br>A:<br><img src="https://i.loli.net/2020/03/21/rpjt3yEwUFeNSJR.png" alt=""></p>
+<h4 id="Q-保活-007"><a href="#Q-保活-007" class="headerlink" title="Q:保活.007"></a>Q:保活.007</h4><p>Service机制(Sticky)拉活<br>A:<br><img src="https://i.loli.net/2020/03/21/lZ5R2cpVSiugs1X.png" alt=""></p>
+<h4 id="Q-保活-008"><a href="#Q-保活-008" class="headerlink" title="Q:保活.008"></a>Q:保活.008</h4><p>JobSchedule拉活<br>A:<br><img src="https://i.loli.net/2020/03/21/MpgxuroAc5t89sY.png" alt=""></p>
+<h4 id="Q-保活-009"><a href="#Q-保活-009" class="headerlink" title="Q:保活.009"></a>Q:保活.009</h4><p>JobSchedule拉活<br>A:<br><img src="https://i.loli.net/2020/03/21/moR1aHkIr4Wejgz.png" alt=""></p>
 <p>1、添加账户</p>
 <ul>
 <li><p>账户服务</p>
@@ -238,10 +238,10 @@ public static void autoSync() {
       ContentResolver.addPeriodicSync(dongnao, CONTENT_AUTHORITY, new Bundle(), 1);
   }</code></pre></li>
 </ul>
-<p>Q:保活.010<br>全家桶拉活<br>A:<br>    有多个app在用户设备上安装，只要开启其中一个就可以将其他的app也拉活。比如手机里装了手Q、QQ空间、兴趣部落等等，那么打开任意一个app后，其他的app也都会被唤醒。</p>
-<p>Q:保活.011<br>推送拉活<br>A:<br>    根据终端不同，在小米手机（包括 MIUI）接入小米推送、华为手机接入华为推送。</p>
-<p>Q:保活.012<br>Native拉活<br>A:<br>    Native fork子进程用于观察当前app主进程的存亡状态。对于5.0以上成功率极低。</p>
-<p>Q:保活.013<br>双进程守护<br>A:<br>    两个进程共同运行，如果有其中一个进程被杀，那么另外一个进程就会将被杀的进程重新拉起</p>
+<h4 id="Q-保活-010"><a href="#Q-保活-010" class="headerlink" title="Q:保活.010"></a>Q:保活.010</h4><p>全家桶拉活<br>A:<br>    有多个app在用户设备上安装，只要开启其中一个就可以将其他的app也拉活。比如手机里装了手Q、QQ空间、兴趣部落等等，那么打开任意一个app后，其他的app也都会被唤醒。</p>
+<h4 id="Q-保活-011"><a href="#Q-保活-011" class="headerlink" title="Q:保活.011"></a>Q:保活.011</h4><p>推送拉活<br>A:<br>    根据终端不同，在小米手机（包括 MIUI）接入小米推送、华为手机接入华为推送。</p>
+<h4 id="Q-保活-012"><a href="#Q-保活-012" class="headerlink" title="Q:保活.012"></a>Q:保活.012</h4><p>Native拉活<br>A:<br>    Native fork子进程用于观察当前app主进程的存亡状态。对于5.0以上成功率极低。</p>
+<h4 id="Q-保活-013"><a href="#Q-保活-013" class="headerlink" title="Q:保活.013"></a>Q:保活.013</h4><p>双进程守护<br>A:<br>    两个进程共同运行，如果有其中一个进程被杀，那么另外一个进程就会将被杀的进程重新拉起</p>
 </section>
 </article>
 
@@ -261,7 +261,7 @@ public static void autoSync() {
 
 <section class="article-toc">
   <div class="card uk-margin-remove-bottom">
-    
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-保活-001"><span class="toc-text">Q:保活.001</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-保活-002"><span class="toc-text">Q:保活.002</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-保活-003"><span class="toc-text">Q:保活.003</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-保活-004"><span class="toc-text">Q:保活.004</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-保活-005"><span class="toc-text">Q:保活.005</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-保活-006"><span class="toc-text">Q:保活.006</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-保活-007"><span class="toc-text">Q:保活.007</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-保活-008"><span class="toc-text">Q:保活.008</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-保活-009"><span class="toc-text">Q:保活.009</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-保活-010"><span class="toc-text">Q:保活.010</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-保活-011"><span class="toc-text">Q:保活.011</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-保活-012"><span class="toc-text">Q:保活.012</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-保活-013"><span class="toc-text">Q:保活.013</span></a></li></ol>
   </div>
 </section>
 
