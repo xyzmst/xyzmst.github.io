@@ -12,7 +12,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="keyword"  content="">
     <meta name="description" content="想写什么就写什么">
-    <title>性能优化-保活 - undefined</title>
+    <title>性能优化-内存管理-JVM和GC基础 - undefined</title>
     <base href="/">
     <link rel="preconnect" href="//cdn.bootcss.com">
     <link rel="manifest" href="/manifest.json">
@@ -88,13 +88,13 @@
     <main class="main wrapper"><article class="article slide-in-right uk-article">
   <section class="article-header">
     <h1 class="article-title uk-article-title">
-      性能优化-保活
+      性能优化-内存管理-JVM和GC基础
     </h1>
     <p class="article-meta uk-article-meta">
       <span class="meta-info">
         <span>
           最后更新&#58;<time class="post-time"
-            datetime="2020-03-22">2020-03-22</time>
+            datetime="2018-01-05">2018-01-05</time>
         </span>
         <span>阅读时间&#58; 1 min</span>
         <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
@@ -102,16 +102,26 @@
       </span>
     </p>
   </section>
-  <section class="article-content"></section>
+  <section class="article-content"><h5 id="Q-JVM和GC基础-000-内存优化基础"><a href="#Q-JVM和GC基础-000-内存优化基础" class="headerlink" title="Q:JVM和GC基础.000 内存优化基础"></a>Q:JVM和GC基础.000 内存优化基础</h5><p>A:<br><img src="https://i.loli.net/2020/03/22/2xstSMdKWpDfeZA.png" alt=""></p>
+<h5 id="Q-JVM和GC基础-001-分析内存的常用工具"><a href="#Q-JVM和GC基础-001-分析内存的常用工具" class="headerlink" title="Q:JVM和GC基础.001 分析内存的常用工具"></a>Q:JVM和GC基础.001 分析内存的常用工具</h5><p>A:<br>top/procrank<br>meinfo<br>Procstats<br>DDMS<br>MAT<br>Finder-Activity<br>LeakCanary<br>LeakInspector<br>工具很多，掌握原理方法，工具随便找两个能用就行</p>
+<h5 id="Q-JVM和GC基础-002-java虚拟机"><a href="#Q-JVM和GC基础-002-java虚拟机" class="headerlink" title="Q:JVM和GC基础.002 java虚拟机"></a>Q:JVM和GC基础.002 java虚拟机</h5><p>A:<br><img src="https://i.loli.net/2020/03/22/pCvybUFcesnQtDr.png" alt=""></p>
+<p><img src="https://i.loli.net/2020/03/22/pBqlSzshY7UCbVJ.png" alt=""></p>
+<p><img src="https://i.loli.net/2020/03/22/b658CQGUHVi7mLB.png" alt=""></p>
+<h5 id="Q-JVM和GC基础-003-GC如何确认回收"><a href="#Q-JVM和GC基础-003-GC如何确认回收" class="headerlink" title="Q:JVM和GC基础.003 GC如何确认回收"></a>Q:JVM和GC基础.003 GC如何确认回收</h5><p>A:<br><img src="https://i.loli.net/2020/03/22/mXBh1vKLqFVxr9A.png" alt=""></p>
+<p><img src="https://i.loli.net/2020/03/22/jaQHPZD7wgpBF2y.png" alt=""></p>
+<h5 id="Q-JVM和GC基础-004-内存泄漏"><a href="#Q-JVM和GC基础-004-内存泄漏" class="headerlink" title="Q:JVM和GC基础.004 内存泄漏"></a>Q:JVM和GC基础.004 内存泄漏</h5><p>A:<br><img src="https://i.loli.net/2020/03/22/uFMkhP5gDzt96ic.png" alt=""></p>
+</section>
 </article>
 
 <section class="prev-next card slide-in-right">
 	
-		<a class="link-disabled prev link">&larr; 没有更多了</a>
+		<a href="/2018/01/29/性能优化-保活/" class="link prev" title="性能优化-保活">
+			<span class="hover-underline-animation">&larr; 性能优化-保活</span>
+		</a>
 	
 	
-		<a href="/2020/03/05/阿里云ECS搭vps/" class="link next" title="阿里云ECS搭vps">
-			<span class="hover-underline-animation">阿里云ECS搭vps &rarr;</span>
+		<a href="/2017/10/07/自定义view-硬件加速/" class="link next" title="自定义View-硬件加速">
+			<span class="hover-underline-animation">自定义View-硬件加速 &rarr;</span>
 		</a>
 	
 </section>
@@ -119,7 +129,7 @@
 
 <section class="article-toc">
   <div class="card uk-margin-remove-bottom">
-    
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-JVM和GC基础-000-内存优化基础"><span class="toc-text">Q:JVM和GC基础.000 内存优化基础</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-JVM和GC基础-001-分析内存的常用工具"><span class="toc-text">Q:JVM和GC基础.001 分析内存的常用工具</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-JVM和GC基础-002-java虚拟机"><span class="toc-text">Q:JVM和GC基础.002 java虚拟机</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-JVM和GC基础-003-GC如何确认回收"><span class="toc-text">Q:JVM和GC基础.003 GC如何确认回收</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-JVM和GC基础-004-内存泄漏"><span class="toc-text">Q:JVM和GC基础.004 内存泄漏</span></a></li></ol>
   </div>
 </section>
 
