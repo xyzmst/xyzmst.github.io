@@ -96,31 +96,89 @@
           最后更新&#58;<time class="post-time"
             datetime="2018-08-16">2018-08-16</time>
         </span>
-        <span>阅读时间&#58; 1 min</span>
+        <span>阅读时间&#58; 2 min</span>
         <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
             id="busuanzi_value_page_pv"></span></span>
       </span>
     </p>
   </section>
-  <section class="article-content"><p>Q: 结构体、共用体.001<br>结构体定义<br>A:<br>结构体是C编程中一种用户自定义的数据类型，类似于Java的JavaBean<br>//Student 相当于类名<br>//student和a 可以不定义，表示结构变量，也就Student类型的变量<br>struct Student<br>{<br>    char name[50];<br>    int age;<br>} student,a;<br>//使用typedef定义<br>typedef struct{<br>    char name[50];<br>    int age;<br>} Student;</p>
-<p>Q:结构体、共用体.002<br>字节对齐<br>A:</p>
-<ul>
-<li>内存空间按照字节划分，理论上可以从任何起始地址访问任意类型的变量。但实际中在访问特定类型变量时经常在特定的内存地址开始访问，这就需要各种类型数据按照一定的规则在空间上排列，而不是顺序一个接一个地存放，这就是对齐。 </li>
-<li>字节对齐的问题主要就是针对结构体。<br>例子：<br>struct MyStruct1<br>{<br>  short a;<br>  int b;<br>  short c;<br>};<br>struct MyStruct2<br>{<br>   short a;<br>  short c;<br>  int b;<br>};<br>//自然对齐<br>//1、某个变量存放的起始位置相对于结构的起始位置的偏移量是该变量字节数的整数倍；<br>//2、结构所占用的总字节数是结构中字节数最长的变量的字节数的整数倍。<br>// short = 2  补 2<br>// int = 4<br>// short = 2  补 2<br>sizeof(MyStruct1) = 12<br>// 2个short在一起组成一个 4<br>sizeof(MyStruct2) = 8</li>
-</ul>
-<p>#pragma pack(2) //指定以2字节对齐  只能2的倍数<br>struct MyStruct1<br>{<br>    short a;<br>    int b;<br>    short c;<br>};<br>#pragma pack()  //取消对齐<br>//short = 2<br>//int = 4<br>//short = 2<br>###合理的利用字节可以有效地节省存储空间<br>###不合理的则会浪费空间、降低效率甚至还会引发错误。(对于部分系统从奇地址访问int、short等数据会导致错误)</p>
-<p>Q:结构体、共用体.003<br>共用体<br>A:<br>在相同的内存位置存储不同的数据类型<br>共用体占用的内存应足够存储共用体中最大的成员<br>//占用4字节<br>union Data<br>{<br>    int i;<br>    short j;<br>}<br>union Data data;<br>data.i = 1;<br>//i的数据损坏<br>data.j = 1.1f;</p>
+  <section class="article-content"><h5 id="Q-结构体、共用体-001-结构体定义"><a href="#Q-结构体、共用体-001-结构体定义" class="headerlink" title="Q: 结构体、共用体.001 结构体定义"></a>Q: 结构体、共用体.001 结构体定义</h5><p>A:</p>
+<pre><code class="c">结构体是C编程中一种用户自定义的数据类型，类似于Java的JavaBean
+//Student 相当于类名
+//student和a 可以不定义，表示结构变量，也就Student类型的变量
+struct Student
+{
+    char name[50];
+    int age;
+} student,a;
+//使用typedef定义
+typedef struct{
+    char name[50];
+    int age;
+} Student;</code></pre>
+<h5 id="Q-结构体、共用体-002-字节对齐"><a href="#Q-结构体、共用体-002-字节对齐" class="headerlink" title="Q:结构体、共用体.002 字节对齐"></a>Q:结构体、共用体.002 字节对齐</h5><p>A:</p>
+<pre><code class="c">- 内存空间按照字节划分，理论上可以从任何起始地址访问任意类型的变量。但实际中在访问特定类型变量时经常在特定的内存地址开始访问，这就需要各种类型数据按照一定的规则在空间上排列，而不是顺序一个接一个地存放，这就是对齐。
+- 字节对齐的问题主要就是针对结构体。
+例子：
+struct MyStruct1
+{
+    short a;  
+    int b;  
+    short c;
+};
+struct MyStruct2
+{
+     short a;
+    short c;
+    int b;
+};
+//自然对齐
+//1、某个变量存放的起始位置相对于结构的起始位置的偏移量是该变量字节数的整数倍；
+//2、结构所占用的总字节数是结构中字节数最长的变量的字节数的整数倍。
+// short = 2  补 2
+// int = 4
+// short = 2  补 2
+sizeof(MyStruct1) = 12
+// 2个short在一起组成一个 4
+sizeof(MyStruct2) = 8
+
+#pragma pack(2) //指定以2字节对齐  只能2的倍数
+struct MyStruct1
+{
+    short a;  
+    int b;  
+    short c;
+};
+#pragma pack()  //取消对齐
+//short = 2
+//int = 4
+//short = 2
+###合理的利用字节可以有效地节省存储空间
+###不合理的则会浪费空间、降低效率甚至还会引发错误。(对于部分系统从奇地址访问int、short等数据会导致错误)</code></pre>
+<h5 id="Q-结构体、共用体-003-共用体"><a href="#Q-结构体、共用体-003-共用体" class="headerlink" title="Q:结构体、共用体.003 共用体"></a>Q:结构体、共用体.003 共用体</h5><p>A:</p>
+<pre><code class="c">在相同的内存位置存储不同的数据类型
+共用体占用的内存应足够存储共用体中最大的成员
+//占用4字节
+union Data
+{
+    int i;
+    short j;
+}
+union Data data;
+data.i = 1;
+//i的数据损坏
+data.j = 1.1f;</code></pre>
 </section>
 </article>
 
 <section class="prev-next card slide-in-right">
 	
-		<a href="/2018/09/05/NDK-ffmpeg基础知识/" class="link prev" title="NDK-Ffmpeg 基础知识">
-			<span class="hover-underline-animation">&larr; NDK-Ffmpeg 基础知识</span>
+		<a href="/2018/08/17/NDK-JNI/" class="link prev" title="NDK-JNI">
+			<span class="hover-underline-animation">&larr; NDK-JNI</span>
 		</a>
 	
 	
-		<a href="/2018/08/16/NDK-C-基础-1/" class="link next" title="NDK-C++基础">
+		<a href="/2018/08/16/NDK-C++基础/" class="link next" title="NDK-C++基础">
 			<span class="hover-underline-animation">NDK-C++基础 &rarr;</span>
 		</a>
 	
@@ -129,7 +187,7 @@
 
 <section class="article-toc">
   <div class="card uk-margin-remove-bottom">
-    
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-结构体、共用体-001-结构体定义"><span class="toc-text">Q: 结构体、共用体.001 结构体定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-结构体、共用体-002-字节对齐"><span class="toc-text">Q:结构体、共用体.002 字节对齐</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-结构体、共用体-003-共用体"><span class="toc-text">Q:结构体、共用体.003 共用体</span></a></li></ol>
   </div>
 </section>
 

@@ -102,25 +102,159 @@
       </span>
     </p>
   </section>
-  <section class="article-content"><p>Q:C基础.001<br>动态内存申请<br>A:<br>malloc 没有初始化内存的内容,一般调用函数memset来初始化这部分的内存空间.<br>void <em><em>jj = malloc(1</em>1024<em>1024);<br>size_t k = 1</em>1024*1024;<br>memset(jj,0,k);//指向内存 初始化 0 长度 k<br>calloc 申请内存并将初始化内存数据为NULL.<br>  int *pn = (int</em>)calloc(10, sizeof(int));<br>相当于<br>  int <em>pn = (int</em>)malloc(10, sizeof(int));<br> memset(pn,0,sizeof(int)<em>10);<br>realloc<br>对malloc申请的内存进行大小的调整.<br>特别的： alloca 在栈申请内存,因此无需释放.int *p = (int *)alloca(sizeof(int) * 10);<br>char *a = (char</em>)malloc(10);<br>realloc(a,20);</p>
-<p>Q:C基础.002<br>指针<br>A:<br>定义<br>    指针是一个变量，其值为地址。<br>    声明指针或者不再使用后都要将其置为0 (NULL)<br>野指针<br>        未初始化的指针<br>悬空指针<br>        指针最初指向的内存已经被释放了的一种指针</p>
-<p>Q:C基础.003<br>指针的使用<br>A:<br>int <em>a; 正规<br>int</em> a;<br>int * a;<br>//因为 其他写法看起来有歧义<br>int* a,b;<br>使用：<br>//声明一个整型变量<br>int i = 10;<br>//将i的地址使用取地址符给p指针<br>int *p = &i;<br>//输出 0xffff 16进制地址<br>printf(“%#x\n”, &amp;i);<br>printf(“%#x\n”, &amp;p);</p>
-<p>Q:C基础.004<br>指针多少个字节？<br>A:<br>    指向地址，存放的是地址，地址在32位中指针4字节 64位8</p>
-<p>Q:C基础.005<br>    解引用<br>A:<br>解析并返回内存地址中保存的值<br>int i = 10;<br>int <em>p = &i;<br>//解引用<br>//p指向一个内存地址，使用</em>解出这个地址的值 即为 10<br>int pv = *p;<br>//修改地址的值,则i值也变成100<br>//为解引用的结果赋值也就是为指针所指的内存赋值<br>*p = 100;</p>
-<p>Q:C基础.006<br>指针运算<br>A:<br>    指针指向地址，指针运算实际上就是移动指针指向的地址位置,移动的位数取决于指针类型（int就是32位）</p>
-<p>Q:C基础.007<br>数组和指针<br>A:<br>在c语言中，指针和数组名都表示地址<br>1、数组是一块内存连续的数据。<br>2、指针是一个指向内存空间的变量</p>
-<p>//数组指针<br>//二维数组类型是 int (<em>p)[x]<br>int array[2][3] = { {11,22,33},{44,55,66} };<br>//也可以 int array[2][3] = {  11,22,33 ,44,55,66 };<br>//array1 就是一个 int[3] 类型的指针<br>int (*array1)[3] = array;<br>//怎么取 55 ？<br>//通过下标<br>array[1][1] == array1[1][1]<br>//通过解引用<br>int i = *(</em>(array1 + 1) + 1);<br>//拆分<br>//1、 指针偏移 因为array1的类型是3个int的数组 所以 +1 移动了12位<br>array1 + 1<br>//2、获得{44,55,66}数组  (<em>(array1 + 1))[1] = 55<br>(</em>(array1 + 1)<br>//3、对数组执行 +/- 相当于隐式的转为指针<br>//获得 55 的地址 再解地址<br>*(array1 + 1) + 1</p>
-<p>Q:C基础.008<br>const char *p, char const *p, char * const p，char const * const  p<br>A:<br>const ：常量 = final 表示不可变的  从右向左看<br>    修饰的是内容，还是指针<br>    修饰内容，可以 重新指向<br>    修饰的是指针的话，那么 可以修改内容</p>
-<p>Q:C基础.009<br>多级指针<br>A:<br>指向指针的指针<br>    一个指针包含一个变量的地址。当我们定义一个指向指针的指针时，第一个指针包含了第二个指针的地址，第二个指针指向包含实际值的位置。<br>    多级指针的意义<br>        见函数部分的引用传值<br>int a = 10;<br>int <em>i = &a;<br>int *</em>j = &i;<br>// <em>j 解出 i<br>printf(“%d\n”, *</em>j);</p>
-<p>Q:C基础.010<br>可变参数<br>A:<br>  与Java一样，C当中也有可变参数<br>     va_start 第二个参数，传什么都无所谓，必须传<br>    例子<br>#include &lt;stdarg.h&gt;<br>int add(int num, …)<br>{<br>    va_list valist;<br>    int sum = 0;<br>    // 初始化  valist指向第一个可变参数 (…)<br>    va_start(valist, num);<br>    for (size_t i = 0; i &lt; num; i++)<br>    {<br>        //访问所有赋给 valist 的参数<br>        int j = va_arg(valist, int);<br>        printf(“%d\n”, j);<br>        sum += j;<br>    }<br>    //清理为 valist 内存<br>    va_end(valist);<br>    return sum;<br>}</p>
-<p>Q:C基础.011<br>函数指针<br>A:</p>
-<pre><code>函数指针是指向函数的指针变量</code></pre><p>Q:C基础.012<br>预处理器<br>A:<br>预处理器不是编译器，但是它是编译过程中一个单独的步骤。<br>预处理器是一个文本替换工具<br>所有的预处理器命令都是以井号（#）开头<br><img src="https://i.loli.net/2020/03/07/FcjCfVZprvS7iag.png" alt=""></p>
+  <section class="article-content"><h5 id="Q-C基础-001-动态内存申请"><a href="#Q-C基础-001-动态内存申请" class="headerlink" title="Q:C基础.001 动态内存申请"></a>Q:C基础.001 动态内存申请</h5><p>A:</p>
+<pre><code>- malloc   
+没有初始化内存的内容,一般调用函数memset来初始化这部分的内存空间.  
+void **jj = malloc(1 * 1024 * 1024);  
+size_t k = 1 * 1024 * 1024;  
+- memset(jj,0,k);//  指向内存 初始化 0 长度 k  
+- calloc   
+申请内存并将初始化内存数据为NULL.    
+  int *pn = (int*)calloc(10, sizeof(int));  
+相当于    
+  int *pn = (int*)malloc(10, sizeof(int));  
+  memset(pn,0,sizeof(int)*10);
+- realloc  
+对malloc申请的内存进行大小的调整.  
+特别的： alloca 在栈申请内存,因此无需释放.  
+int *p = (int *)alloca(sizeof(int) * 10);  
+char *a = (char*)malloc(10);  
+realloc(a,20);  </code></pre><h5 id="Q-C基础-002-指针"><a href="#Q-C基础-002-指针" class="headerlink" title="Q:C基础.002 指针"></a>Q:C基础.002 指针</h5><p>A:  </p>
+<pre><code>- 定义  
+指针是一个变量，其值为地址。
+声明指针或者不再使用后都要将其置为0 (NULL)
+- 野指针   
+未初始化的指针
+- 悬空指针   
+指针最初指向的内存已经被释放了的一种指针</code></pre><h5 id="Q-C基础-003-指针的使用"><a href="#Q-C基础-003-指针的使用" class="headerlink" title="Q:C基础.003 指针的使用"></a>Q:C基础.003 指针的使用</h5><p>A:</p>
+<pre><code>int *a; 正规
+int* a;
+int * a;
+//因为 其他写法看起来有歧义
+int* a,b;
+使用：
+//声明一个整型变量
+int i = 10;
+//将i的地址使用取地址符给p指针
+int *p = &amp;i;
+//输出 0xffff 16进制地址
+printf(&quot;%#x\n&quot;, &amp;i);
+printf(&quot;%#x\n&quot;, &amp;p);</code></pre><h5 id="Q-C基础-004-指针多少个字节？"><a href="#Q-C基础-004-指针多少个字节？" class="headerlink" title="Q:C基础.004 指针多少个字节？"></a>Q:C基础.004 指针多少个字节？</h5><p>A:<br>    指向地址，存放的是地址，地址在32位中指针4字节 64位8</p>
+<h5 id="Q-C基础-005-解引用"><a href="#Q-C基础-005-解引用" class="headerlink" title="Q:C基础.005 解引用"></a>Q:C基础.005 解引用</h5><p>A:  </p>
+<pre><code>解析并返回内存地址中保存的值
+int i = 10;
+int *p = &amp;i;
+//解引用  
+//p指向一个内存地址，使用*解出这个地址的值 即为 10
+int pv = *p;
+//修改地址的值,则i值也变成100
+//为解引用的结果赋值也就是为指针所指的内存赋值
+*p = 100;</code></pre><h5 id="Q-C基础-006-指针运算"><a href="#Q-C基础-006-指针运算" class="headerlink" title="Q:C基础.006 指针运算"></a>Q:C基础.006 指针运算</h5><p>A:<br>    指针指向地址，指针运算实际上就是移动指针指向的地址位置,移动的位数取决于指针类型（int就是32位）</p>
+<h5 id="Q-C基础-007-数组和指针"><a href="#Q-C基础-007-数组和指针" class="headerlink" title="Q:C基础.007 数组和指针"></a>Q:C基础.007 数组和指针</h5><p>A:  </p>
+<pre><code>在c语言中，指针和数组名都表示地址
+1、数组是一块内存连续的数据。
+2、指针是一个指向内存空间的变量
+
+//数组指针
+//二维数组类型是 int (*p)[x]
+int array[2][3] = { {11,22,33},{44,55,66} };
+//也可以 int array[2][3] = {  11,22,33 ,44,55,66 };
+//array1 就是一个 int[3] 类型的指针
+int (*array1)[3] = array;
+//怎么取 55 ？
+//通过下标
+array[1][1] == array1[1][1]
+//通过解引用
+int i = *(*(array1 + 1) + 1);
+//拆分
+//1、 指针偏移 因为array1的类型是3个int的数组 所以 +1 移动了12位
+array1 + 1
+//2、获得{44,55,66}数组  (*(array1 + 1))[1] = 55
+(*(array1 + 1)
+//3、对数组执行 +/- 相当于隐式的转为指针
+//获得 55 的地址 再解地址
+*(array1 + 1) + 1</code></pre><h5 id="Q-C基础-008-const-char-p-char-const-p-char-const-p，char-const-const-p"><a href="#Q-C基础-008-const-char-p-char-const-p-char-const-p，char-const-const-p" class="headerlink" title="Q:C基础.008 const char *p, char const *p, char * const p，char const * const  p"></a>Q:C基础.008 const char *p, char const *p, char * const p，char const * const  p</h5><p>A:  </p>
+<pre><code>const ：常量 = final 表示不可变的  从右向左看
+    修饰的是内容，还是指针
+    修饰内容，可以 重新指向
+    修饰的是指针的话，那么 可以修改内容</code></pre><h5 id="Q-C基础-009-多级指针"><a href="#Q-C基础-009-多级指针" class="headerlink" title="Q:C基础.009 多级指针"></a>Q:C基础.009 多级指针</h5><p>A:</p>
+<pre><code>指向指针的指针
+    一个指针包含一个变量的地址。当我们定义一个指向指针的指针时，第一个指针包含了第二个指针的地址，第二个指针指向包含实际值的位置。
+    多级指针的意义 见函数部分的引用传值
+int a = 10;
+int *i = &amp;a;
+int **j = &amp;i;
+// *j 解出 i   
+printf(&quot;%d\n&quot;, **j);</code></pre><h5 id="Q-C基础-010-可变参数"><a href="#Q-C基础-010-可变参数" class="headerlink" title="Q:C基础.010 可变参数"></a>Q:C基础.010 可变参数</h5><p>A:<br>  与Java一样，C当中也有可变参数<br>  va_start 第二个参数，传什么都无所谓，必须传<br>例子</p>
+<pre><code>#include &lt;stdarg.h&gt;
+int add(int num, ...)
+{
+    va_list valist;
+    int sum = 0;
+    // 初始化  valist指向第一个可变参数 (...)
+    va_start(valist, num);
+    for (size_t i = 0; i &lt; num; i++)
+    {
+        //访问所有赋给 valist 的参数
+        int j = va_arg(valist, int);
+        printf(&quot;%d\n&quot;, j);
+        sum += j;
+    }
+    //清理为 valist 内存
+    va_end(valist);
+    return sum;
+}</code></pre><h5 id="Q-C基础-011-函数指针"><a href="#Q-C基础-011-函数指针" class="headerlink" title="Q:C基础.011 函数指针"></a>Q:C基础.011 函数指针</h5><p>A:<br>    函数指针是指向函数的指针变量</p>
+<h5 id="Q-C基础-012-预处理器"><a href="#Q-C基础-012-预处理器" class="headerlink" title="Q:C基础.012 预处理器"></a>Q:C基础.012 预处理器</h5><p>A:<br>预处理器不是编译器，但是它是编译过程中一个单独的步骤。<br>预处理器是一个文本替换工具<br>所有的预处理器命令都是以井号（#）开头<br>常用的预处理器</p>
+<table>
+<thead>
+<tr>
+<th>预处理器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>#include</td>
+<td>导入头文件</td>
+</tr>
+<tr>
+<td>#if</td>
+<td>if</td>
+</tr>
+<tr>
+<td>#elif</td>
+<td>else if</td>
+</tr>
+<tr>
+<td>#else</td>
+<td>else</td>
+</tr>
+<tr>
+<td>#endif</td>
+<td>结束 if</td>
+</tr>
+<tr>
+<td>#define</td>
+<td>宏定义</td>
+</tr>
+<tr>
+<td>#ifdef</td>
+<td>如果定义了宏</td>
+</tr>
+<tr>
+<td>#ifndef</td>
+<td>如果未定义宏</td>
+</tr>
+<tr>
+<td>#undef</td>
+<td>取消宏定义</td>
+</tr>
+</tbody></table>
 </section>
 </article>
 
 <section class="prev-next card slide-in-right">
 	
-		<a href="/2018/08/16/NDK-C-基础-1/" class="link prev" title="NDK-C++基础">
+		<a href="/2018/08/16/NDK-C++基础/" class="link prev" title="NDK-C++基础">
 			<span class="hover-underline-animation">&larr; NDK-C++基础</span>
 		</a>
 	
@@ -134,7 +268,7 @@
 
 <section class="article-toc">
   <div class="card uk-margin-remove-bottom">
-    
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-C基础-001-动态内存申请"><span class="toc-text">Q:C基础.001 动态内存申请</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-C基础-002-指针"><span class="toc-text">Q:C基础.002 指针</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-C基础-003-指针的使用"><span class="toc-text">Q:C基础.003 指针的使用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-C基础-004-指针多少个字节？"><span class="toc-text">Q:C基础.004 指针多少个字节？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-C基础-005-解引用"><span class="toc-text">Q:C基础.005 解引用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-C基础-006-指针运算"><span class="toc-text">Q:C基础.006 指针运算</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-C基础-007-数组和指针"><span class="toc-text">Q:C基础.007 数组和指针</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-C基础-008-const-char-p-char-const-p-char-const-p，char-const-const-p"><span class="toc-text">Q:C基础.008 const char *p, char const *p, char * const p，char const * const  p</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-C基础-009-多级指针"><span class="toc-text">Q:C基础.009 多级指针</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-C基础-010-可变参数"><span class="toc-text">Q:C基础.010 可变参数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-C基础-011-函数指针"><span class="toc-text">Q:C基础.011 函数指针</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-C基础-012-预处理器"><span class="toc-text">Q:C基础.012 预处理器</span></a></li></ol>
   </div>
 </section>
 

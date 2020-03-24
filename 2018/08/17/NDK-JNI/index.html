@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="#333333">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keyword"  content="">
+    <meta name="description" content="想写什么就写什么">
+    <title>NDK-JNI - undefined</title>
+    <base href="/">
+    <link rel="preconnect" href="//cdn.bootcss.com">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-light.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-dark.min.css" rel="stylesheet" media="screen and (prefers-color-scheme: dark)">
+    <!-- UIkit CSS -->
+    <link href="https://cdn.bootcss.com/uikit/3.2.0/css/uikit.min.css" rel="stylesheet">
+    <!-- UIkit JS -->
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit.min.js" async></script>
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit-icons.min.js" async></script>
+    
+<link rel="stylesheet" href="/styles/cold-stone.css">
+
+    <noscript>
+      <p class="text-center">你的浏览器还没开启 Javascript 功能！</p>
+    </noscript>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+  <body>
+    
+
+    <header class="header" uk-sticky="top: 100; animation: uk-animation-slide-top; bottom: #sticky-on-scroll-up">
+  <nav class="wrapper header-content">
+    <div class="nav-overlay uk-navbar-left">
+      <h1 class="title nav-list-item uk-logo" data-link="/">
+        
+        <a href="/" data-link="/">xyzmst</a>
+        
+      </h1>
+
+      <ul class="nav-list">
+        
+        <li class="nav-list-item" data-link="/categories/">
+          <a class="nav-list-link" href="/categories">分类</a>
+        </li>
+        
+        
+        <li class="nav-list-item" data-link="/about/">
+          <a class="nav-list-link" href="/about/">关于</a>
+        </li>
+        
+        <li class="nav-list-item" data-link="/rss/">
+          <a class="nav-list-link" href="/atom.xml">RSS</a>
+        </li>
+        
+      </ul>
+    </div>
+
+    
+      <div class="uk-navbar-right translate-x">
+        <a class="uk-navbar-toggle" href="#modal-full" uk-search-icon uk-toggle></a>
+      </div>
+    
+  </nav>
+</header>
+
+<div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
+  <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+    <button class="uk-modal-close-full" type="button" uk-close></button>
+    <form class="uk-search uk-search-large search-form" action="//google.com/search" method="get" accept-charset="UTF-8"
+      target="_blank">
+      <input class="uk-search-input search-form-input" type="search" name="q" placeholder="搜索"
+        autofocus autocomplete="false">
+      <input type="hidden" name="sitesearch" value="http://xyzmst.top">
+    </form>
+  </div>
+</div>
+
+
+    <main class="main wrapper"><article class="article slide-in-right uk-article">
+  <section class="article-header">
+    <h1 class="article-title uk-article-title">
+      NDK-JNI
+    </h1>
+    <p class="article-meta uk-article-meta">
+      <span class="meta-info">
+        <span>
+          最后更新&#58;<time class="post-time"
+            datetime="2018-08-17">2018-08-17</time>
+        </span>
+        <span>阅读时间&#58; 1 min</span>
+        <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
+            id="busuanzi_value_page_pv"></span></span>
+      </span>
+    </p>
+  </section>
+  <section class="article-content"><h5 id="Q-JNI-001-生成-h-头文件"><a href="#Q-JNI-001-生成-h-头文件" class="headerlink" title="Q:JNI.001 生成.h 头文件"></a>Q:JNI.001 生成.h 头文件</h5><p>A:<br>    javah -o demo.h 全类名</p>
+<h5 id="Q-JNI-002-jni数据类型"><a href="#Q-JNI-002-jni数据类型" class="headerlink" title="Q:JNI.002 jni数据类型"></a>Q:JNI.002 jni数据类型</h5><p>A:</p>
+<table>
+<thead>
+<tr>
+<th>Java类型</th>
+<th>本地类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>boolean</td>
+<td>jboolean</td>
+<td>C/C++8位整型</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>jbyte</td>
+<td>C/C++带符号的8位整型</td>
+</tr>
+<tr>
+<td>char</td>
+<td>jchar</td>
+<td>C/C++无符号的16位整型</td>
+</tr>
+<tr>
+<td>short</td>
+<td>jshort</td>
+<td>C/C++带符号的16位整型</td>
+</tr>
+<tr>
+<td>int</td>
+<td>jint</td>
+<td>C/C++带符号的32位整型</td>
+</tr>
+<tr>
+<td>long</td>
+<td>jlong</td>
+<td>C/C++带符号的64位整型</td>
+</tr>
+<tr>
+<td>float</td>
+<td>jfloat</td>
+<td>C/C++32位浮点型</td>
+</tr>
+<tr>
+<td>double</td>
+<td>jdouble</td>
+<td>C/C++64位浮点型</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>jobject</td>
+<td>任何Java对象，或者没有对应java类型的对象</td>
+</tr>
+<tr>
+<td>Class</td>
+<td>jclass</td>
+<td>Class对象</td>
+</tr>
+<tr>
+<td>String</td>
+<td>jstring</td>
+<td>字符串对象</td>
+</tr>
+<tr>
+<td>Object[]</td>
+<td>jobjectArray</td>
+<td>任何对象的数组</td>
+</tr>
+<tr>
+<td>boolean[]</td>
+<td>jbooleanArray</td>
+<td>布尔型数组</td>
+</tr>
+<tr>
+<td>byte[]</td>
+<td>jbyteArray</td>
+<td>比特型数组</td>
+</tr>
+<tr>
+<td>char[]</td>
+<td>jcharArray</td>
+<td>字符型数组</td>
+</tr>
+<tr>
+<td>short[]</td>
+<td>jshortArray</td>
+<td>短整型数组</td>
+</tr>
+<tr>
+<td>int[]</td>
+<td>jintArray</td>
+<td>整型数组</td>
+</tr>
+<tr>
+<td>long[]</td>
+<td>jlongArray</td>
+<td>长整型数组</td>
+</tr>
+<tr>
+<td>float[]</td>
+<td>jfloatArray</td>
+<td>浮点型数组</td>
+</tr>
+<tr>
+<td>double[]</td>
+<td>jdoubleArray</td>
+<td>双浮点型数组</td>
+</tr>
+</tbody></table>
+<h5 id="Q-JNI-003-jni交互"><a href="#Q-JNI-003-jni交互" class="headerlink" title="Q:JNI.003 jni交互"></a>Q:JNI.003 jni交互</h5><p>A:<br><img src="https://i.loli.net/2020/03/24/lxQXEuBAVj35tWc.png" alt=""></p>
+<h5 id="Q-JNI-004-jni数组操作"><a href="#Q-JNI-004-jni数组操作" class="headerlink" title="Q:JNI.004 jni数组操作"></a>Q:JNI.004 jni数组操作</h5><p>A:<br><img src="https://i.loli.net/2020/03/24/2f3DQntq8TzkbBK.png" alt=""></p>
+<h5 id="Q-JNI-005-jni-字符串"><a href="#Q-JNI-005-jni-字符串" class="headerlink" title="Q:JNI.005 jni 字符串"></a>Q:JNI.005 jni 字符串</h5><p>A:<br><img src="https://i.loli.net/2020/03/24/T8iseJbEokhP5XN.png" alt=""></p>
+<h5 id="Q-JNI-006-jni-对象"><a href="#Q-JNI-006-jni-对象" class="headerlink" title="Q:JNI.006 jni 对象"></a>Q:JNI.006 jni 对象</h5><p>A:<br><img src="https://i.loli.net/2020/03/24/l8BDPEkOAaq34dy.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th>Java类型</th>
+<th>签名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>boolean</td>
+<td>Z</td>
+</tr>
+<tr>
+<td>short</td>
+<td>S</td>
+</tr>
+<tr>
+<td>float</td>
+<td>F</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>B</td>
+</tr>
+<tr>
+<td>int</td>
+<td>I</td>
+</tr>
+<tr>
+<td>double</td>
+<td>D</td>
+</tr>
+<tr>
+<td>char</td>
+<td>C</td>
+</tr>
+<tr>
+<td>long</td>
+<td>J</td>
+</tr>
+<tr>
+<td>void</td>
+<td>V</td>
+</tr>
+<tr>
+<td>引用类型</td>
+<td>L + 全限定名 + ;</td>
+</tr>
+<tr>
+<td>数组</td>
+<td>[+类型签名</td>
+</tr>
+</tbody></table>
+<h5 id="Q-JNI-007-jni-log-一般定义成一个宏"><a href="#Q-JNI-007-jni-log-一般定义成一个宏" class="headerlink" title="Q:JNI.007 jni log 一般定义成一个宏"></a>Q:JNI.007 jni log 一般定义成一个宏</h5><p>A:</p>
+<pre><code> #define  LOGE(...) __android_log_print(ANDROID_LOG_ERROR,&quot;JNI&quot;,__VA_ARGS__);</code></pre><h5 id="Q-JNI-008-jni-引用"><a href="#Q-JNI-008-jni-引用" class="headerlink" title="Q:JNI.008 jni 引用"></a>Q:JNI.008 jni 引用</h5><p>A:<br><img src="https://i.loli.net/2020/03/24/twqbfS2DWpk5gsJ.png" alt=""></p>
+<h5 id="Q-JNI-009-动态注册"><a href="#Q-JNI-009-动态注册" class="headerlink" title="Q:JNI.009 动态注册"></a>Q:JNI.009 动态注册</h5><p>A:<br><img src="https://i.loli.net/2020/03/24/ZCA31aqRLQfMznt.png" alt=""></p>
+<h5 id="Q-JNI-010-native线程调用java"><a href="#Q-JNI-010-native线程调用java" class="headerlink" title="Q:JNI.010 native线程调用java"></a>Q:JNI.010 native线程调用java</h5><p>A:<br><img src="https://i.loli.net/2020/03/24/hKxHqD9IygWTMU8.png" alt=""></p>
+</section>
+</article>
+
+<section class="prev-next card slide-in-right">
+	
+		<a href="/2018/09/05/NDK-ffmpeg基础知识/" class="link prev" title="NDK-Ffmpeg 基础知识">
+			<span class="hover-underline-animation">&larr; NDK-Ffmpeg 基础知识</span>
+		</a>
+	
+	
+		<a href="/2018/08/16/NDK-结构体共用体/" class="link next" title="NDK-结构体共用体">
+			<span class="hover-underline-animation">NDK-结构体共用体 &rarr;</span>
+		</a>
+	
+</section>
+
+
+<section class="article-toc">
+  <div class="card uk-margin-remove-bottom">
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-JNI-001-生成-h-头文件"><span class="toc-text">Q:JNI.001 生成.h 头文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-JNI-002-jni数据类型"><span class="toc-text">Q:JNI.002 jni数据类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-JNI-003-jni交互"><span class="toc-text">Q:JNI.003 jni交互</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-JNI-004-jni数组操作"><span class="toc-text">Q:JNI.004 jni数组操作</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-JNI-005-jni-字符串"><span class="toc-text">Q:JNI.005 jni 字符串</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-JNI-006-jni-对象"><span class="toc-text">Q:JNI.006 jni 对象</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-JNI-007-jni-log-一般定义成一个宏"><span class="toc-text">Q:JNI.007 jni log 一般定义成一个宏</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-JNI-008-jni-引用"><span class="toc-text">Q:JNI.008 jni 引用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-JNI-009-动态注册"><span class="toc-text">Q:JNI.009 动态注册</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-JNI-010-native线程调用java"><span class="toc-text">Q:JNI.010 native线程调用java</span></a></li></ol>
+  </div>
+</section>
+
+<section class="article slide-in-right">
+  <div class="loader" id="loader">
+    <svg viewBox="0 0 50 50">
+      <circle class="ring" cx="25" cy="25" r="20"></circle>
+      <circle class="ball" cx="25" cy="5" r="3.5"></circle>
+    </svg>
+  </div>
+
+  <div class="comment" id="utteranc"></div>
+  <noscript>Please activate JavaScript for normal use of comments</noscript>
+</section>
+
+<a class="card back-to-top" id="backTop">&UpArrow;</a>
+</main>
+
+    
+
+    <script>
+	window.COLD_STONE = {
+		root: "/",
+		author: "xyzmst" || '',
+		gaid: "xxxxxxxxxxxxxx" || '',
+		repo: "xyzmst/blog" || '',
+	}
+</script>
+
+
+
+
+	<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+
+
+<script src="/scripts/busuanzi.js" referrerpolicy="origin"></script>
+
+<script src="/scripts/cold-stone.js"></script>
+
+
+
+  <script src="//www.googletagmanager.com/gtag/js?id=xxxxxxxxxxxxxx"></script>
+
+  <script>
+	window.dataLayer = window.dataLayer || []
+	function gtag() {
+		dataLayer.push(arguments)
+	}
+	gtag('js', new Date())
+	gtag('config', window.COLD_STONE.gaid)
+  </script>
+
+
+    <!-- <script src="/scripts/hexo_resize_image.js"></script> -->
+  </body>
+</html>
