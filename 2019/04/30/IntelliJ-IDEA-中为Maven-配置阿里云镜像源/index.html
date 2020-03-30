@@ -12,7 +12,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="keyword"  content="">
     <meta name="description" content="想写什么就写什么">
-    <title>Git基本使用 - undefined</title>
+    <title>IntelliJ IDEA 中为Maven 配置阿里云镜像源 - undefined</title>
     <base href="/">
     <link rel="preconnect" href="//cdn.bootcss.com">
     <link rel="manifest" href="/manifest.json">
@@ -88,34 +88,92 @@
     <main class="main wrapper"><article class="article slide-in-right uk-article">
   <section class="article-header">
     <h1 class="article-title uk-article-title">
-      Git基本使用
+      IntelliJ IDEA 中为Maven 配置阿里云镜像源
     </h1>
     <p class="article-meta uk-article-meta">
       <span class="meta-info">
         <span>
           最后更新&#58;<time class="post-time"
-            datetime="2019-02-26">2019-02-26</time>
+            datetime="2019-04-30">2019-04-30</time>
         </span>
-        <span>阅读时间&#58; 1 min</span>
+        <span>阅读时间&#58; 2 min</span>
         <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
             id="busuanzi_value_page_pv"></span></span>
       </span>
     </p>
   </section>
-  <section class="article-content"><p><img src="https://i.loli.net/2020/02/26/z9vecE2qJa6Vnjx.png" alt="导图"></p>
-<p>引用的说明，方便理解分支是怎么回事，Head引用指向工作目录，每提交一个commit会移动一次，<br>push和merge时会先把引用推过去，再对应commit，缺哪个commit推哪个，直到完整，每条分支是一条线。</p>
-</section>
+  <section class="article-content"><p><img src="https://i.loli.net/2020/03/30/LVafdBKqM6h1iIX.png" alt=""></p>
+<p>在使用maven同步项目时特别的慢，不用捉急，只有创建对应目录的 setting.xml 即可，配上阿里云的镜像</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;settings xmlns=&quot;http://maven.apache.org/SETTINGS/1.0.0&quot; 
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&quot;&gt;
+
+    &lt;mirrors&gt;
+        &lt;mirror&gt;
+            &lt;id&gt;alimaven&lt;/id&gt;
+            &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+            &lt;name&gt;aliyun maven&lt;/name&gt;
+            &lt;url&gt;http://maven.aliyun.com/nexus/content/repositories/central/&lt;/url&gt;
+        &lt;/mirror&gt;
+        &lt;mirror&gt;
+            &lt;id&gt;alimaven&lt;/id&gt;
+            &lt;name&gt;aliyun maven&lt;/name&gt;
+            &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;
+            &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+        &lt;/mirror&gt;
+        &lt;mirror&gt;
+            &lt;id&gt;central&lt;/id&gt;
+            &lt;name&gt;Maven Repository Switchboard&lt;/name&gt;
+            &lt;url&gt;http://repo1.maven.org/maven2/&lt;/url&gt;
+            &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+        &lt;/mirror&gt;
+        &lt;mirror&gt;
+            &lt;id&gt;repo2&lt;/id&gt;
+            &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+            &lt;name&gt;Human Readable Name for this Mirror.&lt;/name&gt;
+            &lt;url&gt;http://repo2.maven.org/maven2/&lt;/url&gt;
+        &lt;/mirror&gt;
+        &lt;mirror&gt;
+            &lt;id&gt;ibiblio&lt;/id&gt;
+            &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+            &lt;name&gt;Human Readable Name for this Mirror.&lt;/name&gt;
+            &lt;url&gt;http://mirrors.ibiblio.org/pub/mirrors/maven2/&lt;/url&gt;
+        &lt;/mirror&gt;
+        &lt;mirror&gt;
+            &lt;id&gt;jboss-public-repository-group&lt;/id&gt;
+            &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+            &lt;name&gt;JBoss Public Repository Group&lt;/name&gt;
+            &lt;url&gt;http://repository.jboss.org/nexus/content/groups/public&lt;/url&gt;
+        &lt;/mirror&gt;
+        &lt;mirror&gt;
+            &lt;id&gt;google-maven-central&lt;/id&gt;
+            &lt;name&gt;Google Maven Central&lt;/name&gt;
+            &lt;url&gt;https://maven-central.storage.googleapis.com
+            &lt;/url&gt;
+            &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+        &lt;/mirror&gt;
+        &lt;!-- 中央仓库在中国的镜像 --&gt;
+        &lt;mirror&gt;
+            &lt;id&gt;maven.net.cn&lt;/id&gt;
+            &lt;name&gt;oneof the central mirrors in china&lt;/name&gt;
+            &lt;url&gt;http://maven.net.cn/content/groups/public/&lt;/url&gt;
+            &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+        &lt;/mirror&gt;
+    &lt;/mirrors&gt;
+&lt;/settings&gt;
+</code></pre></section>
 </article>
 
 <section class="prev-next card slide-in-right">
 	
-		<a href="/2019/04/30/IntelliJ-IDEA-中为Maven-配置阿里云镜像源/" class="link prev" title="IntelliJ IDEA 中为Maven 配置阿里云镜像源">
-			<span class="hover-underline-animation">&larr; IntelliJ IDEA 中为Maven 配置阿里云镜像源</span>
+		<a href="/2019/11/28/算法-总览/" class="link prev" title="算法-总览">
+			<span class="hover-underline-animation">&larr; 算法-总览</span>
 		</a>
 	
 	
-		<a href="/2018/10/01/HTTP-HTTPS和TLS、TCPIP协议/" class="link next" title="HTTP - HTTPS 和 TLS、TCPIP 协议">
-			<span class="hover-underline-animation">HTTP - HTTPS 和 TLS、TCPIP 协议 &rarr;</span>
+		<a href="/2019/02/26/git基本使用/" class="link next" title="Git基本使用">
+			<span class="hover-underline-animation">Git基本使用 &rarr;</span>
 		</a>
 	
 </section>

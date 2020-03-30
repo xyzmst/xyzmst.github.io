@@ -186,7 +186,7 @@ int *i = &amp;a;
 int **j = &amp;i;
 // *j 解出 i   
 printf(&quot;%d\n&quot;, **j);</code></pre><h5 id="Q-C基础-010-可变参数"><a href="#Q-C基础-010-可变参数" class="headerlink" title="Q:C基础.010 可变参数"></a>Q:C基础.010 可变参数</h5><p>A:<br>  与Java一样，C当中也有可变参数<br>  va_start 第二个参数，传什么都无所谓，必须传<br>例子</p>
-<pre><code>#include &lt;stdarg.h&gt;
+<pre><code class="c">#include &lt;stdarg.h&gt;
 int add(int num, ...)
 {
     va_list valist;
@@ -203,9 +203,9 @@ int add(int num, ...)
     //清理为 valist 内存
     va_end(valist);
     return sum;
-}</code></pre><h5 id="Q-C基础-011-函数指针"><a href="#Q-C基础-011-函数指针" class="headerlink" title="Q:C基础.011 函数指针"></a>Q:C基础.011 函数指针</h5><p>A:<br>    函数指针是指向函数的指针变量</p>
-<h5 id="Q-C基础-012-预处理器"><a href="#Q-C基础-012-预处理器" class="headerlink" title="Q:C基础.012 预处理器"></a>Q:C基础.012 预处理器</h5><p>A:</p>
-<p>预处理器不是编译器，但是它是编译过程中一个单独的步骤。<br>预处理器是一个文本替换工具<br>所有的预处理器命令都是以井号（#）开头<br>常用的预处理器</p>
+}</code></pre>
+<h5 id="Q-C基础-011-函数指针"><a href="#Q-C基础-011-函数指针" class="headerlink" title="Q:C基础.011 函数指针"></a>Q:C基础.011 函数指针</h5><p>A:<br>    函数指针是指向函数的指针变量</p>
+<h5 id="Q-C基础-012-预处理器"><a href="#Q-C基础-012-预处理器" class="headerlink" title="Q:C基础.012 预处理器"></a>Q:C基础.012 预处理器</h5><p>A:<br>预处理器不是编译器，但是它是编译过程中一个单独的步骤。<br>预处理器是一个文本替换工具<br>所有的预处理器命令都是以井号（#）开头<br>常用的预处理器</p>
 <table>
 <thead>
 <tr>
