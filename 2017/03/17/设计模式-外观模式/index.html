@@ -12,7 +12,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="keyword"  content="">
     <meta name="description" content="想写什么就写什么">
-    <title>代码时间 - undefined</title>
+    <title>设计模式-外观模式 - undefined</title>
     <base href="/">
     <link rel="preconnect" href="//cdn.bootcss.com">
     <link rel="manifest" href="/manifest.json">
@@ -88,13 +88,13 @@
     <main class="main wrapper"><article class="article slide-in-right uk-article">
   <section class="article-header">
     <h1 class="article-title uk-article-title">
-      代码时间
+      设计模式-外观模式
     </h1>
     <p class="article-meta uk-article-meta">
       <span class="meta-info">
         <span>
           最后更新&#58;<time class="post-time"
-            datetime="2016-12-26">2016-12-26</time>
+            datetime="2017-03-17">2017-03-17</time>
         </span>
         <span>阅读时间&#58; 1 min</span>
         <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
@@ -102,20 +102,37 @@
       </span>
     </p>
   </section>
-  <section class="article-content"><h3 id="一个网易云音乐的声音节目，平时敲代码无聊时会听听"><a href="#一个网易云音乐的声音节目，平时敲代码无聊时会听听" class="headerlink" title="一个网易云音乐的声音节目，平时敲代码无聊时会听听"></a>一个网易云音乐的声音节目，平时敲代码无聊时会听听</h3><p>余凡 Nightire<br>http 权威指南<br>http developer handbook、handpocket<br>frontent handbook</p>
-<p>陈斌<br>一年成为Emacs高手 作者</p>
+  <section class="article-content"><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>要求一个子系统的外部与内部通信必须通过一个统一的对象进行，使子系统更易用。也叫门面模式 Facade</p>
+<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><ol>
+<li>为复杂的子系统提供一个简单接口</li>
+<li>需要构建一个层次结构的子系统时，定义子系统每层的入口点。</li>
+</ol>
+<h4 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h4><p><img src="https://i.loli.net/2020/03/30/gR5uWS632PpaQBH.png" alt=""></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>高频使用模式，精髓在于封装。通过高层次结构为用户提供统一的API入口，减少用户使用成本。</p>
+<ul>
+<li>优点<ul>
+<li>隐藏子系统细节，较少客户对子系统的耦合</li>
+<li>外观类对子系统的接口封装，使得系统易于使用</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>外观类接口膨胀，由于子系统接口都是对外暴露的，使得外观类的API接口较多</li>
+<li>外观类没有遵循开闭原则，业务变更时需要可能直接修改外观类</li>
+</ul>
+</li>
+</ul>
 </section>
 </article>
 
 <section class="prev-next card slide-in-right">
 	
-		<a href="/2017/03/17/设计模式-策略模式/" class="link prev" title="设计模式-策略模式">
-			<span class="hover-underline-animation">&larr; 设计模式-策略模式</span>
+		<a href="/2017/03/17/设计模式-单例模式/" class="link prev" title="设计模式-单例模式">
+			<span class="hover-underline-animation">&larr; 设计模式-单例模式</span>
 		</a>
 	
 	
-		<a href="/2016/12/22/freeline使用/" class="link next" title="Freeline使用">
-			<span class="hover-underline-animation">Freeline使用 &rarr;</span>
+		<a href="/2017/03/17/设计模式-Builder模式/" class="link next" title="设计模式-Builder模式">
+			<span class="hover-underline-animation">设计模式-Builder模式 &rarr;</span>
 		</a>
 	
 </section>
@@ -123,7 +140,7 @@
 
 <section class="article-toc">
   <div class="card uk-margin-remove-bottom">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一个网易云音乐的声音节目，平时敲代码无聊时会听听"><span class="toc-text">一个网易云音乐的声音节目，平时敲代码无聊时会听听</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用场景"><span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UML"><span class="toc-text">UML</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
   </div>
 </section>
 

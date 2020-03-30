@@ -12,7 +12,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="keyword"  content="">
     <meta name="description" content="想写什么就写什么">
-    <title>代码时间 - undefined</title>
+    <title>设计模式-策略模式 - undefined</title>
     <base href="/">
     <link rel="preconnect" href="//cdn.bootcss.com">
     <link rel="manifest" href="/manifest.json">
@@ -88,13 +88,13 @@
     <main class="main wrapper"><article class="article slide-in-right uk-article">
   <section class="article-header">
     <h1 class="article-title uk-article-title">
-      代码时间
+      设计模式-策略模式
     </h1>
     <p class="article-meta uk-article-meta">
       <span class="meta-info">
         <span>
           最后更新&#58;<time class="post-time"
-            datetime="2016-12-26">2016-12-26</time>
+            datetime="2017-03-17">2017-03-17</time>
         </span>
         <span>阅读时间&#58; 1 min</span>
         <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
@@ -102,20 +102,101 @@
       </span>
     </p>
   </section>
-  <section class="article-content"><h3 id="一个网易云音乐的声音节目，平时敲代码无聊时会听听"><a href="#一个网易云音乐的声音节目，平时敲代码无聊时会听听" class="headerlink" title="一个网易云音乐的声音节目，平时敲代码无聊时会听听"></a>一个网易云音乐的声音节目，平时敲代码无聊时会听听</h3><p>余凡 Nightire<br>http 权威指南<br>http developer handbook、handpocket<br>frontent handbook</p>
-<p>陈斌<br>一年成为Emacs高手 作者</p>
+  <section class="article-content"><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>定义了一系列的算法，并将每个算法封装起来，而且它们可以相互替换。策略模式让算法独立于使用它的客户而变化。</p>
+<h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4><ol>
+<li>针对同一行为多种处理方法，仅仅具体行为有差别</li>
+<li>需要安全封装多种同类型操作时</li>
+<li>同一抽象类有多个子类，需要判断选择时</li>
+</ol>
+<h4 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h4><p><img src="https://i.loli.net/2020/03/30/hNBAL3RpGmuCV6X.png" alt=""><br>角色介绍：<br>Context 要来操作策略的<br>Stragety 策略的抽象<br>ConcreteStrategyA,B 具体实现</p>
+<h4 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h4><pre><code class="java">
+/**
+ * 计算接口
+ */
+public interface CalculateStrategy {
+    /**
+     * 按距离来计算价格
+     *
+     * @param miles 公里
+     * @return 返回价格
+     */
+    int calculatePrice(int miles);
+}
+
+
+// 公交车价格计算策略
+public class BusStrategy implements CalculateStrategy {
+
+    /**
+     * 北京公交车,10里之内1块钱,超过十公里之后每加一块钱可以乘5公里
+     *
+     * @param miles 公里
+     * @return
+     */
+    @Override
+    public int calculatePrice(int miles) {
+        // 超过10公里的总距离
+        int extraTotal = miles - 10;
+        // 超过的距离是5公里的倍数
+        int extraFactor = extraTotal / 5;
+        // 超过的距离对5公里的取余
+        int fraction = extraTotal % 5;
+        // 价格计算
+        int price = 1 + extraFactor * 1;
+        return fraction &gt; 0 ? ++price : price;
+    }
+
+}
+
+
+// 公交出行价格计算器
+public class TranficCalculator {
+
+    public static void main(String[] args) {
+        TranficCalculator calculator = new TranficCalculator();
+        calculator.setStrategy(new BusStrategy());
+        System.out.println(&quot;公交车乘16公里的价格 : &quot; + calculator.calculatePrice(16));
+        calculator.setStrategy(new TaxiStrategy());
+        System.out.println(&quot;出租车乘16公里的价格 : &quot; + calculator.calculatePrice(16));
+    }
+
+    CalculateStrategy mStrategy;
+
+    public void setStrategy(CalculateStrategy mStrategy) {
+        this.mStrategy = mStrategy;
+    }
+
+    public int calculatePrice(int km) {
+        return mStrategy.calculatePrice(km);
+    }
+}
+</code></pre>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>主要用于分离算法，相同的抽象行为不同的实现。</p>
+<ul>
+<li>优点<ul>
+<li>结构清晰，简单直观</li>
+<li>耦合度低，扩展简单</li>
+<li>操作封装策底，数据更为安全</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>策略增加子类会变多</li>
+</ul>
+</li>
+</ul>
+<p>======= 《Android源码设计模式》笔记</p>
 </section>
 </article>
 
 <section class="prev-next card slide-in-right">
 	
-		<a href="/2017/03/17/设计模式-策略模式/" class="link prev" title="设计模式-策略模式">
-			<span class="hover-underline-animation">&larr; 设计模式-策略模式</span>
+		<a href="/2017/03/17/设计模式-Builder模式/" class="link prev" title="设计模式-Builder模式">
+			<span class="hover-underline-animation">&larr; 设计模式-Builder模式</span>
 		</a>
 	
 	
-		<a href="/2016/12/22/freeline使用/" class="link next" title="Freeline使用">
-			<span class="hover-underline-animation">Freeline使用 &rarr;</span>
+		<a href="/2016/12/26/代码时间/" class="link next" title="代码时间">
+			<span class="hover-underline-animation">代码时间 &rarr;</span>
 		</a>
 	
 </section>
@@ -123,7 +204,7 @@
 
 <section class="article-toc">
   <div class="card uk-margin-remove-bottom">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一个网易云音乐的声音节目，平时敲代码无聊时会听听"><span class="toc-text">一个网易云音乐的声音节目，平时敲代码无聊时会听听</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#场景"><span class="toc-text">场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UML"><span class="toc-text">UML</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#具体实现"><span class="toc-text">具体实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
   </div>
 </section>
 
