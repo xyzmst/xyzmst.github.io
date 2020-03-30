@@ -96,7 +96,7 @@
           最后更新&#58;<time class="post-time"
             datetime="2019-12-05">2019-12-05</time>
         </span>
-        <span>阅读时间&#58; 9 min</span>
+        <span>阅读时间&#58; 12 min</span>
         <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
             id="busuanzi_value_page_pv"></span></span>
       </span>
@@ -106,7 +106,7 @@
 <p>示例:</p>
 <p>输入: [0,1,0,3,12]<br>输出: [1,3,12,0,0]<br>说明:</p>
 <p>必须在原数组上操作，不能拷贝额外的数组。<br>尽量减少操作次数。</p>
-<h5 id="解法-O-n-一个指针指向非零数字-一层循环遍历"><a href="#解法-O-n-一个指针指向非零数字-一层循环遍历" class="headerlink" title="解法 O(n) 一个指针指向非零数字+一层循环遍历"></a>解法 O(n) 一个指针指向非零数字+一层循环遍历</h5><pre><code>class Solution {
+<h5 id="解法-O-n-一个指针指向非零数字-一层循环遍历"><a href="#解法-O-n-一个指针指向非零数字-一层循环遍历" class="headerlink" title="解法 O(n) 一个指针指向非零数字+一层循环遍历"></a>解法 O(n) 一个指针指向非零数字+一层循环遍历</h5><pre><code class="java">class Solution {
     public void moveZeroes(int[] nums) {
         int j = 0;
         for(int i = 0; i &lt; nums.length; i++){
@@ -120,9 +120,10 @@
 
         }
     }
-}</code></pre><h4 id="盛最多水的容器"><a href="#盛最多水的容器" class="headerlink" title="盛最多水的容器"></a>盛最多水的容器</h4><p><a href="https://leetcode-cn.com/problems/container-with-most-water/" target="_blank" rel="noopener">letcode 11</a><br>给定 n 个非负整数 a1，a2，…，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。<br>说明：你不能倾斜容器，且 n 的值至少为 2。<br><img src="https://i.loli.net/2020/02/28/lnQDfbeKWoLjAti.png" alt=""></p>
+}</code></pre>
+<h4 id="盛最多水的容器"><a href="#盛最多水的容器" class="headerlink" title="盛最多水的容器"></a>盛最多水的容器</h4><p><a href="https://leetcode-cn.com/problems/container-with-most-water/" target="_blank" rel="noopener">letcode 11</a><br>给定 n 个非负整数 a1，a2，…，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。<br>说明：你不能倾斜容器，且 n 的值至少为 2。<br><img src="https://i.loli.net/2020/02/28/lnQDfbeKWoLjAti.png" alt=""></p>
 <h6 id="图中垂直线代表输入数组-1-8-6-2-5-4-8-3-7-。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为-49。"><a href="#图中垂直线代表输入数组-1-8-6-2-5-4-8-3-7-。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为-49。" class="headerlink" title="图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。"></a>图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。</h6><p>示例:<br>输入: [1,8,6,2,5,4,8,3,7]<br>输出: 49</p>
-<h5 id="解法1-O-n-2-双层循环遍历所有值"><a href="#解法1-O-n-2-双层循环遍历所有值" class="headerlink" title="解法1 O(n^2) 双层循环遍历所有值"></a>解法1 O(n^2) 双层循环遍历所有值</h5><pre><code>class Solution {
+<h5 id="解法1-O-n-2-双层循环遍历所有值"><a href="#解法1-O-n-2-双层循环遍历所有值" class="headerlink" title="解法1 O(n^2) 双层循环遍历所有值"></a>解法1 O(n^2) 双层循环遍历所有值</h5><pre><code class="java">class Solution {
     public int maxArea(int[] height) {
         int maxArea = 0;
         //两个变量 i，j 遍历所有的数据
@@ -134,7 +135,8 @@
         }
         return maxArea;
     }
-}</code></pre><h5 id="解法2-O-n-左右边界，同时向中间收敛-又叫-左右夹逼"><a href="#解法2-O-n-左右边界，同时向中间收敛-又叫-左右夹逼" class="headerlink" title="解法2 O(n) 左右边界，同时向中间收敛,又叫 左右夹逼"></a>解法2 O(n) 左右边界，同时向中间收敛,又叫 左右夹逼</h5><pre><code>class Solution {
+}</code></pre>
+<h5 id="解法2-O-n-左右边界，同时向中间收敛-又叫-左右夹逼"><a href="#解法2-O-n-左右边界，同时向中间收敛-又叫-左右夹逼" class="headerlink" title="解法2 O(n) 左右边界，同时向中间收敛,又叫 左右夹逼"></a>解法2 O(n) 左右边界，同时向中间收敛,又叫 左右夹逼</h5><pre><code class="java">class Solution {
     public int maxArea(int[] a) {
         int maxArea = 0;
         //一层循环 从两边收敛
@@ -164,7 +166,8 @@ public int maxArea(int[] height) {
     return res;
 }
 
-</code></pre><h4 id="爬楼梯"><a href="#爬楼梯" class="headerlink" title="爬楼梯"></a>爬楼梯</h4><p><a href="https://leetcode-cn.com/problems/climbing-stairs" target="_blank" rel="noopener">letcode 70</a><br>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。</p>
+</code></pre>
+<h4 id="爬楼梯"><a href="#爬楼梯" class="headerlink" title="爬楼梯"></a>爬楼梯</h4><p><a href="https://leetcode-cn.com/problems/climbing-stairs" target="_blank" rel="noopener">letcode 70</a><br>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。</p>
 <p>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
 <p>注意：给定 n 是一个正整数。</p>
 <p>示例 1：</p>
@@ -180,7 +183,7 @@ public int maxArea(int[] height) {
 <li>2 阶 + 1 阶</li>
 </ol>
 <h5 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h5><p>爬上 n-1n−1 阶楼梯的方法数量。因为再爬1阶就能到第n阶<br>爬上 n-2n−2 阶楼梯的方法数量，因为再爬2阶就能到第n阶<br>所以我们得到公式 dp[n] = dp[n-1] + dp[n-2]</p>
-<pre><code>class Solution {
+<pre><code class="java">class Solution {
     public int climbStairs(int n) {
         int[] dp = new int[n + 1];
         dp[0] = 1;
@@ -191,13 +194,24 @@ public int maxArea(int[] height) {
         return dp[n];
     }
 }
-</code></pre><h5 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和</h5><p><a href="https://leetcode-cn.com/problems/two-sum/" target="_blank" rel="noopener">leetcode 1</a><br>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p>
+</code></pre>
+<pre><code class="kotlin">fun climbStairs(n: Int): Int {
+    var dp = IntArray(n + 1)
+    dp[0] = 1
+    dp[1] = 1
+    for (i in 2..n) {
+        dp[i] = dp[i - 1] + dp[i - 2]
+    }
+    return dp[n]
+}
+</code></pre>
+<h5 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和</h5><p><a href="https://leetcode-cn.com/problems/two-sum/" target="_blank" rel="noopener">leetcode 1</a><br>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p>
 <p>你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。</p>
 <p>示例:</p>
 <p>给定 nums = [2, 7, 11, 15], target = 9</p>
 <p>因为 nums[0] + nums[1] = 2 + 7 = 9<br>所以返回 [0, 1]</p>
 <h5 id="解法-1"><a href="#解法-1" class="headerlink" title="解法"></a>解法</h5><h6 id="方法一：暴力法"><a href="#方法一：暴力法" class="headerlink" title="方法一：暴力法"></a>方法一：暴力法</h6><p>暴力法很简单，遍历每个元素 xx，并查找是否存在一个值与 target - xtarget−x 相等的目标元素</p>
-<pre><code>class Solution {
+<pre><code class="java">class Solution {
     public int[] twoSum(int[] nums, int target) {
         for (int i = 0; i &lt; nums.length -1; i++) {
             for (int j = i + 1; j &lt; nums.length; j++) {
@@ -208,7 +222,19 @@ public int maxArea(int[] height) {
         }
         throw new IllegalArgumentException(&quot;No two sum solution&quot;);
     }
-}</code></pre><h6 id="方法二：一遍哈希表"><a href="#方法二：一遍哈希表" class="headerlink" title="方法二：一遍哈希表"></a>方法二：一遍哈希表</h6><pre><code>class Solution {
+}</code></pre>
+<pre><code class="kotlin">fun twoSum(nums: IntArray, target: Int): IntArray? {
+    for (i in 0 until nums.size - 1) {
+        for (j in i + 1 until nums.size) {
+            if (nums[j] == target - nums[i]) {
+                return intArrayOf(i, j)
+            }
+        }
+    }
+    throw java.lang.IllegalArgumentException(&quot;No two sum solution&quot;)
+}
+</code></pre>
+<h6 id="方法二：一遍哈希表"><a href="#方法二：一遍哈希表" class="headerlink" title="方法二：一遍哈希表"></a>方法二：一遍哈希表</h6><pre><code class="java">class Solution {
     public int[] twoSum(int[] nums, int target) {
         Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
         for(int i = 0; i&lt; nums.length; i++) {
@@ -219,13 +245,25 @@ public int maxArea(int[] height) {
         }
         throw new IllegalArgumentException(&quot;No two sum solution&quot;);
     }
-}</code></pre><h4 id="三数之和"><a href="#三数之和" class="headerlink" title="三数之和"></a>三数之和</h4><p><a href="https://leetcode-cn.com/problems/3sum" target="_blank" rel="noopener">LeetCode 15</a><br>给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。</p>
+}</code></pre>
+<pre><code class="kotlin">fun twoSum2(nums: IntArray, target: Int): IntArray? {
+    val map = HashMap&lt;Int, Int&gt;()
+    for (i in nums.indices) {
+        if (map.containsKey(target - nums[i])) {
+            return intArrayOf(map[target - nums[i]]!!, i)
+        }
+        map[nums[i]] = i
+    }
+    throw IllegalArgumentException(&quot;No two sum solution&quot;)
+}
+</code></pre>
+<h4 id="三数之和"><a href="#三数之和" class="headerlink" title="三数之和"></a>三数之和</h4><p><a href="https://leetcode-cn.com/problems/3sum" target="_blank" rel="noopener">LeetCode 15</a><br>给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。</p>
 <p>注意：答案中不可以包含重复的三元组。</p>
 <p>示例：</p>
 <p>给定数组 nums = [-1, 0, 1, 2, -1, -4]</p>
 <p>满足要求的三元组集合为：<br>[<br>  [-1, 0, 1],<br>  [-1, -1, 2]<br>]</p>
 <h5 id="解法-2"><a href="#解法-2" class="headerlink" title="解法"></a>解法</h5><p>1、暴力解法三层循环 O(n^3)<br>2、hash表来记录<br>3、左右下标 推进</p>
-<pre><code>//暴力 三层循环 O(n^3) 结果有重复值
+<pre><code class="java">//暴力 三层循环 O(n^3) 结果有重复值
     public static List&lt;List&lt;Integer&gt;&gt; threeSum(int[] nums) {
         List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();
         if (nums.length == 0) {
@@ -309,11 +347,52 @@ public int maxArea(int[] height) {
         }
         return result;
     }
-</code></pre><h4 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a>反转链表</h4><p><a href="https://leetcode-cn.com/problems/reverse-linked-list/solution/fan-zhuan-lian-biao-by-leetcode/" target="_blank" rel="noopener">letcode 206</a><br>反转一个单链表。</p>
+</code></pre>
+<pre><code class="kotlin">fun threeSum(nums: IntArray): List&lt;List&lt;Int&gt;&gt;? {
+    val result: MutableList&lt;List&lt;Int&gt;&gt; =
+        ArrayList()
+    if (nums.size &lt; 3) return result
+    Arrays.sort(nums)
+    for (i in nums.indices) {
+        if (i &gt; 0 &amp;&amp; nums[i] == nums[i - 1]) continue
+        val target = -nums[i]
+        var left = i + 1
+        var right = nums.size - 1
+        while (left &lt; right) {
+//            var a = nums[left] + nums[right] - target;
+//            when {
+//                a == 0 -&gt; {
+//                }
+//                a &gt; 0 -&gt; {
+//                }
+//                a &lt; 0 -&gt; {
+//                }
+//
+//            }
+            if (nums[left] + nums[right] == target) {
+                val list: MutableList&lt;Int&gt; = ArrayList()
+                list.add(nums[i])
+                list.add(nums[left])
+                list.add(nums[right])
+                result.add(list)
+                left++
+                right--
+                while (left &lt; nums.size &amp;&amp; nums[left] == nums[left - 1]) left++
+                while (right &gt; left &amp;&amp; nums[right] == nums[right + 1]) right--
+            } else if (nums[left] + nums[right] &gt; target) {
+                right--
+            } else if (nums[left] + nums[right] &lt; target) {
+                left++
+            }
+        }
+    }
+    return result
+}</code></pre>
+<h4 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a>反转链表</h4><p><a href="https://leetcode-cn.com/problems/reverse-linked-list/solution/fan-zhuan-lian-biao-by-leetcode/" target="_blank" rel="noopener">letcode 206</a><br>反转一个单链表。</p>
 <p>示例:</p>
 <p>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL<br>输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL<br>进阶:<br>你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</p>
-<h5 id="解法-3"><a href="#解法-3" class="headerlink" title="解法"></a>解法</h5><p>1、递归方式 </p>
-<pre><code>public ListNode reverseList(ListNode head) {
+<h5 id="解法-3"><a href="#解法-3" class="headerlink" title="解法"></a>解法</h5><p>1、递归方式</p>
+<pre><code class="java">public ListNode reverseList(ListNode head) {
     if (head == null || head.next == null) return head;
     ListNode p = reverseList(head.next);
     ListNode tmp = head.next;
@@ -321,9 +400,19 @@ public int maxArea(int[] height) {
     head.next = null;
     return p;
 }
-</code></pre><p>时间复杂度：O(n)，假设 n 是列表的长度，那么时间复杂度为 O(n)。<br>空间复杂度：O(n)，由于使用递归，将会使用隐式栈空间。递归深度可能会达到 n 层。</p>
+</code></pre>
+<pre><code class="kotlin">fun reverseList(head: ListNode?): ListNode? {
+    if (head?.next == null) return head
+    val tmp: ListNode? = head.next
+    val p: ListNode? = reverseList(head.next)
+    tmp?.next = head
+    head?.next = null
+    return p
+}
+</code></pre>
+<p>时间复杂度：O(n)，假设 n 是列表的长度，那么时间复杂度为 O(n)。<br>空间复杂度：O(n)，由于使用递归，将会使用隐式栈空间。递归深度可能会达到 n 层。</p>
 <p>2、迭代方式</p>
-<pre><code>public ListNode reverseList(ListNode head) {
+<pre><code class="java">public ListNode reverseList(ListNode head) {
     ListNode prev = null;
     ListNode curr = head;
     while (curr != null) {
@@ -334,12 +423,26 @@ public int maxArea(int[] height) {
     }
     return prev;
 }
-</code></pre><p>时间复杂度：O(n)O(n)，假设 nn 是列表的长度，时间复杂度是 O(n)O(n)。<br>空间复杂度：O(1)O(1)。</p>
+</code></pre>
+<pre><code class="kotlin">fun reverseList(head: ListNode?): ListNode? {
+    var head = head
+    if (head?.next == null) return head
+    var pre: ListNode? = null
+    var next: ListNode? = null
+    while (head != null) {
+        next = head.next
+        head.next = pre
+        pre = head
+        head = next
+    }
+    return pre
+}</code></pre>
+<p>时间复杂度：O(n)O(n)，假设 nn 是列表的长度，时间复杂度是 O(n)O(n)。<br>空间复杂度：O(1)O(1)。</p>
 <h4 id="环形链表"><a href="#环形链表" class="headerlink" title="环形链表"></a>环形链表</h4><p><a href="https://leetcode-cn.com/problems/linked-list-cycle/" target="_blank" rel="noopener">letcode 141</a></p>
 <p>给定一个链表，判断链表中是否有环。<br>为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。</p>
 <p>示例 1：输入：head = [3,2,0,-4], pos = 1<br>输出：true<br>解释：链表中有一个环，其尾部连接到第二个节点。<br><img src="https://i.loli.net/2020/03/03/jplMF7h4cDGtXfI.png" alt=""><br>示例 2：输入：head = [1,2], pos = 0<br>输出：true<br>解释：链表中有一个环，其尾部连接到第一个节点。<br><img src="https://i.loli.net/2020/03/03/nsjPLiSCX7K3u9A.png" alt=""><br>示例 3：输入：head = [1], pos = -1<br>输出：false<br>解释：链表中没有环。<br><img src="https://i.loli.net/2020/03/03/dRoOXli79PIe2Zc.png" alt=""><br>进阶：你能用 O(1)（即，常量）内存解决此问题吗？</p>
 <h5 id="解法-4"><a href="#解法-4" class="headerlink" title="解法"></a>解法</h5><p>快慢指针</p>
-<pre><code>public boolean hasCycle(ListNode head) {
+<pre><code class="java">public boolean hasCycle(ListNode head) {
     if (head == null || head.next == null) {
         return false;
     }
@@ -354,7 +457,19 @@ public int maxArea(int[] height) {
     }
     return true;
 }
-</code></pre></section>
+</code></pre>
+<pre><code class="kotlin">fun hasCycle(head: ListNode?): Boolean {
+    if (head?.next == null) return false
+    var slow = head
+    var fast = head.next
+    while (fast?.next != null) {
+        slow = slow!!.next
+        fast = fast.next!!.next
+        if (slow == fast) return true
+    }
+    return false
+}</code></pre>
+</section>
 </article>
 
 <section class="prev-next card slide-in-right">
