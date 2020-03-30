@@ -112,25 +112,21 @@
         * 这对于那些重量级对象而言，是非常可观的一笔系统开销
     * 由于new操作的次数减少
         * 因而对系统内存的使用频率也会降低
-        * 这将减轻GC压力，缩短GC停顿时间</code></pre><h4 id="二、单例的六种写法和各自特点"><a href="#二、单例的六种写法和各自特点" class="headerlink" title="二、单例的六种写法和各自特点"></a>二、单例的六种写法和各自特点</h4><pre><code>* 饿汉/懒汉/懒汉线程安全/DCL/静态内部类/枚举</code></pre><h5 id="饿汉"><a href="#饿汉" class="headerlink" title="饿汉"></a>饿汉</h5><pre><code>![](https://i.loli.net/2020/03/30/iEfjLgR62uzKsxH.png)
-
-    * 不足之处
+        * 这将减轻GC压力，缩短GC停顿时间</code></pre><h4 id="二、单例的六种写法和各自特点"><a href="#二、单例的六种写法和各自特点" class="headerlink" title="二、单例的六种写法和各自特点"></a>二、单例的六种写法和各自特点</h4><pre><code>* 饿汉/懒汉/懒汉线程安全/DCL/静态内部类/枚举</code></pre><h5 id="饿汉"><a href="#饿汉" class="headerlink" title="饿汉"></a>饿汉</h5><p><img src="https://i.loli.net/2020/03/30/iEfjLgR62uzKsxH.png" alt=""></p>
+<pre><code>    * 不足之处
         * 无法对 instance做延时加载
         * instance 会使用很多次导致static变量 会重复加载
     * 优化
-        * 懒汉</code></pre><h5 id="懒汉"><a href="#懒汉" class="headerlink" title="懒汉"></a>懒汉</h5><pre><code>![](https://i.loli.net/2020/03/30/isTNSuHn5ULfBbp.png)
-
-    * 不足之处
+        * 懒汉</code></pre><h5 id="懒汉"><a href="#懒汉" class="headerlink" title="懒汉"></a>懒汉</h5><p><img src="https://i.loli.net/2020/03/30/isTNSuHn5ULfBbp.png" alt=""></p>
+<pre><code>    * 不足之处
         * 多线程并发下无法保证实例是唯一的
     * 优化
-        * 懒汉线程安全</code></pre><h5 id="懒汉线程安全"><a href="#懒汉线程安全" class="headerlink" title="懒汉线程安全"></a>懒汉线程安全</h5><pre><code>![](https://i.loli.net/2020/03/30/HRZC3Sg1VlBLdaF.png)
-
-    * 不足之处
+        * 懒汉线程安全</code></pre><h5 id="懒汉线程安全"><a href="#懒汉线程安全" class="headerlink" title="懒汉线程安全"></a>懒汉线程安全</h5><p><img src="https://i.loli.net/2020/03/30/HRZC3Sg1VlBLdaF.png" alt=""></p>
+<pre><code>    * 不足之处
         * 性能 synchronized
     * 优化
-        * DCL 双重检查锁模式</code></pre><h5 id="DCL-双重检查锁模式"><a href="#DCL-双重检查锁模式" class="headerlink" title="DCL 双重检查锁模式"></a>DCL 双重检查锁模式</h5><pre><code> ![](https://i.loli.net/2020/03/30/H2NuWYSPrx68X4C.png)
-
-    * 不足之处
+        * DCL 双重检查锁模式</code></pre><h5 id="DCL-双重检查锁模式"><a href="#DCL-双重检查锁模式" class="headerlink" title="DCL 双重检查锁模式"></a>DCL 双重检查锁模式</h5><p><img src="https://i.loli.net/2020/03/30/H2NuWYSPrx68X4C.png" alt=""></p>
+<pre><code>    * 不足之处
         * JVM的即时编译器中存在指令重排序的优化
             * instance = new DclSingleton() 不是原子操作
             * 正常情况下
@@ -146,17 +142,15 @@
                 * 主要禁止指令重排序优化
                 * 赋值会有一个内存屏障
     * 优化
-        * 静态内部类/枚举</code></pre><h5 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h5><pre><code> ![](https://i.loli.net/2020/03/30/AvOpEt57a4jLs6n.png)
-
-    * jvm给我们同步控制
+        * 静态内部类/枚举</code></pre><h5 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h5><p><img src="https://i.loli.net/2020/03/30/AvOpEt57a4jLs6n.png" alt=""></p>
+<pre><code>    * jvm给我们同步控制
         * static 区块赋值 保证数据独一份
         * final 初始化后无法被修改
     * 优点
         * JVM本身机制保证了线程安全/没有性能缺陷
         * 没有 synchronized关键字 保证了性能优势
-        * SingletonHolder 是私有的除了getInstance 外面是无法访问的</code></pre><h5 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h5><pre><code>![](https://i.loli.net/2020/03/30/iIaCdRjTZJqQ9kb.png)
-
-    * 优点
+        * SingletonHolder 是私有的除了getInstance 外面是无法访问的</code></pre><h5 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h5><p><img src="https://i.loli.net/2020/03/30/iIaCdRjTZJqQ9kb.png" alt=""></p>
+<pre><code>    * 优点
         * 写法简单
         * 线程安全
             * 如果自己要添加变量和方法要注意线程安全
