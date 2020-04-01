@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="#333333">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keyword"  content="">
+    <meta name="description" content="想写什么就写什么">
+    <title>NDK-CMake基本配置与注意事项 - undefined</title>
+    <base href="/">
+    <link rel="preconnect" href="//cdn.bootcss.com">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-light.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-dark.min.css" rel="stylesheet" media="screen and (prefers-color-scheme: dark)">
+    <!-- UIkit CSS -->
+    <link href="https://cdn.bootcss.com/uikit/3.2.0/css/uikit.min.css" rel="stylesheet">
+    <!-- UIkit JS -->
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit.min.js" async></script>
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit-icons.min.js" async></script>
+    
+<link rel="stylesheet" href="/styles/cold-stone.css">
+
+    <noscript>
+      <p class="text-center">你的浏览器还没开启 Javascript 功能！</p>
+    </noscript>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+  <body>
+    
+
+    <header class="header" uk-sticky="top: 100; animation: uk-animation-slide-top; bottom: #sticky-on-scroll-up">
+  <nav class="wrapper header-content">
+    <div class="nav-overlay uk-navbar-left">
+      <h1 class="title nav-list-item uk-logo" data-link="/">
+        
+        <a href="/" data-link="/">xyzmst</a>
+        
+      </h1>
+
+      <ul class="nav-list">
+        
+        <li class="nav-list-item" data-link="/categories/">
+          <a class="nav-list-link" href="/categories">分类</a>
+        </li>
+        
+        
+        <li class="nav-list-item" data-link="/about/">
+          <a class="nav-list-link" href="/about/">关于</a>
+        </li>
+        
+        <li class="nav-list-item" data-link="/rss/">
+          <a class="nav-list-link" href="/atom.xml">RSS</a>
+        </li>
+        
+      </ul>
+    </div>
+
+    
+      <div class="uk-navbar-right translate-x">
+        <a class="uk-navbar-toggle" href="#modal-full" uk-search-icon uk-toggle></a>
+      </div>
+    
+  </nav>
+</header>
+
+<div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
+  <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+    <button class="uk-modal-close-full" type="button" uk-close></button>
+    <form class="uk-search uk-search-large search-form" action="//google.com/search" method="get" accept-charset="UTF-8"
+      target="_blank">
+      <input class="uk-search-input search-form-input" type="search" name="q" placeholder="搜索"
+        autofocus autocomplete="false">
+      <input type="hidden" name="sitesearch" value="http://xyzmst.top">
+    </form>
+  </div>
+</div>
+
+
+    <main class="main wrapper"><article class="article slide-in-right uk-article">
+  <section class="article-header">
+    <h1 class="article-title uk-article-title">
+      NDK-CMake基本配置与注意事项
+    </h1>
+    <p class="article-meta uk-article-meta">
+      <span class="meta-info">
+        <span>
+          最后更新&#58;<time class="post-time"
+            datetime="2018-08-18">2018-08-18</time>
+        </span>
+        <span>阅读时间&#58; 3 min</span>
+        <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
+            id="busuanzi_value_page_pv"></span></span>
+      </span>
+    </p>
+  </section>
+  <section class="article-content"><h5 id="Q-CMake基本配置与注意事项-001-CMAKE的基本配置"><a href="#Q-CMake基本配置与注意事项-001-CMAKE的基本配置" class="headerlink" title="Q:CMake基本配置与注意事项.001 CMAKE的基本配置"></a>Q:CMake基本配置与注意事项.001 CMAKE的基本配置</h5><p>A:</p>
+<p>1.添加多个文件</p>
+<pre><code>#查找当前目录所有源文件 并将名称保存到 DIR_SRCS 变量
+#不能查找子目录
+aux_source_directory(. DIR_SRCS)
+message(${DIR_SRCS})
+#也可以
+file(GLOB DIR_SRCS *.c)
+add_executable(main ${DIR_SRCS})</code></pre><p>2、添加其他目录的cmakelist</p>
+<pre><code># 添加 child 子目录下的cmakelist
+add_subdirectory(child)
+# 添加链接库
+target_link_libraries(main child)</code></pre><p>3、添加预编译宏</p>
+<pre><code>#设置cflag和cxxflag
+#定义预编译宏：TEST
+set(CMAKE_C_FLAGS &quot;${CMAKE_C_FLAGS} -DTEST&quot;  )
+set(CMAKE_Cxx_FLAGS &quot;${CMAKE_Cxx_FLAGS} -DTEST&quot;  )    </code></pre><p>4、添加ndk中的预编译库</p>
+<pre><code>#NDK中已经有一部分预构建库 ndk库已经是被配置为cmake搜索路径的一部分 所以可以
+findLibrary(log-lib log)
+target_link_libraries( native-lib  ${log-lib} )
+#其实直接这样就行
+target_link_libraries( native-lib log )</code></pre><p>5、添加其他预编译库(已经提前编译好的库)</p>
+<pre><code>#使用 IMPORTED 标志告知 CMake 只希望将库导入到项目中
+#如果是静态库则将shared改为static
+add_library( imported-lib
+             SHARED
+             IMPORTED )
+# 参数分别为：库、属性、导入地址、so所在地址
+set_target_properties(
+                       imported-lib
+                       PROPERTIES
+                       IMPORTED_LOCATION
+                       ${CMAKE_SOURCE_DIR}/src/${ANDROID_ABI}/libimported-lib.so )
+#为了确保 CMake 可以在编译时定位头文件
+#这样就可以使用 #include &lt;xx&gt; 引入
+#否则需要使用 #include &quot;path/xx&quot;
+include_directories( imported-lib/include/ )
+
+
+#native-lib 是自己编写的源码最终要编译出的so库
+target_link_libraries(native-lib imported-lib)
+#===========================================================================================
+#添加其他预编译库还可以使用这种方式
+#使用-L指导编译时库文件的查找路径
+set(CMAKE_CXX_FLAGS &quot;${CMAKE_CXX_FLAGS} -Lxx&quot;)
+#为了确保 CMake 可以在编译时定位您的标头文件
+include_directories( imported-lib/include/ )
+
+#native-lib 是自己编写的源码最终要编译出的so库
+target_link_libraries(native-lib imported-lib)</code></pre><p>6、常用指令</p>
+<pre><code>#set命令表示声明一个变量source 变量的值是后面的可变参数
+set（source a b c）
+#注：message 日志输出位置 .externalNativeBuild/cmake/debug/$ARCH/cmake_build_output.txt
+message(${source})
+
+#逻辑判断 计较字符串
+set(ANDROID_ABI &quot;areambi-v7a&quot;)
+if(${ANDROID_ABI} STREQUAL &quot;areambi&quot;)
+    message(&quot;armv5&quot;)
+elseif(${ANDROID_ABI} STREQUAL &quot;areambi-v7a&quot;)
+    message(&quot;armv7a&quot;)
+else()
+
+endif()</code></pre><p>7、gradle中设置参数</p>
+<pre><code>externalNativeBuild {
+      cmake {
+        arguments &quot;-DANDROID_TOOLCHAIN=clang&quot;,  //使用的编译器clang/gcc
+                  &quot;-DANDROID_STL=gnustl_static&quot; //cmake默认就是 gnustl_static
+        cFlags &quot;&quot; //这里也可以指定cflag和cxxflag,效果和之前的cmakelist里使用一样
+        cppFlags &quot;&quot;
+      }
+    }  </code></pre><h5 id="Q-CMake基本配置与注意事项-002-5-0及以下与6-0及以上的注意事项"><a href="#Q-CMake基本配置与注意事项-002-5-0及以下与6-0及以上的注意事项" class="headerlink" title="Q:CMake基本配置与注意事项.002 5.0及以下与6.0及以上的注意事项"></a>Q:CMake基本配置与注意事项.002 5.0及以下与6.0及以上的注意事项</h5><p>A:</p>
+<p>存在两个动态库libhello-jni.so 与 libTest.so。<br>libhello-jni.so依赖于libTest.so (使用NDK下的ndk-depends可查看依赖关系)，则：</p>
+<pre><code>//&lt;=5.0:
+    System.loadLibrary(&quot;Test&quot;);
+    System.loadLibrary(&quot;hello-jni&quot;);
+//&gt;=6.0:
+    System.loadLibrary(&quot;hello-jni&quot;);</code></pre><p>Android.mk<br> 使用Android.mk在 &gt;=6.0 设备上不能再使用预编译动态库(静态库没问题)：</p>
+<pre><code>LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := Test
+#libTest.so放在当前文件同目录
+LOCAL_SRC_FILES := libTest.so
+#预编译库
+include $(PREBUILT_SHARED_LIBRARY)
+
+
+include $(CLEAR_VARS)
+#引入上面的Test模块
+LOCAL_SHARED_LIBRARIES := Test
+LOCAL_MODULE := hello-jni
+LOCAL_SRC_FILES := hello-jni.c
+include $(BUILD_SHARED_LIBRARY)</code></pre><p>上面这段配置生成的libhllo-jni在&gt;=6.0设备中无法执行。<br>CMake<br> 使用CMakeList.txt在 &gt;=6.0 设备上引入预编译动态库:</p>
+<pre><code>cmake_minimum_required(VERSION 3.4.1)
+
+file(GLOB SOURCE *.c )
+add_library(
+             hello-jni
+             SHARED
+            ${SOURCE} )
+#这段配置在6.0依然没问题
+set(CMAKE_C_FLAGS &quot;${CMAKE_C_FLAGS} -L[SO所在目录]&quot;)
+
+#这段配置只能在6.0以下使用 原因和android.mk一样
+#add_library(Test SHARED IMPORTED)
+#set_target_properties(Test PROPERTIES IMPORTED_LOCATION [SO绝对地址])
+
+target_link_libraries(  hello-jni Test )</code></pre></section>
+</article>
+
+<section class="prev-next card slide-in-right">
+	
+		<a href="/2018/09/05/NDK-ffmpeg基础知识/" class="link prev" title="NDK-Ffmpeg 基础知识">
+			<span class="hover-underline-animation">&larr; NDK-Ffmpeg 基础知识</span>
+		</a>
+	
+	
+		<a href="/2018/08/17/NDK-JNI/" class="link next" title="NDK-JNI">
+			<span class="hover-underline-animation">NDK-JNI &rarr;</span>
+		</a>
+	
+</section>
+
+
+<section class="article-toc">
+  <div class="card uk-margin-remove-bottom">
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-CMake基本配置与注意事项-001-CMAKE的基本配置"><span class="toc-text">Q:CMake基本配置与注意事项.001 CMAKE的基本配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Q-CMake基本配置与注意事项-002-5-0及以下与6-0及以上的注意事项"><span class="toc-text">Q:CMake基本配置与注意事项.002 5.0及以下与6.0及以上的注意事项</span></a></li></ol>
+  </div>
+</section>
+
+<section class="article slide-in-right">
+  <div class="loader" id="loader">
+    <svg viewBox="0 0 50 50">
+      <circle class="ring" cx="25" cy="25" r="20"></circle>
+      <circle class="ball" cx="25" cy="5" r="3.5"></circle>
+    </svg>
+  </div>
+
+  <div class="comment" id="utteranc"></div>
+  <noscript>Please activate JavaScript for normal use of comments</noscript>
+</section>
+
+<a class="card back-to-top" id="backTop">&UpArrow;</a>
+</main>
+
+    
+
+    <script>
+	window.COLD_STONE = {
+		root: "/",
+		author: "xyzmst" || '',
+		gaid: "xxxxxxxxxxxxxx" || '',
+		repo: "xyzmst/blog" || '',
+	}
+</script>
+
+
+
+
+	<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+
+
+<script src="/scripts/busuanzi.js" referrerpolicy="origin"></script>
+
+<script src="/scripts/cold-stone.js"></script>
+
+
+
+  <script src="//www.googletagmanager.com/gtag/js?id=xxxxxxxxxxxxxx"></script>
+
+  <script>
+	window.dataLayer = window.dataLayer || []
+	function gtag() {
+		dataLayer.push(arguments)
+	}
+	gtag('js', new Date())
+	gtag('config', window.COLD_STONE.gaid)
+  </script>
+
+
+    <!-- <script src="/scripts/hexo_resize_image.js"></script> -->
+  </body>
+</html>
