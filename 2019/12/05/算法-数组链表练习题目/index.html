@@ -143,57 +143,55 @@
 }</code></pre>
 </li>
 <li><p>解法2 O(n) 左右边界，同时向中间收敛,又叫 左右夹逼</p>
-<pre><code class="java">class Solution {
- public int maxArea(int[] a) {
-     int maxArea = 0;
-     //一层循环 从两边收敛
-     for(int i = 0, j = a.length - 1; i &lt; j;){
-         int minHeight = a[i] &lt; a[j] ? a[i++] : a[j--];
-         // 上面执行后 会少一个位置
-         int area = (j - i + 1)*minHeight;
-         maxArea = Math.max(maxArea,area);
-     }
-     return maxArea;
- }
-}
-</code></pre>
 </li>
 </ul>
-<p>public int maxArea(int[] height) {<br>    int res = 0;<br>    int i = 0;<br>    int j = height.length - 1;<br>    while (i &lt; j) {<br>        int area = (j - i) * Math.min(height[i], height[j]);<br>        res = Math.max(res, area);<br>        if (height[i] &lt; height[j]) {<br>            i++;<br>        } else {<br>            j–;<br>        }<br>    }<br>    return res;<br>}</p>
-<pre><code>
-
-### 爬楼梯
-[letcode 70](https://leetcode-cn.com/problems/climbing-stairs)
-假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
-
-每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
-
-注意：给定 n 是一个正整数。
-
-示例 1：
-
-输入： 2
-输出： 2
-解释： 有两种方法可以爬到楼顶。
-1.  1 阶 + 1 阶
-2.  2 阶
-示例 2：
-
-输入： 3
-输出： 3
-解释： 有三种方法可以爬到楼顶。
-1.  1 阶 + 1 阶 + 1 阶
-2.  1 阶 + 2 阶
-3.  2 阶 + 1 阶
-
-- 解法
-爬上 n-1n−1 阶楼梯的方法数量。因为再爬1阶就能到第n阶
-爬上 n-2n−2 阶楼梯的方法数量，因为再爬2阶就能到第n阶
-所以我们得到公式 dp[n] = dp[n-1] + dp[n-2]
-
-
-```java
-class Solution {
+<pre><code class="java">class Solution {
+    public int maxArea(int[] a) {
+        int maxArea = 0;
+        //一层循环 从两边收敛
+        for(int i = 0, j = a.length - 1; i &lt; j;){
+            int minHeight = a[i] &lt; a[j] ? a[i++] : a[j--];
+            // 上面执行后 会少一个位置
+            int area = (j - i + 1)*minHeight;
+            maxArea = Math.max(maxArea,area);
+        }
+        return maxArea;
+    }
+}</code></pre>
+<pre><code class="java">public int maxArea(int[] height) {
+    int res = 0;
+    int i = 0;
+    int j = height.length - 1;
+    while (i &lt; j) {
+        int area = (j - i) * Math.min(height[i], height[j]);
+        res = Math.max(res, area);
+        if (height[i] &lt; height[j]) {
+            i++;
+        } else {
+            j--;
+        }
+    }
+    return res;
+}</code></pre>
+<h3 id="爬楼梯"><a href="#爬楼梯" class="headerlink" title="爬楼梯"></a>爬楼梯</h3><p><a href="https://leetcode-cn.com/problems/climbing-stairs" target="_blank" rel="noopener">letcode 70</a><br>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。</p>
+<p>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
+<p>注意：给定 n 是一个正整数。</p>
+<p>示例 1：</p>
+<p>输入： 2<br>输出： 2<br>解释： 有两种方法可以爬到楼顶。</p>
+<ol>
+<li>1 阶 + 1 阶</li>
+<li>2 阶<br>示例 2：</li>
+</ol>
+<p>输入： 3<br>输出： 3<br>解释： 有三种方法可以爬到楼顶。</p>
+<ol>
+<li>1 阶 + 1 阶 + 1 阶</li>
+<li>1 阶 + 2 阶</li>
+<li>2 阶 + 1 阶</li>
+</ol>
+<ul>
+<li>解法<br>爬上 n-1n−1 阶楼梯的方法数量。因为再爬1阶就能到第n阶<br>爬上 n-2n−2 阶楼梯的方法数量，因为再爬2阶就能到第n阶<br>所以我们得到公式 dp[n] = dp[n-1] + dp[n-2]</li>
+</ul>
+<pre><code class="java">class Solution {
     public int climbStairs(int n) {
         int[] dp = new int[n + 1];
         dp[0] = 1;
@@ -204,7 +202,8 @@ class Solution {
         return dp[n];
     }
 }
-</code></pre><pre><code class="kotlin">fun climbStairs(n: Int): Int {
+</code></pre>
+<pre><code class="kotlin">fun climbStairs(n: Int): Int {
     var dp = IntArray(n + 1)
     dp[0] = 1
     dp[1] = 1
@@ -508,7 +507,7 @@ fun hasCycle(head: ListNode?): Boolean {
 
 <section class="article-toc">
   <div class="card uk-margin-remove-bottom">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#移动0"><span class="toc-text">移动0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#盛最多水的容器"><span class="toc-text">盛最多水的容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#两数之和"><span class="toc-text">两数之和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三数之和"><span class="toc-text">三数之和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反转链表"><span class="toc-text">反转链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环形链表"><span class="toc-text">环形链表</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#移动0"><span class="toc-text">移动0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#盛最多水的容器"><span class="toc-text">盛最多水的容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#爬楼梯"><span class="toc-text">爬楼梯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#两数之和"><span class="toc-text">两数之和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三数之和"><span class="toc-text">三数之和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反转链表"><span class="toc-text">反转链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环形链表"><span class="toc-text">环形链表</span></a></li></ol>
   </div>
 </section>
 
