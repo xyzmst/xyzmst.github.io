@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="#333333">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keyword"  content="">
+    <meta name="description" content="想写什么就写什么">
+    <title>算法-栈队列练习题目 - undefined</title>
+    <base href="/">
+    <link rel="preconnect" href="//cdn.bootcss.com">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-light.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/atom-one-dark.min.css" rel="stylesheet" media="screen and (prefers-color-scheme: dark)">
+    <!-- UIkit CSS -->
+    <link href="https://cdn.bootcss.com/uikit/3.2.0/css/uikit.min.css" rel="stylesheet">
+    <!-- UIkit JS -->
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit.min.js" async></script>
+    <script src="https://cdn.bootcss.com/uikit/3.2.0/js/uikit-icons.min.js" async></script>
+    
+<link rel="stylesheet" href="/styles/cold-stone.css">
+
+    <noscript>
+      <p class="text-center">你的浏览器还没开启 Javascript 功能！</p>
+    </noscript>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  
+  <body>
+    
+
+    <header class="header" uk-sticky="top: 100; animation: uk-animation-slide-top; bottom: #sticky-on-scroll-up">
+  <nav class="wrapper header-content">
+    <div class="nav-overlay uk-navbar-left">
+      <h1 class="title nav-list-item uk-logo" data-link="/">
+        
+        <a href="/" data-link="/">xyzmst</a>
+        
+      </h1>
+
+      <ul class="nav-list">
+        
+        <li class="nav-list-item" data-link="/categories/">
+          <a class="nav-list-link" href="/categories">分类</a>
+        </li>
+        
+        
+        <li class="nav-list-item" data-link="/about/">
+          <a class="nav-list-link" href="/about/">关于</a>
+        </li>
+        
+        <li class="nav-list-item" data-link="/rss/">
+          <a class="nav-list-link" href="/atom.xml">RSS</a>
+        </li>
+        
+      </ul>
+    </div>
+
+    
+      <div class="uk-navbar-right translate-x">
+        <a class="uk-navbar-toggle" href="#modal-full" uk-search-icon uk-toggle></a>
+      </div>
+    
+  </nav>
+</header>
+
+<div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
+  <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+    <button class="uk-modal-close-full" type="button" uk-close></button>
+    <form class="uk-search uk-search-large search-form" action="//google.com/search" method="get" accept-charset="UTF-8"
+      target="_blank">
+      <input class="uk-search-input search-form-input" type="search" name="q" placeholder="搜索"
+        autofocus autocomplete="false">
+      <input type="hidden" name="sitesearch" value="http://xyzmst.top">
+    </form>
+  </div>
+</div>
+
+
+    <main class="main wrapper"><article class="article slide-in-right uk-article">
+  <section class="article-header">
+    <h1 class="article-title uk-article-title">
+      算法-栈队列练习题目
+    </h1>
+    <p class="article-meta uk-article-meta">
+      <span class="meta-info">
+        <span>
+          最后更新&#58;<time class="post-time"
+            datetime="2019-12-06">2019-12-06</time>
+        </span>
+        <span>阅读时间&#58; 6 min</span>
+        <span class="hide" id="busuanzi_container_page_pv">阅读量&#58; <span
+            id="busuanzi_value_page_pv"></span></span>
+      </span>
+    </p>
+  </section>
+  <section class="article-content"><p><img src="https://i.loli.net/2020/04/02/K3xAgTWdDlF8SeN.png" alt=""></p>
+<h2 id="有效的括号"><a href="#有效的括号" class="headerlink" title="有效的括号"></a>有效的括号</h2><p><a href="https://leetcode-cn.com/problems/valid-parentheses/description/" target="_blank" rel="noopener">20</a><br>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。</p>
+<p>有效字符串需满足：</p>
+<p>左括号必须用相同类型的右括号闭合。<br>左括号必须以正确的顺序闭合。<br>注意空字符串可被认为是有效字符串。</p>
+<p>示例 1:</p>
+<p>输入: “()”<br>输出: true<br>示例 2:</p>
+<p>输入: “()[]{}”<br>输出: true<br>示例 3:</p>
+<p>输入: “(]”<br>输出: false<br>示例 4:</p>
+<p>输入: “([)]”<br>输出: false<br>示例 5:</p>
+<p>输入: “{[]}”<br>输出: true</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>暴力解法 不断的replace匹配括号</p>
+<pre><code>
+</code></pre><p>栈的解法 有最近相关性就可以考虑用栈的方式解决，洋葱的结构，先来后到 队列，与现实世界相关</p>
+<pre><code>public boolean isValid(String s) {
+       Stack&lt;Character&gt; stack = new Stack&lt;&gt;();
+        for (char c : s.toCharArray()){
+            if(c == &#39;(&#39;){
+                stack.push(&#39;)&#39;);
+            }else if(c == &#39;{&#39;){
+                stack.push(&#39;}&#39;);
+            }else if(c == &#39;[&#39;){
+                stack.push(&#39;]&#39;);
+            }else if(stack.isEmpty() || stack.pop() != c){
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }</code></pre><h2 id="最小栈"><a href="#最小栈" class="headerlink" title="最小栈"></a>最小栈</h2><p><a href="https://leetcode-cn.com/problems/min-stack/" target="_blank" rel="noopener">155</a><br>设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。</p>
+<p>push(x) – 将元素 x 推入栈中。<br>pop() – 删除栈顶的元素。<br>top() – 获取栈顶元素。<br>getMin() – 检索栈中的最小元素。<br>示例:</p>
+<p>MinStack minStack = new MinStack();<br>minStack.push(-2);<br>minStack.push(0);<br>minStack.push(-3);<br>minStack.getMin();   –&gt; 返回 -3.<br>minStack.pop();<br>minStack.top();      –&gt; 返回 0.<br>minStack.getMin();   –&gt; 返回 -2.</p>
+<h3 id="解法-1"><a href="#解法-1" class="headerlink" title="解法"></a>解法</h3><p>类似的 栈实现队列，队列实现栈，都是两个来回倒</p>
+<pre><code class="java">//设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
+//
+//
+// push(x) -- 将元素 x 推入栈中。
+// pop() -- 删除栈顶的元素。
+// top() -- 获取栈顶元素。
+// getMin() -- 检索栈中的最小元素。
+//
+//
+// 示例:
+//
+// MinStack minStack = new MinStack();
+//minStack.push(-2);
+//minStack.push(0);
+//minStack.push(-3);
+//minStack.getMin();   --&gt; 返回 -3.
+//minStack.pop();
+//minStack.top();      --&gt; 返回 0.
+//minStack.getMin();   --&gt; 返回 -2.
+//
+// Related Topics 栈 设计
+
+
+import java.util.Stack;
+
+//leetcode submit region begin(Prohibit modification and deletion)
+class MinStack {
+
+    private Stack&lt;Integer&gt; mainStack;
+    private Stack&lt;Integer&gt; minStack;
+
+    /**
+     * initialize your data structure here.
+     */
+    public MinStack() {
+        minStack = new Stack&lt;&gt;();
+        mainStack = new Stack&lt;&gt;();
+    }
+
+    public void push(int x) {
+        mainStack.push(x);
+        if (minStack.isEmpty() || minStack.peek() &gt;= x) {
+            minStack.push(x);
+        }
+    }
+
+    public void pop() {
+        if (!mainStack.isEmpty()) {
+            int pop = mainStack.pop();
+            if (pop == minStack.peek()) {
+                minStack.pop();
+            }
+        }
+
+    }
+
+    public int top() {
+        if (mainStack.isEmpty()) {
+            throw new RuntimeException(&quot;stack is empty&quot;);
+        }
+        return mainStack.peek();
+    }
+
+    public int getMin() {
+        if (mainStack.isEmpty()) {
+            throw new RuntimeException(&quot;stack is empty&quot;);
+        }
+        return minStack.peek();
+    }
+
+}
+</code></pre>
+<h2 id="柱状图中最大的矩形"><a href="#柱状图中最大的矩形" class="headerlink" title="柱状图中最大的矩形"></a>柱状图中最大的矩形</h2><p><a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/" target="_blank" rel="noopener">84</a><br>n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。<br>求在该柱状图中，能够勾勒出来的矩形的最大面积。</p>
+<p><img src="https://i.loli.net/2020/04/02/EVrYGT76gxuohw2.png" alt=""><br>以上是柱状图的示例，其中每个柱子的宽度为 1，给定的高度为 [2,1,5,6,2,3]。<br><img src="https://i.loli.net/2020/04/02/NmWV5jEo8AZ9bfr.png" alt=""><br>图中阴影部分为所能勾勒出的最大矩形面积，其面积为 10 个单位。<br>示例:输入: [2,1,5,6,2,3]<br>输出: 10</p>
+<h3 id="解法-2"><a href="#解法-2" class="headerlink" title="解法"></a>解法</h3><p>1、暴力 循环遍历，外层循环遍历所有柱子，内部循环遍历所有组合，拿到最小值计算面积</p>
+<pre><code class="java"> public int largestRectangleArea(int[] heights) {
+        int maxArea = 0;
+        for (int i = 0; i &lt; heights.length; i++) {
+            for (int j = i; j &lt; heights.length; j++) {
+                int min = Math.min(heights[i], heights[j]);
+                maxArea = Math.max(maxArea, min * (j - i + 1));
+            }
+        }
+        return maxArea;
+    }</code></pre>
+<p>2、通过栈的方式，找到左右边界，最后弹出所有的，获取最大值</p>
+<pre><code class="java">public int largestRectangleArea(int[] heights) {
+        int maxArea = 0;
+        Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();
+        stack.push(-1);
+        for (int i = 0; i &lt; heights.length; i++) {
+            while (stack.peek() != -1 &amp;&amp; heights[stack.peek()] &gt;= heights[i]) {
+                //计算边界 有边界index-左边界index-1（有边界不包括在内）
+                maxArea = Math.max(maxArea, heights[stack.pop()] * (i - stack.peek() - 1));
+            }
+            stack.push(i);
+        }
+        while (stack.peek() != -1) {
+            maxArea = Math.max(maxArea, heights[stack.pop()] * (heights.length - stack.peek() - 1));
+        }
+
+        return maxArea;
+    }</code></pre>
+<h2 id="滑动窗口最大值"><a href="#滑动窗口最大值" class="headerlink" title="滑动窗口最大值"></a>滑动窗口最大值</h2><p><a href="https://leetcode-cn.com/problems/sliding-window-maximum/" target="_blank" rel="noopener">239</a><br>给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。</p>
+<p>返回滑动窗口中的最大值。</p>
+<p>进阶：</p>
+<p>你能在线性时间复杂度内解决此题吗？</p>
+<p>示例:</p>
+<p>输入: nums = [1,3,-1,-3,5,3,6,7], 和 k = 3<br>输出: [3,3,5,5,6,7]<br>解释:</p>
+<p>  滑动窗口的位置                最大值</p>
+<hr>
+<p>[1  3  -1] -3  5  3  6  7       3<br> 1 [3  -1  -3] 5  3  6  7       3<br> 1  3 [-1  -3  5] 3  6  7       5<br> 1  3  -1 [-3  5  3] 6  7       5<br> 1  3  -1  -3 [5  3  6] 7       6<br> 1  3  -1  -3  5 [3  6  7]      7</p>
+<p>提示：</p>
+<p>1 &lt;= nums.length &lt;= 10^5<br>-10^4 &lt;= nums[i] &lt;= 10^4<br>1 &lt;= k &lt;= nums.length</p>
+<h3 id="解法-3"><a href="#解法-3" class="headerlink" title="解法"></a>解法</h3><p>1、暴力<br>首先边界判断，一层循环遍历所有的窗口，然后一层循环遍历窗口内最大值，容易忽略的地方 max的初始化，使用一个 Integer.MIN-VALUE</p>
+<pre><code class="java"> public int[] maxSlidingWindow(int[] nums, int k) {
+        int length = nums.length;
+        if (length == 0)
+            return new int[]{0};
+        int[] output = new int[length - k + 1];
+        for (int i = 0; i &lt; length - k + 1; i++) {
+            int max = Integer.MIN_VALUE;
+            for (int j = i; j &lt; i + k; j++) {
+                max = Math.max(max, nums[j]);
+            }
+            output[i] = max;
+        }
+        return output;
+    }</code></pre>
+<p>2、deque<br>使用双端队列，两边都可以进出，首先正常的for循环添加队列，如果到边界了，移除栈顶元素，每次添加时都去循环判断，添加的值和栈内最后一个元素，谁大，保证每次添加一个大的值，把小的值都移除，这样第0个元素就是最大的</p>
+<pre><code class="java">public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums == null || nums.length == 0)
+            return new int[0];
+
+        int[] arr = new int[nums.length - k + 1];
+        LinkedList&lt;Integer&gt; list = new LinkedList&lt;&gt;();
+
+        for (int index = 0, i = 0; i &lt; nums.length; i++) {
+            while (!list.isEmpty() &amp;&amp; nums[list.peekLast()] &lt; nums[i]) {
+                list.pollLast();
+            }
+            list.add(i);
+            if (list.peek() == i - k) {
+                list.poll();
+            }
+            if (i &gt;= k - 1) {
+                arr[index++] = nums[list.peek()];
+            }
+        }
+        return arr;
+    }</code></pre>
+</section>
+</article>
+
+<section class="prev-next card slide-in-right">
+	
+		<a href="/2020/02/17/新世界/" class="link prev" title="新世界">
+			<span class="hover-underline-animation">&larr; 新世界</span>
+		</a>
+	
+	
+		<a href="/2019/12/05/算法-数组链表练习题目/" class="link next" title="算法-数组链表练习题目">
+			<span class="hover-underline-animation">算法-数组链表练习题目 &rarr;</span>
+		</a>
+	
+</section>
+
+
+<section class="article-toc">
+  <div class="card uk-margin-remove-bottom">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#有效的括号"><span class="toc-text">有效的括号</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解法"><span class="toc-text">解法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最小栈"><span class="toc-text">最小栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解法-1"><span class="toc-text">解法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#柱状图中最大的矩形"><span class="toc-text">柱状图中最大的矩形</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解法-2"><span class="toc-text">解法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#滑动窗口最大值"><span class="toc-text">滑动窗口最大值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解法-3"><span class="toc-text">解法</span></a></li></ol></li></ol>
+  </div>
+</section>
+
+<section class="article slide-in-right">
+  <div class="loader" id="loader">
+    <svg viewBox="0 0 50 50">
+      <circle class="ring" cx="25" cy="25" r="20"></circle>
+      <circle class="ball" cx="25" cy="5" r="3.5"></circle>
+    </svg>
+  </div>
+
+  <div class="comment" id="utteranc"></div>
+  <noscript>Please activate JavaScript for normal use of comments</noscript>
+</section>
+
+<a class="card back-to-top" id="backTop">&UpArrow;</a>
+</main>
+
+    
+
+    <script>
+	window.COLD_STONE = {
+		root: "/",
+		author: "xyzmst" || '',
+		gaid: "xxxxxxxxxxxxxx" || '',
+		repo: "xyzmst/blog" || '',
+	}
+</script>
+
+
+
+
+	<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
+
+
+<script src="/scripts/busuanzi.js" referrerpolicy="origin"></script>
+
+<script src="/scripts/cold-stone.js"></script>
+
+
+
+  <script src="//www.googletagmanager.com/gtag/js?id=xxxxxxxxxxxxxx"></script>
+
+  <script>
+	window.dataLayer = window.dataLayer || []
+	function gtag() {
+		dataLayer.push(arguments)
+	}
+	gtag('js', new Date())
+	gtag('config', window.COLD_STONE.gaid)
+  </script>
+
+
+    <!-- <script src="/scripts/hexo_resize_image.js"></script> -->
+  </body>
+</html>
