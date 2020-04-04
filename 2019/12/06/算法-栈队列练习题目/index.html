@@ -211,8 +211,9 @@ class MinStack {
 <pre><code class="java"> public int largestRectangleArea(int[] heights) {
         int maxArea = 0;
         for (int i = 0; i &lt; heights.length; i++) {
+            int min = heights[i];
             for (int j = i; j &lt; heights.length; j++) {
-                int min = Math.min(heights[i], heights[j]);
+                min = Math.min(min, heights[j]);
                 maxArea = Math.max(maxArea, min * (j - i + 1));
             }
         }
@@ -289,8 +290,8 @@ class MinStack {
 
 <section class="prev-next card slide-in-right">
 	
-		<a href="/2020/02/17/新世界/" class="link prev" title="新世界">
-			<span class="hover-underline-animation">&larr; 新世界</span>
+		<a href="/2019/12/08/算法-哈希表练习题目/" class="link prev" title="算法 - 哈希表，映射，集合 练习题目">
+			<span class="hover-underline-animation">&larr; 算法 - 哈希表，映射，集合 练习题目</span>
 		</a>
 	
 	
